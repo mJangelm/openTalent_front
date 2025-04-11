@@ -38,6 +38,7 @@ export class LoginComponent {
       if (response.accessToken) {
         localStorage.setItem("accessToken", response.accessToken);
         localStorage.setItem("refreshToken", response.refreshToken);
+        localStorage.setItem('user', JSON.stringify(response.user));
         this.modelForm.reset();
         this.router.navigate(['/usuario/home']);
       }

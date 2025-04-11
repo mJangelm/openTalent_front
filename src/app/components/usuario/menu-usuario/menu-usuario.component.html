@@ -1,7 +1,7 @@
 <div class="side-menu" [ngClass]="{'open': isMenuOpen}">
-    <button class="close-btn" style="padding-right: 15px" (click)="onClose()">Nombre apellido</button>
+    <button class="close-btn" style="padding-right: 15px" (click)="onClose()">{{estudiante.nombre}}</button>
     <ul>
-      <li >Estudios</li>
+      <li >{{estudiante.estudios}}</li>
     </ul>
     <ul>
       <li><a [routerLink]="['/usuario/favoritos']">Favoritos</a></li>
@@ -13,7 +13,9 @@
    
     <br>
     <ul>
-      <li><a [routerLink]="['/']" style="font-weight: bold">Salir</a></li>
+      <li>    <div class="card card-shadow">
+        <button class="btn btn-danger" (click)="logOut()">Log Out</button>
+    </div></li>
     </ul>
     <br>
     <button class="btn btn-primary" (click)="onClose()">Cerrar</button>
