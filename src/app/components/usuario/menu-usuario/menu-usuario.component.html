@@ -1,0 +1,20 @@
+<div class="side-menu" [ngClass]="{'open': isMenuOpen}">
+    <button class="close-btn" style="padding-right: 15px" (click)="onClose()">Nombre apellido</button>
+    <ul>
+      <li >Estudios</li>
+    </ul>
+    <ul>
+      <li><a [routerLink]="['/usuario/favoritos']">Favoritos</a></li>
+      <li><a href="#">Mis proyectos</a></li>
+      <li><a href="#">Configuración</a></li>
+      <!-- Más opciones -->
+
+    </ul>
+   
+    <br>
+    <ul>
+      <li><a [routerLink]="['/']" style="font-weight: bold">Salir</a></li>
+    </ul>
+    <br>
+    <button class="btn btn-primary" (click)="onClose()">Cerrar</button>
+  </div>

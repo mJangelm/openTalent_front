@@ -1,0 +1,21 @@
+<div class="card mb-3" style="max-width: 540px; margin: auto;">
+    <div class="row g-0">
+      <!-- Columna para la imagen -->
+      <div class="col-md-4">
+        <div class="contenedor" style="margin-top: 5px; margin-left:50px;">
+          <img src="assets/imagenes de prueba/edificio_empresa.jpg" 
+               alt="{{empresaUnica.nombreEmpresa}}" 
+               class="imagen img-fluid rounded-circle">
+        </div>
+      </div>
+      <!-- Columna para el contenido (nombre, email, país) -->
+      <div class="col-md-8">
+        <div class="card-body" style="padding-right: 30px">
+          <h5 class="card-title">{{empresaUnica.nombreEmpresa}}</h5>
+          <p class="card-text">{{empresaUnica.email}}</p>
+          <p class="card-text">{{empresaUnica.direccion.pais}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

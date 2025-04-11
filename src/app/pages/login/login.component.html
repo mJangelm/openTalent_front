@@ -1,0 +1,50 @@
+<style>
+  /* Estilos para pantallas medianas y grandes */
+  @media (min-width: 768px) {
+    .header-col {
+      max-width: 400px;
+      margin-left: 300px; /* Desplaza el header a la derecha en escritorio */
+    }
+    .login-form {
+      max-width: 400px;
+      margin-left: 20px; /* Desplaza el formulario un poco hacia la izquierda */
+    }
+  }
+
+  /* Estilos para móviles: se eliminan los márgenes y se usan anchos completos */
+  @media (max-width: 767.98px) {
+    .header-col,
+    .login-form {
+      max-width: 100%;
+      margin-left: 0;
+    }
+  }
+</style>
+
+<div class="container-fluid">
+  <div class="row" style="min-height: 100vh;">
+    <!-- Columna izquierda para el header -->
+    <div class="col-md-6 d-flex align-items-center justify-content-center header-col">
+      <app-header></app-header>
+    </div>
+    <!-- Columna derecha para el login -->
+    <div class="col-md-9 d-flex align-items-center justify-content-center login-form" >
+      <form [formGroup]="modelForm" (ngSubmit)="getUser()" class=" p-4 border rounded shadow">
+        <h2 class="d-flex justify-content-center">Iniciar sesión</h2>
+        <div class="mb-3">
+          <label for="name" class="form-label">Usuario</label>
+          <input type="text" id="name" placeholder="username" class="form-control" formControlName="username">
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Contraseña</label>
+          <input type="password" id="password" placeholder="Contraseña" class="form-control" formControlName="password">
+        </div>
+        <div class="text-center">
+          <input type="submit" class="btn btn-secondary" value="Log In">
+          <br><br>
+          <p>Si aún no tienes cuenta, puedes registrarte <b>aquí</b></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

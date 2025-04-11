@@ -1,0 +1,19 @@
+<app-navbar-usuario (toggleMenuEvent)="toggleMenuHome()"></app-navbar-usuario>
+<app-menu-usuario [isMenuOpen]="isMenuOpenHome" (eventoMenu)="toggleMenuHome()"></app-menu-usuario>
+
+<div class="container">
+  <div class="row">
+    @for (empresa of arrEmpresas; track empresa.cif) {
+      <div class="col-md-4 mb-3">
+        <app-empresas-usuario-card [empresaUnica]="empresa"></app-empresas-usuario-card>
+      </div>
+    }
+    @empty {
+      <div class="col-12 text-muted text-center fs-5 mt-4">
+        No hay empresas disponibles. Quizás sea problema del servidor o de su conexión a Internet.
+        <br><br>
+        Inténtelo más tarde.
+      </div>
+    }
+  </div>
+</div>

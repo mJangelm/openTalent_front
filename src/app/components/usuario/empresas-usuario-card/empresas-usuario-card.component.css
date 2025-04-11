@@ -1,0 +1,14 @@
+.contenedor {
+    width: 100px; /* Configurar con el diámetro deseado */
+    height: 100px; /* La altura debe ser igual al ancho */
+    border-radius: 50%; /* Hacer el borde circular */
+    overflow: hidden; /* Esconder el sobrante */
+    display: flex; /* Para centrar la imagen */
+    justify-content: center; /* Centrar la imagen horizontalmente */
+    align-items: center; /* Centrar la imagen verticalmente */
+  }
+  
+  .imagen {
+    width: auto; /* Mantener el aspect ratio */
+    height: 100%; /* Asegurarse de que la imagen cubra el 100% de la altura */
+  }
