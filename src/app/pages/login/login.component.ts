@@ -3,11 +3,11 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from '../../layout/header/header.component';
 import { Iuser } from '../../interfaces/iuser';
 import { LoginServiceService } from '../../services/login-service.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, HeaderComponent],
+  imports: [ReactiveFormsModule, HeaderComponent,RouterLink],
   standalone: true,
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']

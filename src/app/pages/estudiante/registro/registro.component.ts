@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HeaderRegistroComponent } from '../../../layout/header-registro/header-registro.component';
+import { RegistroEstudianteService } from '../../../services/registro-estudiante.service';
+import { Estudiante } from '../../../interfaces/estudiante';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-registro',
-  imports: [ReactiveFormsModule, HeaderRegistroComponent],
+  imports: [ReactiveFormsModule],
   standalone: true,
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']  // Se corrigió "styleUrl" a "styleUrls"
@@ -13,24 +16,28 @@ export class RegistroComponent {
 
 
   modelForm: FormGroup;
+  router = inject(Router);
+  registroEstudiante =inject(RegistroEstudianteService)
 
   constructor() {
     // Se crea el FormGroup con los controles y validadores, incluyendo el validador de contraseñas
     this.modelForm = new FormGroup({
-      name: new FormControl(null, [Validators.required, Validators.minLength(3)]),
-      apellido: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      nombre: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      apellidos: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       email: new FormControl(null, [Validators.required, Validators.email]),
+      username: new FormControl(null, [Validators.required, Validators.minLength(3)]),
       password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
       fechaNacimiento: new FormControl(null, [Validators.required]),
       telefono: new FormControl(null, [Validators.required]),
       pais: new FormControl(null, [Validators.required]),
       calle: new FormControl(null, [Validators.required]),
       poblacion: new FormControl(null, [Validators.required]),
-      cp: new FormControl(null, [Validators.required]),
+      codigoPostal: new FormControl(null, [Validators.required]),
       provincia: new FormControl(null, [Validators.required]),
-      estudiosExperiencia: new FormControl(null, [Validators.required]),
-      pdfFile: new FormControl(null),
-      jpgFile: new FormControl(null)
+      estudios: new FormControl(null, [Validators.required]),
+      experiencia: new FormControl(null, [Validators.required]),
+      cv: new FormControl(null),
+      fotoPerfil: new FormControl(null)
     });
   }
 
@@ -85,8 +92,17 @@ export class RegistroComponent {
       this.modelForm.get('jpgFile')?.updateValueAndValidity();
     }
   }
-  getDataForm() {
-    // Implementa aquí la lógica que deseas ejecutar al enviar el formulario
-    throw new Error('Method not implemented.');
+ registro() {
+    const registroDeEstudiante :Estudiante = this.modelForm.value as Estudiante;
+
+    try {
+      this.registroEstudiante.registro(registroDeEstudiante);
+      console.log('Usuario registrado');
+      this.router.navigate(['/login']);
+
+    
+  } catch (error) {
+    alert('No se ha podido registrar');
   }
+ }
 }

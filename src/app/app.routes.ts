@@ -12,6 +12,10 @@ export const routes: Routes = [
     component: LoginComponent,
     pathMatch: 'full',  // Aseguramos que esta ruta sea la predeterminada
   },
+  {
+    path: 'registro',
+    component: RegistroComponent,
+  },
 
   // Ruta para el Home, solo accesible después de loguearse
   { 

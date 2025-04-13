@@ -26,8 +26,7 @@ onClose() {
 }
 
 logOut() : void {
-  localStorage.removeItem('accessToken');
-  localStorage.removeItem('refreshToken');
+localStorage.clear();
   this.router.navigate(['/login']);
   }
 
