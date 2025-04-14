@@ -39,9 +39,25 @@ export class LoginComponent {
         localStorage.setItem("accessToken", response.accessToken);
         localStorage.setItem("refreshToken", response.refreshToken);
         localStorage.setItem('user', JSON.stringify(response.user));
+
+      const rol = response.user.rol
+        localStorage.setItem('rol', rol);
         this.modelForm.reset();
-        this.router.navigate(['/usuario/home']);
+        switch (rol) {
+          case 'USUARIO':
+            this.router.navigate(['/usuario/home']);
+            break;
+          case 'ADMIN':
+            this.router.navigate(['/usuario/home']);
+            break;
+          case 'EMPRESA':
+            this.router.navigate(['/empresa/home']);
+            break;
+          default:
+            this.router.navigate(['/home']);
+        
       }
+    }
     } catch (error) {
       alert('Username o password incorrectos');
       this.modelForm.reset();
