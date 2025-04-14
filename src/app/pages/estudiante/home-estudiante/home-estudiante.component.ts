@@ -13,7 +13,7 @@ import { EmpresasUsuarioCardComponent } from "../../../components/usuario/empres
   templateUrl: './home-estudiante.component.html',
   styleUrl: './home-estudiante.component.css'
 })
-export class HomeEstudianteComponent implements OnInit {
+export class HomeEstudianteComponent  {
 
 servicioEmpresas = inject(EmpresaService);
 router = inject(Router);
@@ -25,9 +25,13 @@ toggleMenuHome() {
 
 
 ngOnInit() {
+
+
   this.servicioEmpresas.getAllEmpresas().subscribe((response:any) =>{
     this.arrEmpresas = response;
     console.log(response)
   })
 }
+
+
 }

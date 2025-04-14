@@ -10,11 +10,12 @@ export class EmpresaService {
 
   httpClient = inject(HttpClient);
 
-  private baseUrl : string = 'http://localhost:9009/usuario/home/all';
+  private baseUrl : string = 'http://localhost:9009/usuario/home';
 
   constructor() { }
 
   getAllEmpresas(): Observable<Empresa[]>{
+    console.log('haciendo la petición del getall')
     return this.httpClient.get<Empresa[]>(this.baseUrl);
   }
   getEmpresaById(_id: string): Observable<Empresa> {

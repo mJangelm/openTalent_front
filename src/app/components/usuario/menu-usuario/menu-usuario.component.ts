@@ -35,7 +35,7 @@ localStorage.clear();
 let userMenu = localStorage.getItem('user');
 this.estudiante = userMenu ? JSON.parse(userMenu) : null;
 
-console.log('aquí está la info' +userMenu)
+// console.log('aquí está la info' +userMenu)
   }
 }
 
