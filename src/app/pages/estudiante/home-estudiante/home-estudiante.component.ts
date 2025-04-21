@@ -8,7 +8,7 @@ import { EmpresasUsuarioCardComponent } from "../../../components/usuario/empres
 
 @Component({
   selector: 'app-home-estudiante',
-  imports: [NavbarUsuarioComponent, MenuUsuarioComponent, EmpresasUsuarioCardComponent,RouterOutlet],
+  imports: [NavbarUsuarioComponent, MenuUsuarioComponent,RouterOutlet],
   standalone:true,
   templateUrl: './home-estudiante.component.html',
   styleUrl: './home-estudiante.component.css'

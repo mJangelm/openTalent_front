@@ -6,21 +6,20 @@ import { Oferta } from '../interfaces/oferta';
 @Injectable({
   providedIn: 'root'
 })
-export class OfertaService {
+export class DetallesOfertaService {
 
 
+
+  
   httpClient = inject(HttpClient);
 
-  private baseUrl : string = 'http://localhost:9009/usuario/ofertas/';
+  private baseUrl : string = 'http://localhost:9009/usuario/ofertas';
 
   constructor() { }
 
   
 
-  getAllOfertas(): Observable<Oferta[]>{
-    console.log('haciendo la petición del getall')
-    return this.httpClient.get<Oferta[]>(this.baseUrl);
-  }
+
 
   getById(_id: number): Observable<Oferta> {
     return this.httpClient.get<Oferta>(this.baseUrl+"/"+_id);

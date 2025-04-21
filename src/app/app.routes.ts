@@ -6,6 +6,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { RegistroEmpresaComponent } from './pages/empresa/registro-empresa/registro-empresa.component';
 import { OfertasComponent } from './pages/estudiante/ofertas/ofertas.component';
 import { ListaEmpresasComponent } from './pages/estudiante/lista-empresas/lista-empresas.component';
+import { OfertaViewComponent } from './pages/estudiante/oferta-view/oferta-view.component';
 
 export const routes: Routes = [
   {
@@ -40,7 +41,8 @@ export const routes: Routes = [
       {     
       path: '',
       component: ListaEmpresasComponent
-      }
+      },
+      {path: "ofertas/:_id", component: OfertaViewComponent},
     ]
     },
 
