@@ -7,13 +7,12 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [ReactiveFormsModule, HeaderComponent,RouterLink],
+  imports: [ReactiveFormsModule, RouterLink],
   standalone: true,
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent {
-
   modelForm: FormGroup;
   titulo: string;
 
@@ -24,23 +23,23 @@ export class LoginComponent {
     this.titulo = 'Web del reto';
     this.modelForm = new FormGroup({
       username: new FormControl(null, []),
-      password: new FormControl(null, [])
+      password: new FormControl(null, []),
     });
   }
 
   async getUser() {
     const loginUser: Iuser = this.modelForm.value as Iuser;
     loginUser.expiresInMins = 30;
-    
+
     try {
       let response = await this.loginService.login(loginUser);
       console.log(response);
       if (response.accessToken) {
-        localStorage.setItem("accessToken", response.accessToken);
-        localStorage.setItem("refreshToken", response.refreshToken);
+        localStorage.setItem('accessToken', response.accessToken);
+        localStorage.setItem('refreshToken', response.refreshToken);
         localStorage.setItem('user', JSON.stringify(response.user));
 
-      const rol = response.user.rol
+        const rol = response.user.rol;
         localStorage.setItem('rol', rol);
         this.modelForm.reset();
         switch (rol) {
@@ -55,9 +54,8 @@ export class LoginComponent {
             break;
           default:
             this.router.navigate(['/home']);
-        
+        }
       }
-    }
     } catch (error) {
       alert('Username o password incorrectos');
       this.modelForm.reset();

@@ -1,0 +1,24 @@
+  /* Estilos para pantallas medianas y grandes */
+  @media (min-width: 768px) {
+    .header-col {
+      max-width: 400px;
+      margin-left: 300px;
+      /* Desplaza el header a la derecha en escritorio */
+    }
+
+    .login-form {
+      max-width: 400px;
+      margin-left: 20px;
+      /* Desplaza el formulario un poco hacia la izquierda */
+    }
+  }
+
+  /* Estilos para móviles: se eliminan los márgenes y se usan anchos completos */
+  @media (max-width: 767.98px) {
+
+    .header-col,
+    .login-form {
+      max-width: 100%;
+      margin-left: 0;
+    }
+  }
