@@ -1,23 +1,26 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Iuser } from '../interfaces/iuser';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
+import { EmpresaRegistroDto } from '../interfaces/empresa-registro-dto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LoginServiceService {
-
   httpClient = inject(HttpClient);
 
-  private baseUrl : string = 'http://localhost:9009/auth/';
+  private baseUrl: string = 'http://localhost:9009/auth/';
 
-  constructor() { }
+  constructor() {}
 
-  login(user: Iuser) : Promise<any> {
-
-    return lastValueFrom (this.httpClient.post<any>(this.baseUrl+"login", user));
-      }
+  login(user: Iuser): Promise<any> {
+    return lastValueFrom(
+      this.httpClient.post<any>(this.baseUrl + 'login', user)
+    );
   }
-  
 
+  loginEmpresa(user: EmpresaRegistroDto): Observable<any> {
+    return this.httpClient.post<any>(this.baseUrl + 'registro/empresa', user);
+  }
+}

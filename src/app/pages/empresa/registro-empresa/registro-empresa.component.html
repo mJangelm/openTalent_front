@@ -1,75 +1,129 @@
-<form [formGroup]="modelForm" (ngSubmit)="registro()">
-  <div class="row">
+<div class="container py-5">
+  <!-- Título y logo -->
+  <div class="d-flex justify-content-center align-items-center gap-4 mb-4">
+    <h1 class="display-4 fw-bold m-0">OpenTalent</h1>
+    <img src="assets/logo/openTalent_logo_sinletras.png" alt="Logo" style="width: 80px;">
+  </div>
+
+  <!-- Subtítulo -->
+  <div class="text-center mb-4">
+    <h3 class="fw-semibold">Registro como empresa</h3>
+  </div>
+
+  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="row g-4">
     <!-- Columna 1 -->
     <div class="col-md-4">
-      <div>
-        <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" formControlName="nombre" class="form-control" placeholder="Introduce tu nombre">
+      <div class="mb-2">
+        <label class="form-label">CIF</label>
+        <input formControlName="cif" type="text" class="form-control" placeholder="CIF">
+        @if (registroForm.get('cif')?.touched && registroForm.get('cif')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
       </div>
-      <div>
-        <label for="apellido">Apellido</label>
-        <input type="text" id="apellido" formControlName="apellido" class="form-control" placeholder="Introduce tu apellido">
+
+      <div class="mb-2">
+        <label class="form-label">Nombre</label>
+        <input formControlName="nombre" type="text" class="form-control">
+        @if (registroForm.get('nombre')?.touched && registroForm.get('nombre')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
       </div>
-      <div>
-        <label for="email">Email</label>
-        <input type="email" id="email" formControlName="email" class="form-control" placeholder="Introduce tu email">
+
+      <div class="mb-2">
+        <label class="form-label">Apellido</label>
+        <input formControlName="apellido" type="text" class="form-control">
       </div>
-      <div>
-        <label for="username">Nombre de usuario</label>
-        <input type="text" id="username" formControlName="username" class="form-control" placeholder="Introduce tu nombre de usuario">
+
+      <div class="mb-2">
+        <label class="form-label">Username</label>
+        <input formControlName="username" type="text" class="form-control">
       </div>
-      <div>
-        <label for="password">Contraseña</label>
-        <input type="password" id="password" formControlName="password" class="form-control" placeholder="Introduce tu contraseña">
+
+      <div class="mb-2">
+        <label class="form-label">Email</label>
+        <input formControlName="email" type="email" class="form-control">
+        @if (registroForm.get('email')?.touched && registroForm.get('email')?.errors) {
+        <div class="text-danger small">
+          @if (registroForm.get('email')?.errors?.['required']) { El correo es obligatorio. }
+          @else if (registroForm.get('email')?.errors?.['email']) { Correo no válido. }
+        </div>
+        }
       </div>
-      <div>
-        <label for="fechaNacimiento">Fecha de Nacimiento</label>
-        <input type="date" id="fechaNacimiento" formControlName="fechaNacimiento" class="form-control">
+
+      <div class="mb-2">
+        <label class="form-label">Contraseña</label>
+        <input formControlName="password" type="password" class="form-control">
+        @if (registroForm.get('password')?.touched && registroForm.get('password')?.errors) {
+        <div class="text-danger small">
+          @if (registroForm.get('password')?.errors?.['required']) { La contraseña es obligatoria. }
+          @else if (registroForm.get('password')?.errors?.['minlength']) { Mínimo 6 caracteres. }
+        </div>
+        }
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Repite contraseña</label>
+        <input formControlName="confirmarPassword" type="password" class="form-control">
+        @if (registroForm.errors?.['passwordsMismatch'] && registroForm.get('confirmarPassword')?.touched) {
+        <div class="text-danger small">Las contraseñas no coinciden.</div>
+        }
       </div>
     </div>
 
     <!-- Columna 2 -->
     <div class="col-md-4">
-      <div>
-        <label for="telefono">Teléfono</label>
-        <input type="tel" id="telefono" formControlName="telefono" class="form-control" placeholder="Introduce tu teléfono">
+      <div class="mb-2">
+        <label class="form-label">Fecha nacimiento</label>
+        <input formControlName="fechaNacimiento" type="date" class="form-control">
       </div>
-      <div>
-        <label for="pais">País</label>
-        <input type="text" id="pais" formControlName="pais" class="form-control" placeholder="Introduce tu país">
+      <div class="mb-2">
+        <label class="form-label">Teléfono</label>
+        <input formControlName="telefono" type="text" class="form-control">
       </div>
-      <div>
-        <label for="calle">Calle</label>
-        <input type="text" id="calle" formControlName="calle" class="form-control" placeholder="Introduce tu calle">
+      <div class="mb-2">
+        <label class="form-label">País</label>
+        <input formControlName="pais" type="text" class="form-control">
       </div>
-      <div>
-        <label for="poblacion">Población</label>
-        <input type="text" id="poblacion" formControlName="poblacion" class="form-control" placeholder="Introduce tu población">
+      <div class="mb-2">
+        <label class="form-label">Provincia</label>
+        <input formControlName="provincia" type="text" class="form-control">
       </div>
-      <div>
-        <label for="codigoPostal">Código Postal</label>
-        <input type="text" id="codigoPostal" formControlName="codigoPostal" class="form-control" placeholder="Introduce tu código postal">
+      <div class="mb-2">
+        <label class="form-label">Población</label>
+        <input formControlName="poblacion" type="text" class="form-control">
       </div>
-      <div>
-        <label for="provincia">Provincia</label>
-        <input type="text" id="provincia" formControlName="provincia" class="form-control" placeholder="Introduce tu provincia">
+      <div class="mb-2">
+        <label class="form-label">Código postal</label>
+        <input formControlName="codigoPostal" type="text" class="form-control">
       </div>
     </div>
 
     <!-- Columna 3 -->
     <div class="col-md-4">
-      <div>
-        <label for="fotoPerfil">Foto de perfil</label>
-        <input type="text" id="fotoPerfil" formControlName="fotoPerfil" class="form-control" placeholder="Introduce la URL de tu foto de perfil">
+      <div class="mb-2">
+        <label class="form-label">Calle</label>
+        <input formControlName="calle" type="text" class="form-control">
       </div>
-      <div>
-        <label for="cif">CIF</label>
-        <input type="text" id="cif" formControlName="cif" class="form-control" placeholder="Introduce tu CIF">
+
+      <div class="mb-2">
+        <label class="form-label">URL de foto de perfil</label>
+        <input formControlName="fotoPerfil" type="text" class="form-control" placeholder="https://...">
+        <small class="text-muted">Debe ser una URL a una imagen válida</small>
       </div>
     </div>
-  </div>
 
-  <br><br>
-  <input type="submit" value="Registrarse" class="btn btn-primary">
-  <button type="button" class="btn btn-secondary" style="margin-left:800px">Volver</button>
-</form>
+    <!-- Botones -->
+    <div class="col-12 d-flex justify-content-center gap-4 mt-4">
+      <button type="submit" class="btn btn-primary px-4" style="background-color: #373D8C; border: none;"
+        [disabled]="loading || registroForm.invalid">
+        @if (loading) {
+        <span class="spinner-border spinner-border-sm me-2"></span>
+        }
+        Registrarse
+      </button>
+      <a [routerLink]="['/login']" class="btn btn-secondary px-4" style="background-color: #373D8C; border: none;">
+        Volver
+      </a>
+    </div>
+  </form>
+</div>
