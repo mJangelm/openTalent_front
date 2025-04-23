@@ -4,34 +4,24 @@ import { MenuUsuarioComponent } from '../../../components/usuario/menu-usuario/m
 import { EmpresaService } from '../../../services/empresa.service';
 import { Router, RouterOutlet } from '@angular/router';
 import { Empresa } from '../../../interfaces/empresa';
-import { EmpresasUsuarioCardComponent } from "../../../components/usuario/empresas-usuario-card/empresas-usuario-card.component";
+import { EmpresasUsuarioCardComponent } from '../../../components/usuario/empresas-usuario-card/empresas-usuario-card.component';
 
 @Component({
   selector: 'app-home-estudiante',
-  imports: [NavbarUsuarioComponent, MenuUsuarioComponent,RouterOutlet],
-  standalone:true,
+  imports: [EmpresasUsuarioCardComponent],
+  standalone: true,
   templateUrl: './home-estudiante.component.html',
-  styleUrl: './home-estudiante.component.css'
+  styleUrl: './home-estudiante.component.css',
 })
-export class HomeEstudianteComponent  {
+export class HomeEstudianteComponent {
+  servicioEmpresas = inject(EmpresaService);
+  router = inject(Router);
+  arrEmpresas!: Empresa[];
 
-servicioEmpresas = inject(EmpresaService);
-router = inject(Router);
-arrEmpresas! : Empresa[];
-isMenuOpenHome: boolean = false;
-toggleMenuHome() {
-  this.isMenuOpenHome = !this.isMenuOpenHome;
-}
-
-
-ngOnInit() {
-
-
-  this.servicioEmpresas.getAllEmpresas().subscribe((response:any) =>{
-    this.arrEmpresas = response;
-    console.log(response)
-  })
-}
-
-
+  ngOnInit() {
+    this.servicioEmpresas.getAllEmpresas().subscribe((response: any) => {
+      this.arrEmpresas = response;
+      console.log(response);
+    });
+  }
 }

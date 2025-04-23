@@ -7,14 +7,14 @@ import { OfertasUsuarioCardComponent } from '../../../components/usuario/ofertas
 @Component({
   selector: 'app-ofertas',
   imports: [OfertasUsuarioCardComponent],
-  standalone:true,
+  standalone: true,
   templateUrl: './ofertas.component.html',
-  styleUrl: './ofertas.component.css'
+  styleUrl: './ofertas.component.css',
 })
 export class OfertasComponent {
   servicioOfertas = inject(OfertaService);
   router = inject(Router);
-  arrOfertas! : Oferta[];
+  arrOfertas!: Oferta[];
   isMenuOpenHome: boolean = false;
 
   toggleMenuHome() {
@@ -22,11 +22,9 @@ export class OfertasComponent {
   }
 
   ngOnInit() {
-  
-  
-    this.servicioOfertas.getAllOfertas().subscribe((response:any) =>{
+    this.servicioOfertas.getAllOfertas().subscribe((response: any) => {
       this.arrOfertas = response;
-      console.log(response)
-    })
-}
+      console.log(response);
+    });
+  }
 }

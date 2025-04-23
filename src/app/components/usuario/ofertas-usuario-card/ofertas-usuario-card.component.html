@@ -3,8 +3,8 @@
       <!-- Columna para la imagen -->
       <div class="col-md-4">
         <div class="contenedor" style="margin-top: 5px; margin-left:50px;">
-          <img src="assets/imagenes de prueba/edificio_empresa.jpg" 
-               alt="{{OfertaUnica.idOfeta}}" 
+          <img [src]="OfertaUnica.imagenOferta"
+               alt="{{OfertaUnica.idOferta}}"
                class="imagen img-fluid rounded-circle">
         </div>
       </div>
@@ -12,11 +12,11 @@
       <div class="col-md-8">
         <div class="card-body" style="padding-right: 30px">
           <h5 class="card-title">{{OfertaUnica.titulo}}</h5>
-          
-          <app-botonera  [_id]="OfertaUnica.idOfeta"></app-botonera>
+
+          <app-botonera  [_id]="OfertaUnica.idOferta"></app-botonera>
 
         </div>
       </div>
     </div>
   </div>
-  
+

@@ -1,18 +1,22 @@
 export interface Direccion {
-    idDireccion: number;
-    calle: string;
-    pais: string;
-    codigoPostal: string;
-    provincia: string;
-    poblacion: string;
-  }
-  
-  export interface Oferta {
-    idOfeta: number;  // Parece un typo, ¿debería ser "idOferta"?
-    fotoContenido: string;
-    titulo: string;
-    descripcion: string;
-    foto: string;
-    direccion: Direccion;
-    esFavorita: boolean;
-  }
+  idDireccion: number;
+  calle: string;
+  pais: string;
+  codigoPostal: string;
+  provincia: string;
+  poblacion: string;
+}
+
+export interface Oferta {
+  idOferta: number;
+  titulo: string;
+  descripcion: string;
+  modalidad: string;
+  imagenOferta: string;
+  nombreEmpresa: string;
+  fotoEmpresa: string;
+  direccionEmpresa: Direccion;
+  estadoAplicacion: string;
+  esFavorita: boolean;
+  vacantesDisponibles: number;
+}

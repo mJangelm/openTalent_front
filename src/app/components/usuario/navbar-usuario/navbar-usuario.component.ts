@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-navbar-usuario',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './navbar-usuario.component.html',
   styleUrl: './navbar-usuario.component.css',
 })

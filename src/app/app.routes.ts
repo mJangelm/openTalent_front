@@ -29,26 +29,33 @@ export const routes: Routes = [
     canActivate: [loginGuard],
   },
   {
-    path: 'usuario/home',
-    component: HomeEstudianteComponent,
+    path: 'usuario',
     canActivate: [loginGuard],
-    data: { roles: ['ADMIN', 'USUARIO'] },
-    children:  [ 
-      {     
-      path: 'ofertas',
-      component: OfertasComponent
+    data: { roles: ['USUARIO'] },
+    children: [
+      {
+        path: 'ofertas',
+        component: OfertasComponent,
+        canActivate: [loginGuard], // Protege la ruta hija
+        data: { roles: ['USUARIO'] },
       },
-      {     
-      path: '',
-      component: ListaEmpresasComponent
+      {
+        path: 'home',
+        component: HomeEstudianteComponent,
+        canActivate: [loginGuard], // Protege la ruta hija
+        data: { roles: ['USUARIO'] },
       },
-      {path: "ofertas/:_id", component: OfertaViewComponent},
-    ]
-    },
+      {
+        path: 'ofertas/:_id',
+        component: OfertaViewComponent,
+        canActivate: [loginGuard], // Protege la ruta hija
+        data: { roles: ['USUARIO'] },
+      },
+    ],
+  },
 
-  
   {
     path: '**',
-    redirectTo: ''
-  }
+    redirectTo: '',
+  },
 ];

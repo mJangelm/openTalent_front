@@ -26,7 +26,9 @@ export class LoginComponent {
       password: new FormControl(null, []),
     });
   }
-
+  ngOnInit() {
+    localStorage.clear();
+  }
   async getUser() {
     const loginUser: Iuser = this.modelForm.value as Iuser;
     loginUser.expiresInMins = 30;
