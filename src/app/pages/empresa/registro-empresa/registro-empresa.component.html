@@ -1,8 +1,8 @@
-<div class="container py-5">
+<div class="container py-2">
   <!-- Título y logo -->
-  <div class="d-flex justify-content-center align-items-center gap-4 mb-4">
+  <div class="d-flex justify-content-center align-items-center gap-4 mb-">
     <h1 class="display-4 fw-bold m-0">OpenTalent</h1>
-    <img src="assets/logo/openTalent_logo_sinletras.png" alt="Logo" style="width: 80px;">
+    <img src="assets/logo/openTalent_logo_sinletras.png" alt="Logo" style="width: 200px;">
   </div>
 
   <!-- Subtítulo -->
@@ -32,11 +32,17 @@
       <div class="mb-2">
         <label class="form-label">Apellido</label>
         <input formControlName="apellido" type="text" class="form-control">
+        @if (registroForm.get('apellido')?.touched && registroForm.get('apellido')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
       </div>
 
       <div class="mb-2">
         <label class="form-label">Username</label>
         <input formControlName="username" type="text" class="form-control">
+        @if (registroForm.get('username')?.touched && registroForm.get('username')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
       </div>
 
       <div class="mb-2">
@@ -75,26 +81,44 @@
       <div class="mb-2">
         <label class="form-label">Fecha nacimiento</label>
         <input formControlName="fechaNacimiento" type="date" class="form-control">
+        @if (registroForm.get('fechaNacimiento')?.touched && registroForm.get('fechaNacimiento')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
       </div>
       <div class="mb-2">
         <label class="form-label">Teléfono</label>
         <input formControlName="telefono" type="text" class="form-control">
+        @if (registroForm.get('telefono')?.touched && registroForm.get('telefono')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
       </div>
       <div class="mb-2">
         <label class="form-label">País</label>
         <input formControlName="pais" type="text" class="form-control">
+        @if (registroForm.get('pais')?.touched && registroForm.get('pais')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
       </div>
       <div class="mb-2">
         <label class="form-label">Provincia</label>
         <input formControlName="provincia" type="text" class="form-control">
+        @if (registroForm.get('provincia')?.touched && registroForm.get('provincia')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
       </div>
       <div class="mb-2">
         <label class="form-label">Población</label>
         <input formControlName="poblacion" type="text" class="form-control">
+        @if (registroForm.get('poblacion')?.touched && registroForm.get('poblacion')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
       </div>
       <div class="mb-2">
         <label class="form-label">Código postal</label>
         <input formControlName="codigoPostal" type="text" class="form-control">
+        @if (registroForm.get('codigoPostal')?.touched && registroForm.get('codigoPostal')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
       </div>
     </div>
 
@@ -103,11 +127,17 @@
       <div class="mb-2">
         <label class="form-label">Calle</label>
         <input formControlName="calle" type="text" class="form-control">
+        @if (registroForm.get('cif')?.touched && registroForm.get('cif')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
       </div>
 
       <div class="mb-2">
         <label class="form-label">URL de foto de perfil</label>
         <input formControlName="fotoPerfil" type="text" class="form-control" placeholder="https://...">
+        @if (registroForm.get('cif')?.touched && registroForm.get('cif')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
         <small class="text-muted">Debe ser una URL a una imagen válida</small>
       </div>
     </div>
