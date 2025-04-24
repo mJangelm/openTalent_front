@@ -35,11 +35,11 @@ constructor() {
     cif: new FormControl(null, [Validators.required])
   })
 }
-registro() {
+async registro() {
     const registroEmpresa :EmpresaRegistroDto = this.modelForm.value as EmpresaRegistroDto;
 
     try {
-      this.servicioEmpresaRegistro.registro(registroEmpresa);
+     await this.servicioEmpresaRegistro.registro(registroEmpresa);
       console.log('Empresa registrada');
       this.router.navigate(['/login']);
 
