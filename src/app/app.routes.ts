@@ -7,6 +7,8 @@ import { RegistroEmpresaComponent } from './pages/empresa/registro-empresa/regis
 import { OfertasComponent } from './pages/estudiante/ofertas/ofertas.component';
 import { ListaEmpresasComponent } from './pages/estudiante/lista-empresas/lista-empresas.component';
 import { OfertaViewComponent } from './pages/estudiante/oferta-view/oferta-view.component';
+import { ProyectosComponent } from './pages/estudiante/proyectos/proyectos.component';
+import { ProyectoViewComponent } from './pages/estudiante/proyecto-view/proyecto-view.component';
 
 export const routes: Routes = [
   {
@@ -51,6 +53,19 @@ export const routes: Routes = [
         canActivate: [loginGuard], // Protege la ruta hija
         data: { roles: ['USUARIO'] },
       },
+      {
+        path: 'proyectos',
+        component: ProyectosComponent,
+        canActivate: [loginGuard], 
+        data: { roles: ['USUARIO'] },
+      },
+      {
+        path: 'proyectos/:_id',
+        component: ProyectoViewComponent,
+        canActivate: [loginGuard], // Protege la ruta hija
+        data: { roles: ['USUARIO'] },
+      },
+      
     ],
   },
 

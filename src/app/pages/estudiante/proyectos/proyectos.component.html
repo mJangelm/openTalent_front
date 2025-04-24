@@ -1,0 +1,19 @@
+
+<div class="container">
+    <div class="row">
+      @for (proyecto of arrProyectos; track proyecto.idProyecto) {
+        <div class="col-md-4 mb-3">
+          <app-proyectos-usuario-card [proyectoUnico]="proyecto"></app-proyectos-usuario-card>
+          </div>
+      }
+      @empty {
+        <div class="col-12 text-muted text-center fs-5 mt-4">
+          No hay empresas disponibles. Quizás sea problema del servidor o de su conexión a Internet.
+          <br><br>
+          Inténtelo más tarde.
+        </div>
+      }
+    </div>
+  </div>
+  
+
