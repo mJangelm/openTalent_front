@@ -9,14 +9,10 @@ export interface Direccion {
 
 export interface Oferta {
   idOferta: number;
+  fotoContenido: string;
   titulo: string;
   descripcion: string;
-  modalidad: string;
-  imagenOferta: string;
-  nombreEmpresa: string;
-  fotoEmpresa: string;
-  direccionEmpresa: Direccion;
-  estadoAplicacion: string;
+  foto: string;
+  direccion?: Direccion;
   esFavorita: boolean;
-  vacantesDisponibles: number;
 }

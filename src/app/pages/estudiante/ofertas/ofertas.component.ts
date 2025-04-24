@@ -24,7 +24,6 @@ export class OfertasComponent {
   ngOnInit() {
     this.servicioOfertas.getAllOfertas().subscribe((response: any) => {
       this.arrOfertas = response;
-      console.log(response);
     });
   }
 }

@@ -2,8 +2,7 @@ import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { OfertaService } from '../../../services/oferta.service';
 import { Oferta } from '../../../interfaces/oferta';
-import { OfertaDetalle } from '../../../interfaces/oferta-view-interface';
-import { DetallesOfertaService } from '../../../services/detalles-oferta.service';
+import { OfertaDetalle } from '../../../interfaces/oferta-detalle';
 
 @Component({
   selector: 'app-oferta-view',
@@ -14,10 +13,10 @@ import { DetallesOfertaService } from '../../../services/detalles-oferta.service
 })
 export class OfertaViewComponent {
   activatedRouter = inject(ActivatedRoute);
-  detallesOferta = inject(DetallesOfertaService);
-  miOferta: Oferta;
+  detallesOferta = inject(OfertaService);
+  miOferta: OfertaDetalle;
   constructor() {
-    this.miOferta = {} as Oferta;
+    this.miOferta = {} as OfertaDetalle;
   }
 
   ngOnInit() {
@@ -27,7 +26,7 @@ export class OfertaViewComponent {
   loadOferta() {
     this.activatedRouter.params.subscribe((response: any) => {
       const id: number = response._id as number;
-      this.detallesOferta.getById(id).subscribe((data: Oferta) => {
+      this.detallesOferta.getById(id).subscribe((data: OfertaDetalle) => {
         this.miOferta = data;
       });
     });

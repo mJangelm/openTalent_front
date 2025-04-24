@@ -4,21 +4,19 @@ import { Observable } from 'rxjs';
 import { Empresa } from '../interfaces/empresa';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EmpresaService {
-
   httpClient = inject(HttpClient);
 
-  private baseUrl : string = 'http://localhost:9009/usuario/home';
+  private baseUrl: string = 'http://localhost:9009/usuario/home';
 
-  constructor() { }
+  constructor() {}
 
-  getAllEmpresas(): Observable<Empresa[]>{
-    console.log('haciendo la petición del getall')
+  getAllEmpresas(): Observable<Empresa[]> {
     return this.httpClient.get<Empresa[]>(this.baseUrl);
   }
   getEmpresaById(_id: string): Observable<Empresa> {
-    return this.httpClient.get<Empresa>(this.baseUrl+"/"+_id);
+    return this.httpClient.get<Empresa>(this.baseUrl + '/' + _id);
   }
 }

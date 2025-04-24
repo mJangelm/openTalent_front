@@ -21,7 +21,6 @@ export class HomeEstudianteComponent {
   ngOnInit() {
     this.servicioEmpresas.getAllEmpresas().subscribe((response: any) => {
       this.arrEmpresas = response;
-      console.log(response);
     });
   }
 }

@@ -20,7 +20,7 @@ export class LoginServiceService {
     );
   }
 
-  loginEmpresa(user: EmpresaRegistroDto): Observable<any> {
+  registroEmpresa(user: EmpresaRegistroDto): Observable<any> {
     return this.httpClient.post<any>(this.baseUrl + 'registro/empresa', user);
   }
 }

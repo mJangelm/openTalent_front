@@ -66,7 +66,7 @@ export class RegistroEmpresaComponent {
     this.loading = true;
     const { confirmarPassword, ...empresaData } = this.registroForm.value;
 
-    this.loginService.loginEmpresa(empresaData).subscribe({
+    this.loginService.registroEmpresa(empresaData).subscribe({
       next: () => {
         this.loading = false;
         this.mostrarExito('Empresa registrada correctamente.', () => {

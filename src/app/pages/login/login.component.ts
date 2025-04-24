@@ -4,6 +4,7 @@ import { HeaderComponent } from '../../layout/header/header.component';
 import { Iuser } from '../../interfaces/iuser';
 import { LoginServiceService } from '../../services/login-service.service';
 import { Router, RouterLink } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -59,7 +60,17 @@ export class LoginComponent {
         }
       }
     } catch (error) {
-      alert('Username o password incorrectos');
+      Swal.fire({
+        icon: 'error',
+        title: 'Credenciales inválidas',
+        text: 'El nombre de usuario o la contraseña es incorrecto.',
+        confirmButtonText: 'Intentar de nuevo',
+        customClass: {
+          confirmButton: 'btn btn-secondary',
+        },
+        buttonsStyling: false,
+      });
+
       this.modelForm.reset();
     }
   }

@@ -4,39 +4,47 @@ import { NgModel } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Iuser } from '../../../interfaces/iuser';
 import { Estudiante } from '../../../interfaces/estudiante';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-menu-usuario',
-  standalone:true,
+  standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './menu-usuario.component.html',
-  styleUrl: './menu-usuario.component.css'
+  styleUrl: './menu-usuario.component.css',
 })
 export class MenuUsuarioComponent {
+  activatedRouter = inject(ActivatedRoute);
+  usuario!: Iuser;
+  estudiante!: Estudiante;
+  router = inject(Router);
+  @Input() isMenuOpen: boolean = false;
+  @Output() eventoMenu = new EventEmitter<void>();
 
-activatedRouter = inject(ActivatedRoute);
-usuario!: Iuser;
-estudiante! : Estudiante;
-router = inject(Router);
-@Input() isMenuOpen: boolean = false;
-@Output() eventoMenu = new EventEmitter<void>();
-
-onClose() {
-  this.eventoMenu.emit();
-}
-
-logOut() : void {
-localStorage.clear();
-  this.router.navigate(['/login']);
+  onClose() {
+    this.eventoMenu.emit();
   }
 
+  logOut(): void {
+    localStorage.clear();
+    Swal.fire({
+      icon: 'success',
+      title: 'Sesión cerrada',
+      text: 'Te has desconectado correctamente.',
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      toast: false,
+      position: 'center',
+    });
+    this.eventoMenu.emit();
+    this.router.navigate(['/login']);
+  }
 
   ngOnInit() {
-let userMenu = localStorage.getItem('user');
-this.estudiante = userMenu ? JSON.parse(userMenu) : null;
+    let userMenu = localStorage.getItem('user');
+    this.estudiante = userMenu ? JSON.parse(userMenu) : null;
 
-// console.log('aquí está la info' +userMenu)
+    // console.log('aquí está la info' +userMenu)
   }
 }
-
-

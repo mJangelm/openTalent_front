@@ -2,24 +2,24 @@ import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Proyecto } from '../interfaces/proyecto';
+import { ProyectosView } from '../interfaces/proyectos-view';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProyectosService {
-
-
   httpClient = inject(HttpClient);
 
-  private baseUrl : string = 'http://localhost:9009/usuario/proyectos/';
+  private baseUrl: string = 'http://localhost:9009/';
 
-  constructor() { }
+  constructor() {}
 
-  getAllProyectos(): Observable<Proyecto[]>{
-    console.log('haciendo la petición del getall')
-    return this.httpClient.get<Proyecto[]>(this.baseUrl);
+  getAllProyectos(): Observable<Proyecto[]> {
+    return this.httpClient.get<Proyecto[]>(this.baseUrl + 'usuario/proyectos/');
   }
-  getById(_id: number): Observable<Proyecto> {
-    return this.httpClient.get<Proyecto>(this.baseUrl+"/"+_id);
+  getById(_id: number): Observable<ProyectosView> {
+    return this.httpClient.get<ProyectosView>(
+      this.baseUrl + 'usuario/proyectos/' + _id
+    );
   }
 }
