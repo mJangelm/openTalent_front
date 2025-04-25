@@ -3,7 +3,7 @@
     <div class="row">
       @for (oferta of arrOfertasFavoritas; track oferta.idOferta) {
         <div class="col-md-4 mb-3">
-         hola
+         <app-oferta-fav-card [OfertaUnica]="oferta"></app-oferta-fav-card>
         </div>
       }
       @empty {
