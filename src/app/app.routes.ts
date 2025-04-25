@@ -5,10 +5,10 @@ import { RegistroComponent } from './pages/estudiante/registro/registro.componen
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroEmpresaComponent } from './pages/empresa/registro-empresa/registro-empresa.component';
 import { OfertasComponent } from './pages/estudiante/ofertas/ofertas.component';
-import { ListaEmpresasComponent } from './pages/estudiante/lista-empresas/lista-empresas.component';
 import { OfertaViewComponent } from './pages/estudiante/oferta-view/oferta-view.component';
 import { ProyectosComponent } from './pages/estudiante/proyectos/proyectos.component';
 import { ProyectoViewComponent } from './pages/estudiante/proyecto-view/proyecto-view.component';
+import { ListaOfertasFavComponent } from './pages/estudiante/favoritos/ofertasFavoritas/lista-ofertas-fav/lista-ofertas-fav.component';
 
 export const routes: Routes = [
   {
@@ -24,7 +24,6 @@ export const routes: Routes = [
     path: 'registroEmpresa',
     component: RegistroEmpresaComponent,
   },
-
   {
     path: 'usuario/registro',
     component: RegistroComponent,
@@ -36,39 +35,32 @@ export const routes: Routes = [
     data: { roles: ['USUARIO'] },
     children: [
       {
-        path: 'ofertas',
-        component: OfertasComponent,
-        canActivate: [loginGuard], // Protege la ruta hija
-        data: { roles: ['USUARIO'] },
-      },
-      {
         path: 'home',
         component: HomeEstudianteComponent,
-        canActivate: [loginGuard], // Protege la ruta hija
+        canActivate: [loginGuard],
         data: { roles: ['USUARIO'] },
       },
       {
-        path: 'ofertas/:_id',
-        component: OfertaViewComponent,
-        canActivate: [loginGuard], // Protege la ruta hija
+        path: 'ofertas',
         data: { roles: ['USUARIO'] },
+        canActivate: [loginGuard],
+        children: [
+          { path: '', component: OfertasComponent },
+          { path: 'favoritas', component: ListaOfertasFavComponent },
+          { path: ':_id', component: OfertaViewComponent },
+        ],
       },
       {
         path: 'proyectos',
-        component: ProyectosComponent,
-        canActivate: [loginGuard], 
         data: { roles: ['USUARIO'] },
+        canActivate: [loginGuard],
+        children: [
+          { path: '', component: ProyectosComponent },
+          { path: ':_id', component: ProyectoViewComponent },
+        ],
       },
-      {
-        path: 'proyectos/:_id',
-        component: ProyectoViewComponent,
-        canActivate: [loginGuard], // Protege la ruta hija
-        data: { roles: ['USUARIO'] },
-      },
-      
     ],
   },
-
   {
     path: '**',
     redirectTo: '',

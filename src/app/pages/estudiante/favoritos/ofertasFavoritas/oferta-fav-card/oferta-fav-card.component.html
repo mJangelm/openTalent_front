@@ -1,0 +1,44 @@
+<div class="card shadow-sm mb-3 mt-5 hover-card" style="border-radius: 12px;">
+    <div class="card-body">
+  
+      <!-- Encabezado: imagen + título + estrella -->
+      <div class="d-flex align-items-center mb-2">
+        <a [routerLink]="[OfertaUnica.idOferta]" class="text-decoration-none text-dark card-trigger">
+        <img [src]="OfertaUnica.foto" alt="logo" class="rounded-circle border me-3"
+          style="width: 50px; height: 50px; object-fit: cover;">
+          </a>
+        <h5 class="m-0 fw-bold flex-grow-1">
+          {{ OfertaUnica.titulo }}
+        </h5>
+  
+        <button (click)="toggleFavorita()" class="p-0 m-0 border-0 bg-transparent"
+          style="outline: none; box-shadow: none; cursor: pointer;">
+          @if(OfertaUnica.esFavorita) {
+          <i class="fa-solid fa-star"></i>
+          } @else {
+          <i class="fa-regular fa-star"></i>
+          }
+        </button>
+  
+      </div>
+  
+      <!-- Ubicación + ícono adicional -->
+      <div class="d-flex align-items-center mb-2">
+        <i class="fa-solid fa-location-dot me-2"></i>
+        <span class="me-auto small"> {{OfertaUnica.direccion?.provincia}}</span>
+  
+        <i class="fa-regular fa-face-smile"></i>
+      </div>
+      <a [routerLink]="[OfertaUnica.idOferta]" class="text-decoration-none text-dark card-trigger">
+        <!-- Descripción -->
+        <p class="mb-3 text-wrap" style="font-size: 0.9rem;">
+          {{ OfertaUnica.descripcion }}
+        </p>
+  
+        <!-- Imagen inferior -->
+        <img [src]="OfertaUnica.fotoContenido" alt="contenido" class="img-fluid rounded mb-2"
+          style="max-height: 150px; object-fit: cover; width: 100%;">
+      </a>
+    </div>
+  </div>
+  

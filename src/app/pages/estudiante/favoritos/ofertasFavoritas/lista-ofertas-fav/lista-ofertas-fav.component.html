@@ -1,0 +1,19 @@
+
+<div class="container">
+    <div class="row">
+      @for (oferta of arrOfertasFavoritas; track oferta.idOferta) {
+        <div class="col-md-4 mb-3">
+         hola
+        </div>
+      }
+      @empty {
+        <div class="col-12 text-muted text-center fs-5 mt-4">
+          No hay ofertas favoritas disponibles. Quizás sea problema del servidor o de su conexión a Internet.
+          <br><br>
+          Inténtelo más tarde.
+        </div>
+      }
+    </div>
+  </div>
+
+
