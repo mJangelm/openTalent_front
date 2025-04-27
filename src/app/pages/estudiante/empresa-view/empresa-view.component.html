@@ -1,0 +1,86 @@
+@if (miEmpresa) {
+<div class="container my-5">
+  <div class="card shadow border-0 p-4 empresa-card">
+    <div class="row">
+      <div class="col-md-10">
+        <div class="d-flex align-items-center mb-3">
+          <img [src]="miEmpresa.foto" alt="{{ miEmpresa.nombreEmpresa }}" class="rounded-circle me-3 empresa-foto">
+          <div>
+            <h2 class="mb-1">{{ miEmpresa.nombreEmpresa }}</h2>
+            <small class="text-muted">{{ miEmpresa.numeroInscritos }} trabajadores</small>
+          </div>
+        </div>
+        <p class="empresa-descripcion">{{ miEmpresa.descripcion }}</p>
+      </div>
+
+      <div class="col-md-2 text-end d-flex flex-column justify-content-center">
+        <div class="mb-2">
+          <i class="fas fa-briefcase me-1"></i> {{ miEmpresa.sectores?.[0]?.nombre }}
+        </div>
+        <div>
+          <i class="fas fa-map-marker-alt me-1"></i> {{ miEmpresa.direccion?.poblacion }}
+        </div>
+      </div>
+    </div>
+
+<h3 class="text-center mb-4 mt-5">Ofertas</h3>
+
+<div class="row g-4 ofertas-container">
+  @if (miEmpresa.ofertas) {
+  @if (miEmpresa.ofertas.length > 0) {
+  @for (oferta of miEmpresa.ofertas; track oferta.idOferta) {
+  <div class="col-md-6">
+    <a [routerLink]="['/usuario/ofertas', oferta.idOferta]" class="text-decoration-none text-dark">
+      <div class="card h-100 oferta-card">
+        <div class="row g-0 align-items-center">
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ oferta.titulo }}</h5>
+              <p class="card-text">{{ oferta.descripcion }}</p>
+            </div>
+          </div>
+          <div class="col-md-4 d-flex align-items-center justify-content-center">
+            <img [src]="oferta.foto" class="img-fluid oferta-img" alt="{{ oferta.titulo }}">
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+  }
+  } @else {
+  <p class="text-center text-muted">No hay ofertas disponibles.</p>
+  }
+  }
+</div>
+
+
+
+    <h3 class="text-center mb-4 mt-5">Reseñas</h3>
+
+    <div class="resennas-container">
+      @if(miEmpresa.resennas) {
+      @if (miEmpresa.resennas.length > 0) {
+      @for (resenna of miEmpresa.resennas; track resenna.idResenna) {
+      <div class="card shadow-sm p-3 mb-4 resenna-card">
+        <div class="d-flex align-items-center mb-3">
+          <img [src]="resenna.usuario.fotoPerfil" alt="{{ resenna.usuario.nombre }}"
+            class="rounded-circle border resenna-foto">
+          <h5 class="ms-3 mb-0">{{ resenna.usuario.nombre }} {{ resenna.usuario.apellidos }}</h5>
+          <span class="ms-auto fs-5">
+            @for (star of getEstrellasArray(resenna.puntuacion); track $index) {
+            <i class="fa-solid fa-star"></i>
+            }
+          </span>
+        </div>
+        <h6 class="resenna-titulo">{{ resenna.titulo }}</h6>
+        <p class="resenna-comentario">{{ resenna.comentario }}</p>
+      </div>
+      }
+      } @else {
+      <p class="text-center text-muted">No hay reseñas disponibles.</p>
+      }
+      }
+    </div>
+  </div>
+</div>
+}

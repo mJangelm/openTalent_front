@@ -9,6 +9,7 @@ import { OfertaViewComponent } from './pages/estudiante/oferta-view/oferta-view.
 import { ProyectosComponent } from './pages/estudiante/proyectos/proyectos.component';
 import { ProyectoViewComponent } from './pages/estudiante/proyecto-view/proyecto-view.component';
 import { ListaOfertasFavComponent } from './pages/estudiante/favoritos/ofertasFavoritas/lista-ofertas-fav/lista-ofertas-fav.component';
+import { EmpresaViewComponent } from './pages/estudiante/empresa-view/empresa-view.component';
 
 export const routes: Routes = [
   {
@@ -58,6 +59,12 @@ export const routes: Routes = [
           { path: '', component: ProyectosComponent },
           { path: ':_id', component: ProyectoViewComponent },
         ],
+      },
+      {
+        path: 'empresas',
+        data: { roles: ['USUARIO'] },
+        canActivate: [loginGuard],
+        children: [{ path: ':cif', component: EmpresaViewComponent }],
       },
     ],
   },

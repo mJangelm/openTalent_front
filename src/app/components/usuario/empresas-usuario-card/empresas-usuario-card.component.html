@@ -1,4 +1,4 @@
-<div data-tipo="Empresas" class="bg-light p-2 rounded shadow-sm border mt-5 d-flex flex-column justify-content-between"
+<div data-tipo="Empresas" class="bg-light p-2 rounded shadow-sm border mt-5 d-flex flex-column justify-content-between hover-card"
   style="width: 381px; height: 285px;">
 
   <!-- Encabezado + descripción -->
@@ -8,14 +8,16 @@
         style="width: 50px; height: 48px; box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);">
       <div class="fw-semibold fs-5 text-dark">{{empresaUnica.nombreEmpresa}}</div>
     </div>
-
+    <a [routerLink]="[empresaUnica.cif]" class="text-decoration-none text-dark card-trigger">
     <div class="text-justify text-dark fs-6" style="font-size: 12px;">
       {{empresaUnica.descripcion}}
-    </div>
+    </div></a>
   </div>
 
   <!-- Imagen inferior siempre abajo -->
+  <a [routerLink]="['/usuario/empresas/'+ empresaUnica.cif]" class="text-decoration-none text-dark card-trigger">
   <div class="text-center mt-2">
     <img [src]="empresaUnica.fotoContenido" class="img-fluid" style="max-width: 259px; height: 113px;">
   </div>
+  </a>
 </div>
