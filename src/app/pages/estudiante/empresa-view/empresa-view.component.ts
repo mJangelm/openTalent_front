@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { EmpresaService } from '../../../services/empresa.service';
 import { IEmpresaDetalle } from '../../../interfaces/iempresa-detalle';
 
