@@ -1,22 +1,38 @@
-<div class="side-menu" [ngClass]="{'open': isMenuOpen}">
-    <button class="close-btn" style="padding-right: 15px" (click)="onClose()">{{estudiante.nombre}}</button>
-    <ul>
-      <li >{{estudiante.estudios}}</li>
-    </ul>
-    <ul>
-      <li><a [routerLink]="['/usuario', 'ofertas', 'favoritas']">Favoritos</a></li>
-      <li><a href="#">Mis proyectos</a></li>
-      <li><a href="#">Configuración</a></li>
-      <!-- Más opciones -->
+<div class="overlay" *ngIf="isMenuOpen" (click)="onClose()"></div>
 
+<div class="side-menu d-flex flex-column justify-content-between py-4" [ngClass]="{'open': isMenuOpen}">
+  <div>
+    <div class="d-flex flex-column align-items-start ps-4 mb-4">
+      <button (click)="onClose()" class="profile-button">
+        <img [src]="estudiante.fotoPerfil || 'https://via.placeholder.com/100'" alt="Foto perfil"
+          class="rounded-circle profile-img mb-2">
+      </button>
+      <h6 class="mb-0">{{ estudiante.nombre }} {{ estudiante.apellidos }}</h6>
+      <small class="text-muted">{{ estudiante.estudios }}</small>
+    </div>
+
+    <ul class="nav flex-column">
+      <li class="nav-item mb-1">
+        <a class="nav-link" (click)="onClose()" [routerLink]="['/usuario/ofertas/favoritas']">
+          <i class="fas fa-bookmark me-2"></i> Favoritos
+        </a>
+      </li>
+      <li class="nav-item mb-1">
+        <a class="nav-link" (click)="onClose()" [routerLink]="['']">
+          <i class="fas fa-briefcase me-2"></i> Mis proyectos
+        </a>
+      </li>
+      <li class="nav-item mb-1">
+        <a class="nav-link"(click)="onClose()" [routerLink]="['/usuario/configuracion']">
+          <i class="fas fa-cog me-2"></i> Configuración
+        </a>
+      </li>
     </ul>
-   
-    <br>
-    <ul>
-      <li>    <div class="card card-shadow">
-        <button class="btn btn-danger" (click)="logOut()">Log Out</button>
-    </div></li>
-    </ul>
-    <br>
-    <button class="btn btn-primary" (click)="onClose()">Cerrar</button>
   </div>
+
+  <div class="text-start ">
+    <button class="btn btn-link logout-btn" (click)="logOut()">
+      <i class="fas fa-sign-out-alt me-2"></i> Cerrar sesión
+    </button>
+  </div>
+</div>

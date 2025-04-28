@@ -26,13 +26,22 @@ export class OfertaService {
   }
 
   getAllOfertasFavoritas(): Observable<Oferta[]> {
-    return this.httpClient.get<Oferta[]>(this.baseUrl + '/usuario/ofertas/favoritas');
+    return this.httpClient.get<Oferta[]>(
+      this.baseUrl + '/usuario/ofertas/favoritas'
+    );
   }
 
   cambiarEstadoFavorito(estado: IFavoritosCambiar): Observable<any> {
     return this.httpClient.post<any>(
       this.baseUrl + '/usuario/ofertas/favoritas/cambiar',
       estado
+    );
+  }
+
+  inscribirseOferta(idOferta: number): Observable<any> {
+    return this.httpClient.post<any>(
+      this.baseUrl + '/usuario/ofertas/inscribir/' + idOferta,
+      {}
     );
   }
 }

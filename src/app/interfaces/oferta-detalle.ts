@@ -16,7 +16,7 @@ export interface OfertaDetalle {
   nombreEmpresa: string;
   fotoEmpresa: string;
   direccionEmpresa?: DireccionEmpresa;
-  estadoAplicacion: 'NO_APLICADO' | 'APLICADO' | string;
+  estadoAplicacion: 'NO APLICADO' | 'APLICADO' | string;
   esFavorita: boolean;
   vacantesDisponibles: number;
 }

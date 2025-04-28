@@ -1,0 +1,55 @@
+.oferta-card {
+  background-color: #f5f6fa;
+  border-radius: 12px;
+}
+
+.empresa-foto {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  /* redondeado leve */
+}
+
+.oferta-foto {
+  width: 100%;
+  margin-top: 20px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+button.btn-primary {
+  background-color: #4a4ea8;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+button.btn-primary:hover {
+  background-color: #3a3e9c;
+}
+.favorita-btn {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  outline: none;
+  box-shadow: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.estrella-icono {
+  font-size: 1.2rem;
+  margin-top: 6px;
+  transition: color 0.3s ease;
+}
+
+button i.fa-star {
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+button i.fa-star:hover {
+  transform: scale(1.3);
+}

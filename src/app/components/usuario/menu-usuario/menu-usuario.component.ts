@@ -1,10 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { NgModel } from '@angular/forms';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import {
+  ActivatedRoute,
+  NavigationEnd,
+  Router,
+  RouterLink,
+} from '@angular/router';
 import { Iuser } from '../../../interfaces/iuser';
 import { Estudiante } from '../../../interfaces/estudiante';
 import Swal from 'sweetalert2';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menu-usuario',
@@ -15,11 +21,17 @@ import Swal from 'sweetalert2';
 })
 export class MenuUsuarioComponent {
   activatedRouter = inject(ActivatedRoute);
-  usuario!: Iuser;
-  estudiante!: Estudiante;
   router = inject(Router);
+
+  estudiante!: Estudiante;
+
   @Input() isMenuOpen: boolean = false;
   @Output() eventoMenu = new EventEmitter<void>();
+
+  ngOnInit() {
+    let userMenu = localStorage.getItem('user');
+    this.estudiante = userMenu ? JSON.parse(userMenu) : null;
+  }
 
   onClose() {
     this.eventoMenu.emit();
@@ -39,12 +51,5 @@ export class MenuUsuarioComponent {
     });
     this.eventoMenu.emit();
     this.router.navigate(['/login']);
-  }
-
-  ngOnInit() {
-    let userMenu = localStorage.getItem('user');
-    this.estudiante = userMenu ? JSON.parse(userMenu) : null;
-
-    // console.log('aquí está la info' +userMenu)
   }
 }

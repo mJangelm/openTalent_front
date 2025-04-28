@@ -1,10 +1,15 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 
 @Component({
   selector: 'app-navbar-usuario',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive],
+  imports: [RouterLink],
   templateUrl: './navbar-usuario.component.html',
   styleUrl: './navbar-usuario.component.css',
 })
@@ -16,6 +21,16 @@ export class NavbarUsuarioComponent implements OnInit {
     foto: '',
   };
 
+  activeRoute: string = '';
+
+  constructor(private router: Router) {
+    // NUEVO: Escuchamos cambios de ruta
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.activeRoute = event.url; // Se actualiza inmediatamente
+      }
+    });
+  }
   ngOnInit(): void {
     const storedUser = localStorage.getItem('user');
 
@@ -35,9 +50,14 @@ export class NavbarUsuarioComponent implements OnInit {
         foto: 'https://via.placeholder.com/50',
       };
     }
+    this.activeRoute = this.router.url;
   }
 
   onMenuButtonClick(): void {
     this.toggleMenuEvent.emit();
+  }
+
+  isActive(route: string): boolean {
+    return this.activeRoute.startsWith(route);
   }
 }

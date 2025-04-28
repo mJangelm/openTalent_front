@@ -1,3 +1,98 @@
-.active {
-  border-bottom: 2px solid black;
+.navbar-usuario {
+  background-color: #535AA6;
+  padding: 0.5rem 0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  min-height: 80px;
+}
+
+/* Imagen de usuario */
+.user-img {
+  width: 69px;
+  height: 68px;
+  border-radius: 101px;
+  border: 1px solid #F2F3FA;
+  object-fit: cover;
+  box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
+  background: lightgray 50% / cover no-repeat;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.user-img:hover {
+  transform: scale(1.05);
+}
+
+/* Texto de navegación */
+.nav-text {
+  font-weight: 600;
+  color: #010103;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Íconos de navegación */
+.nav-icon {
+  color: #010103;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+}
+
+/* Hover y activo para texto e iconos */
+.nav-text:hover,
+.nav-text.active {
+  color: #F5F5FA;
+}
+
+.nav-text:hover .nav-icon,
+.nav-text.active .nav-icon {
+  color: #F5F5FA;
+}
+
+/* Buscador */
+.search-form {
+  width: 220px;
+}
+
+.search-input {
+  border: none;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  border-radius: 8px;
+}
+
+/* Logo */
+.logo-img {
+  width: 113px;
+  height: 80px;
+  object-fit: contain;
+}
+.nav-text {
+  position: relative;
+  font-weight: 600;
+  color: #010103;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+}
+
+/* Subrayado animado para activo */
+.nav-text::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 50%;
+  bottom: -4px;
+  background-color: #F5F5FA;
+  transition: all 0.3s ease;
+}
+
+.nav-text.active::after,
+.nav-text:hover::after {
+  width: 100%;
+  left: 0;
+}
+.custom-gap {
+  gap: 120px;
 }

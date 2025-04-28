@@ -1,17 +1,63 @@
-<section class="container mt-3">
-    <div class="card shadow p-3">
-        <div class="row">
-            <figure class="col-12 col-md-3">
-                <img class="img-fluid" [src]="miOferta.fotoEmpresa">
-            </figure>
-            <div class="col-12 col-md-9">
-                <h2>{{miOferta.titulo}}</h2>
-                <hr>
-                <p>Descripción: {{miOferta.descripcion}}</p>
-                <p>Direccion: {{miOferta.direccionEmpresa?.pais}}, {{miOferta.direccionEmpresa?.provincia}}</p>
+@if (miOferta) {
+<div class="container my-5">
+  <div class="card shadow border-0 p-4 oferta-card">
+    <div class="row">
+      <div class="col-md-9">
+        <div class="d-flex align-items-center mb-4">
+          <img [src]="miOferta.fotoEmpresa" alt="Logo Empresa" class="rounded empresa-foto me-3">
 
-            </div>
+          <div>
+            <h5 class="mb-0">{{ miOferta.nombreEmpresa }}</h5>
+          </div>
         </div>
-    </div>
-</section>
 
+        <div class="d-flex align-items-center mb-3">
+          <h3 class="mb-0 me-2">{{ miOferta.titulo }}</h3>
+          <button (click)="toggleFavorita()" class="favorita-btn">
+            @if(miOferta.esFavorita) {
+            <i class="fa-solid fa-star ms-2 estrella-icono"></i>
+            } @else {
+            <i class="fa-regular fa-star ms-2 estrella-icono"></i>
+            }
+          </button>
+        </div>
+
+        <div class="mb-4 text-muted">
+          Vacantes: {{miOferta.vacantesDisponibles}}
+        </div>
+
+        <h5 class="fw-bold mb-3">Descripción de la oferta</h5>
+        <p>{{ miOferta.descripcion }}</p>
+      </div>
+
+      <div class="col-md-3 d-flex flex-column align-items-start justify-content-start">
+        <div class="mb-2">
+          <i class="fas fa-briefcase me-2"></i> {{ miOferta.modalidad }}
+        </div>
+        <div class="mb-2">
+          <i class="fas fa-map-marker-alt me-2"></i> {{ miOferta.direccionEmpresa?.provincia }}
+        </div>
+        <div class="mb-2">
+          <i class="fas fa-check-circle me-2"></i>
+          @if(miOferta.estadoAplicacion === 'FAVORITO') {
+          NO APLICACO
+          }@else {
+          {{ miOferta.estadoAplicacion }}
+          }
+
+        </div>
+
+        <div class="mt-4 w-100">
+          <img [src]="miOferta.imagenOferta" class="img-fluid rounded oferta-foto" alt="Foto oferta">
+        </div>
+      </div>
+    </div>
+
+    <div class="text-center mt-4">
+      <button class="btn btn-primary px-5 py-2" (click)="solicitarOferta()">Solicitar</button>
+      <button class="btn btn-primary px-5 py-2 ms-5" [routerLink]="['/usuario/ofertas']">Volver</button>
+
+    </div>
+  </div>
+</div>
+}
