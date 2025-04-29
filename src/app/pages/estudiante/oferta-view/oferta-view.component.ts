@@ -18,6 +18,7 @@ export class OfertaViewComponent {
   detallesOferta = inject(OfertaService);
   miOferta: OfertaDetalle;
   favorita: IFavoritosCambiar;
+
   constructor() {
     this.miOferta = {} as OfertaDetalle;
     this.favorita = {} as IFavoritosCambiar;

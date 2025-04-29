@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Oferta } from '../../../interfaces/oferta';
 import { OfertaViewComponent } from '../../../pages/estudiante/oferta-view/oferta-view.component';
 import { BotoneraComponent } from '../oferta/botonera/botonera.component';
@@ -15,27 +15,28 @@ import { IFavoritosCambiar } from '../../../interfaces/ifavoritos-cambiar';
 })
 export class OfertasUsuarioCardComponent {
   @Input() OfertaUnica!: Oferta;
+  @Output() quitarFavoritoOferta = new EventEmitter<Oferta>();
+
   ofertaService = inject(OfertaService);
   favorita: IFavoritosCambiar;
   constructor() {
     this.favorita = {} as IFavoritosCambiar;
   }
   toggleFavorita() {
-    if (this.OfertaUnica.esFavorita) {
-      this.favorita = {
-        id: this.OfertaUnica.idOferta,
-        estado: false,
-      };
-    } else {
-      this.favorita = {
-        id: this.OfertaUnica.idOferta,
-        estado: true,
-      };
-    }
-    this.ofertaService
-      .cambiarEstadoFavorito(this.favorita)
-      .subscribe((response: any) => {
-        this.OfertaUnica.esFavorita = !this.OfertaUnica.esFavorita;
-      });
+    const nuevaEsFavorita = !this.OfertaUnica.esFavorita;
+
+    this.favorita = {
+      id: this.OfertaUnica.idOferta,
+      estado: nuevaEsFavorita,
+    };
+
+    this.ofertaService.cambiarEstadoFavorito(this.favorita).subscribe(() => {
+      this.OfertaUnica.esFavorita = nuevaEsFavorita;
+
+      // Emitir solo si se ha quitado de favoritos
+      if (!nuevaEsFavorita) {
+        this.quitarFavoritoOferta.emit(this.OfertaUnica);
+      }
+    });
   }
 }

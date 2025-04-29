@@ -4,8 +4,11 @@
     <h4 class="mb-3 fw-semibold">Ofertas Favoritas</h4>
     <div class="row">
       @for (oferta of arrOfertasFavoritas; track oferta.idOferta) {
-      <div class="col-md-4 mb-4">
-        <app-ofertas-usuario-card [OfertaUnica]="oferta"></app-ofertas-usuario-card>
+        <div class="col-md-4 mb-4 card-transition" [ngClass]="{'fade-out': animatingOfertaIds.has(oferta.idOferta)}">
+        <app-ofertas-usuario-card
+          [OfertaUnica]="oferta"
+          (quitarFavoritoOferta)="removeOferta(oferta)">
+        </app-ofertas-usuario-card>
       </div>
 
       }
@@ -18,8 +21,10 @@
     <div class="row">
 
       @for (proyecto of arrProyectosFavortitos; track proyecto.idProyecto) {
-      <div class="col-md-4 mb-4">
-        <app-proyectos-usuario-card [proyectoUnico]="proyecto"></app-proyectos-usuario-card>
+        <div class="col-md-4 mb-4 card-transition" [ngClass]="{'fade-out': animatingProyectoIds.has(proyecto.idProyecto)}">
+        <app-proyectos-usuario-card
+          [proyectoUnico]="proyecto"
+          (quitarFavoritoProyecto)="removeProyecto(proyecto)"></app-proyectos-usuario-card>
       </div>
       }
 

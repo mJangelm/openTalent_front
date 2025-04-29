@@ -17,9 +17,17 @@
         <li class="nav-item">
           <a class="nav-link nav-text" [routerLink]="['/usuario/proyectos']"
             [class.active]="isActive('/usuario/proyectos')">
-            <i class="fas fa-briefcase me-2 nav-icon"></i> PROYECTOS
+            <i class="fa-solid fa-folder-closed me-2 nav-icon"></i> PROYECTOS
           </a>
         </li>
+        @if (enProyectos) {
+        <li class="nav-item">
+          <a class="nav-link nav-text" [routerLink]="['/usuario/proyectos/add']"
+            [class.active]="isActive('/usuario/proyectos/add')">
+            <i class="fa-solid fa-circle-plus me-2 nav-icon"></i> AÑADIR
+          </a>
+        </li>
+        }
         <li class="nav-item">
           <a class="nav-link nav-text" [routerLink]="['/usuario/ofertas']"
             [class.active]="isActive('/usuario/ofertas')">

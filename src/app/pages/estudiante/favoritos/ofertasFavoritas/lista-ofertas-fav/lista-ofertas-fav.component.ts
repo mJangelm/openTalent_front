@@ -7,10 +7,15 @@ import { OfertasUsuarioCardComponent } from '../../../../../components/usuario/o
 import { Proyecto } from '../../../../../interfaces/proyecto';
 import { ProyectosService } from '../../../../../services/proyectos.service';
 import { ProyectosUsuarioCardComponent } from '../../../../../components/usuario/proyectos-usuario-card/proyectos-usuario-card.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-lista-ofertas-fav',
-  imports: [OfertasUsuarioCardComponent, ProyectosUsuarioCardComponent],
+  imports: [
+    OfertasUsuarioCardComponent,
+    ProyectosUsuarioCardComponent,
+    CommonModule,
+  ],
   standalone: true,
   templateUrl: './lista-ofertas-fav.component.html',
   styleUrl: './lista-ofertas-fav.component.css',
@@ -19,8 +24,13 @@ export class ListaOfertasFavComponent {
   servicioOfertas = inject(OfertaService);
   proyectoService = inject(ProyectosService);
   router = inject(Router);
+
   arrOfertasFavoritas!: Oferta[];
   arrProyectosFavortitos!: Proyecto[];
+
+  animatingOfertaIds: Set<number> = new Set();
+  animatingProyectoIds: Set<number> = new Set();
+
   isMenuOpenHome: boolean = false;
 
   toggleMenuHome() {
@@ -42,5 +52,27 @@ export class ListaOfertasFavComponent {
     this.proyectoService.getFavoritos().subscribe((response: any) => {
       this.arrProyectosFavortitos = response;
     });
+  }
+
+  removeOferta(oferta: Oferta) {
+    this.animatingOfertaIds.add(oferta.idOferta);
+
+    setTimeout(() => {
+      this.arrOfertasFavoritas = this.arrOfertasFavoritas.filter(
+        (o) => o.idOferta !== oferta.idOferta
+      );
+      this.animatingOfertaIds.delete(oferta.idOferta);
+    }, 500);
+  }
+
+  removeProyecto(proyecto: Proyecto) {
+    this.animatingProyectoIds.add(proyecto.idProyecto);
+
+    setTimeout(() => {
+      this.arrProyectosFavortitos = this.arrProyectosFavortitos.filter(
+        (p) => p.idProyecto !== proyecto.idProyecto
+      );
+      this.animatingProyectoIds.delete(proyecto.idProyecto);
+    }, 500);
   }
 }

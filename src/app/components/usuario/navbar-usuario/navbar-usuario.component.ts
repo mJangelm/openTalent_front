@@ -16,7 +16,7 @@ import {
 export class NavbarUsuarioComponent implements OnInit {
   @Output() toggleMenuEvent = new EventEmitter<void>();
   rol: string = localStorage.getItem('rol') || '';
-
+  enProyectos: boolean = false;
   sessionUser = {
     nombre: '',
     foto: '',
@@ -29,6 +29,7 @@ export class NavbarUsuarioComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         this.activeRoute = event.url; // Se actualiza inmediatamente
+        this.enProyectos = this.activeRoute.startsWith('/usuario/proyectos');
       }
     });
   }
@@ -59,6 +60,6 @@ export class NavbarUsuarioComponent implements OnInit {
   }
 
   isActive(route: string): boolean {
-    return this.activeRoute.startsWith(route);
+    return this.activeRoute === route;
   }
 }
