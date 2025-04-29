@@ -10,6 +10,7 @@ import { ProyectosComponent } from './pages/estudiante/proyectos/proyectos.compo
 import { ProyectoViewComponent } from './pages/estudiante/proyecto-view/proyecto-view.component';
 import { ListaOfertasFavComponent } from './pages/estudiante/favoritos/ofertasFavoritas/lista-ofertas-fav/lista-ofertas-fav.component';
 import { EmpresaViewComponent } from './pages/estudiante/empresa-view/empresa-view.component';
+import { EmpresaVistaPrincipalComponent } from './pages/empresa/empresa-vista-principal/empresa-vista-principal.component';
 
 export const routes: Routes = [
   {
@@ -69,7 +70,18 @@ export const routes: Routes = [
     ],
   },
   {
+    path: 'empresaUser',
+    data: { roles: ['EMPRESA'] },
+    canActivate: [loginGuard],
+    children: [
+      { path: 'home', component: EmpresaVistaPrincipalComponent },
+
+    ],
+  },
+
+  {
     path: '**',
     redirectTo: '',
   },
+  
 ];

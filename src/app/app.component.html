@@ -1,11 +1,14 @@
 @if(showNavbar()){
   <header>
+    @if(localUser === "USUARIO") {
       <app-navbar-usuario (toggleMenuEvent)="toggleMenuHome()"></app-navbar-usuario>
-      <app-menu-usuario [isMenuOpen]="isMenuOpenHome" (eventoMenu)="toggleMenuHome()"></app-menu-usuario>
+    }@if (localUser === "EMPRESA") {
+      <app-navbar-empresa-user (toggleMenuEvent)="toggleMenuHome()"></app-navbar-empresa-user>
+    }
+
+    <app-menu-usuario [isMenuOpen]="isMenuOpenHome" (eventoMenu)="toggleMenuHome()"></app-menu-usuario>
   </header>
 }
 <main>
   <router-outlet />
 </main>
-
-

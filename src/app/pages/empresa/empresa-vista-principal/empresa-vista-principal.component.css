@@ -1,0 +1,28 @@
+.welcome-card {
+    background-color: #cceeff;   /* celeste suave */
+    border: 2px solid blue;      /* borde azul */
+    width: 70%;
+    max-width: 800px;
+    margin: 200px auto 0;        /* 200px de margen superior, centrado */
+    padding: 20px;               /* espacio interior */
+    border-radius: 8px;          /* esquinas redondeadas */
+    text-align: center;          /* texto centrado */
+  }
+  
+  .welcome-card__logo {
+    display: block;
+    margin: 0 auto 20px;         /* espaciado abajo del logo */
+    max-width: 150px;            /* adapta según el tamaño de tu imagen */
+  }
+  
+  .welcome-card__title {
+    margin: 0;
+    font-size: 1.8rem;
+  }
+  
+  .welcome-card__subtitle {
+    margin-top: 10px;
+    font-size: 1rem;
+    color: #004080;              /* un azul más oscuro para el subtítulo */
+  }
+  

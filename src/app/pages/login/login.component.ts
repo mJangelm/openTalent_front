@@ -53,7 +53,7 @@ export class LoginComponent {
             this.router.navigate(['/usuario/home']);
             break;
           case 'EMPRESA':
-            this.router.navigate(['/empresa/home']);
+            this.router.navigate(['/empresaUser/home']);
             break;
           default:
             this.router.navigate(['/home']);
