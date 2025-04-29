@@ -15,6 +15,7 @@ import {
 })
 export class NavbarUsuarioComponent implements OnInit {
   @Output() toggleMenuEvent = new EventEmitter<void>();
+  rol: string = localStorage.getItem('rol') || '';
 
   sessionUser = {
     nombre: '',

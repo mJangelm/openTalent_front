@@ -1,18 +1,70 @@
-<section class="container mt-3">
-    <div class="card shadow p-3">
-        <div class="row">
-            <figure class="col-12 col-md-3">
-                <img class="img-fluid" [src]="miProyecto.foto">
-            </figure>
-            <div class="col-12 col-md-9">
-                <h2>{{miProyecto.titulo}}</h2>
-                <hr>
-                <p>Descripción: {{miProyecto.descripcion}}</p>
-
-                <p>Plazas: {{miProyecto.plazasRestantes}}</p>
-
-            </div>
+@if (miProyecto) {
+<div class="container my-5">
+  <div class="card shadow border-0 p-4 proyecto-card">
+    <div class="row mb-4">
+      <!-- Info del creador -->
+      <div class="col-md-9">
+        <div class="d-flex align-items-center mb-4">
+          <img [src]="miProyecto.fotoUsuario" alt="Foto usuario" class="usuario-img me-3">
+          <div>
+            <h5 class="mb-0">{{ miProyecto.nombreUsuario }} {{ miProyecto.apellidos }}</h5>
+          </div>
         </div>
-    </div>
-</section>
 
+        <div class="d-flex align-items-center mb-2">
+          <h3 class="mb-0 me-2 fw-bold">{{ miProyecto.titulo }}</h3>
+          <button (click)="toggleFavorita()" class="favorita-btn">
+            @if(miProyecto.esFavorito) {
+            <i class="fa-solid fa-star ms-2 estrella-icono"></i>
+            } @else {
+            <i class="fa-regular fa-star ms-2 estrella-icono"></i>
+            }
+          </button>
+        </div>
+
+        <div class="text-muted mb-3">
+          Vacantes: {{ miProyecto.plazasRestantes }}
+        </div>
+
+        <h5 class="fw-bold mb-2">Descripción del proyecto</h5>
+        <p>{{ miProyecto.descripcion }}</p>
+
+        <button class="btn btn-primary mt-3">Solicitar</button>
+      </div>
+
+      <!-- Imagen y estado -->
+      <div class="col-md-3 d-flex flex-column align-items-start justify-content-start">
+        <div class="mb-2">
+          <i class="fas fa-calendar-alt me-2"></i> {{ miProyecto.fechaInicio }}
+        </div>
+        <div class="mb-2">
+          <i class="fas fa-check-circle me-2"></i>
+          @if(miProyecto.estadoAplicacion === 'FAVORITO') {
+          NO APLICACO
+          }@else {
+          {{ miProyecto.estadoAplicacion }}
+          }
+
+
+        </div>
+
+        <img [src]="miProyecto.foto" alt="Foto proyecto" class="img-fluid mt-3 proyecto-img rounded">
+      </div>
+    </div>
+
+    <h4 class="text-center fw-bold mb-3">INTEGRANTES</h4>
+
+    <div class="row g-3">
+      @for (p of miProyecto.participantes; track p.idUsuario) {
+      <div class="col-md-6">
+        <div class="d-flex align-items-center integrante-card p-2 rounded">
+          <img [src]="p.fotoPerfil" class="rounded-circle integrante-img me-3" alt="Foto participante">
+          <span class="fw-semibold">{{ p.nombre }} {{ p.apellidos }}</span>
+          <i class="fa-regular fa-envelope ms-auto"></i>
+        </div>
+      </div>
+      }
+    </div>
+  </div>
+</div>
+}

@@ -6,6 +6,7 @@
     </div>
 
     <!-- Enlaces -->
+    @if(rol === 'USUARIO'){
     <div class="d-flex justify-content-center flex-grow-1">
       <ul class="navbar-nav d-flex flex-ro align-items-center custom-gap">
         <li class="nav-item">
@@ -27,6 +28,29 @@
         </li>
       </ul>
     </div>
+    }@else if (rol === 'EMPRESA') {
+    <div class="d-flex justify-content-center flex-grow-1">
+      <ul class="navbar-nav d-flex flex-ro align-items-center custom-gap">
+        <li class="nav-item">
+          <a class="nav-link nav-text" [routerLink]="['empresa/home']" [class.active]="isActive('/empresa/home')">
+            <i class="fas fa-home me-2 nav-icon"></i> INICIO
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-text" [routerLink]="['/empresa/add']" [class.active]="isActive('/empresa/add')">
+            <i class="fa-solid fa-square-plus me-2 nav-icon"></i> AÑADIR
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link nav-text" [routerLink]="['/empresa/ofertas']"
+            [class.active]="isActive('/empresa/ofertas')">
+            <i class="fas fa-briefcase me-2 nav-icon"></i> MIS OFERTAS
+          </a>
+        </li>
+      </ul>
+    </div>
+    }
+
 
     <!-- Buscador -->
     <div class="d-flex align-items-center me-4">

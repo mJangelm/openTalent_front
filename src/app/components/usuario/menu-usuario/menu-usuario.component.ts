@@ -22,7 +22,7 @@ import { Subscription } from 'rxjs';
 export class MenuUsuarioComponent {
   activatedRouter = inject(ActivatedRoute);
   router = inject(Router);
-
+  rol: string = localStorage.getItem('rol') || '';
   estudiante!: Estudiante;
 
   @Input() isMenuOpen: boolean = false;

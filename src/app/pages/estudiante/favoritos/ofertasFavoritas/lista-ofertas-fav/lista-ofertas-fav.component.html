@@ -1,19 +1,28 @@
-
-<div class="container">
+<div class="container my-5">
+  <!-- OFERTAS FAVORITAS -->
+  <div class="mb-4">
+    <h4 class="mb-3 fw-semibold">Ofertas Favoritas</h4>
     <div class="row">
       @for (oferta of arrOfertasFavoritas; track oferta.idOferta) {
-        <div class="col-md-4 mb-3">
-         <app-oferta-fav-card [OfertaUnica]="oferta"></app-oferta-fav-card>
-        </div>
-      }
-      @empty {
-        <div class="col-12 text-muted text-center fs-5 mt-4">
-          No hay ofertas favoritas disponibles. Quizás sea problema del servidor o de su conexión a Internet.
-          <br><br>
-          Inténtelo más tarde.
-        </div>
+      <div class="col-md-4 mb-4">
+        <app-ofertas-usuario-card [OfertaUnica]="oferta"></app-ofertas-usuario-card>
+      </div>
+
       }
     </div>
   </div>
 
+  <!-- PROYECTOS FAVORITOS -->
+  <div>
+    <h4 class="mb-3 fw-semibold">Proyectos Favoritos</h4>
+    <div class="row">
 
+      @for (proyecto of arrProyectosFavortitos; track proyecto.idProyecto) {
+      <div class="col-md-4 mb-4">
+        <app-proyectos-usuario-card [proyectoUnico]="proyecto"></app-proyectos-usuario-card>
+      </div>
+      }
+
+    </div>
+  </div>
+</div>

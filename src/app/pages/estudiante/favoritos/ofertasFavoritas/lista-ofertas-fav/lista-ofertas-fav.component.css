@@ -1,0 +1,9 @@
+h4 {
+  color: #333;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.container {
+  max-width: 1200px;
+}

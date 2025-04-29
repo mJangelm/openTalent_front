@@ -4,6 +4,7 @@ import { ProyectosService } from '../../../services/proyectos.service';
 import { Proyecto } from '../../../interfaces/proyecto';
 import { Empresa } from '../../../interfaces/empresa';
 import { ProyectosView } from '../../../interfaces/proyectos-view';
+import { IFavoritosCambiar } from '../../../interfaces/ifavoritos-cambiar';
 
 @Component({
   selector: 'app-proyecto-view',
@@ -16,7 +17,11 @@ export class ProyectoViewComponent {
   activatedRouter = inject(ActivatedRoute);
   servicioProyecto = inject(ProyectosService);
   miProyecto!: ProyectosView;
-  constructor() {}
+  favorita: IFavoritosCambiar;
+  constructor() {
+    this.miProyecto = {} as ProyectosView;
+    this.favorita = {} as IFavoritosCambiar;
+  }
 
   ngOnInit() {
     this.loadProyecto();
@@ -32,5 +37,24 @@ export class ProyectoViewComponent {
         this.miProyecto = data;
       });
     });
+  }
+
+  toggleFavorita() {
+    if (this.miProyecto.esFavorito) {
+      this.favorita = {
+        id: this.miProyecto.idProyecto,
+        estado: false,
+      };
+    } else {
+      this.favorita = {
+        id: this.miProyecto.idProyecto,
+        estado: true,
+      };
+    }
+    this.servicioProyecto
+      .cambiarEstadoFavorito(this.favorita)
+      .subscribe((response: any) => {
+        this.miProyecto.esFavorito = !this.miProyecto.esFavorito;
+      });
   }
 }

@@ -12,6 +12,8 @@
     </div>
 
     <ul class="nav flex-column">
+
+      @if(rol === 'USUARIO') {
       <li class="nav-item mb-1">
         <a class="nav-link" (click)="onClose()" [routerLink]="['/usuario/ofertas/favoritas']">
           <i class="fas fa-bookmark me-2"></i> Favoritos
@@ -22,8 +24,11 @@
           <i class="fas fa-briefcase me-2"></i> Mis proyectos
         </a>
       </li>
+      }
+
+
       <li class="nav-item mb-1">
-        <a class="nav-link"(click)="onClose()" [routerLink]="['/usuario/configuracion']">
+        <a class="nav-link" (click)="onClose()" [routerLink]="['/usuario/configuracion']">
           <i class="fas fa-cog me-2"></i> Configuración
         </a>
       </li>

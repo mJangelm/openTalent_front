@@ -3,7 +3,7 @@
 
     <!-- Encabezado: imagen + título + estrella -->
     <div class="d-flex align-items-center mb-2">
-      <a [routerLink]="[OfertaUnica.idOferta]" class="text-decoration-none text-dark card-trigger">
+      <a [routerLink]="[ '/usuario/ofertas/' +OfertaUnica.idOferta]" class="text-decoration-none text-dark card-trigger">
       <img [src]="OfertaUnica.foto" alt="logo" class="rounded-circle border me-3"
         style="width: 50px; height: 50px; object-fit: cover;">
         </a>
@@ -29,7 +29,7 @@
 
       <i class="fa-regular fa-face-smile"></i>
     </div>
-    <a [routerLink]="[OfertaUnica.idOferta]" class="text-decoration-none text-dark card-trigger">
+    <a [routerLink]="[ '/usuario/ofertas/' +OfertaUnica.idOferta]" class="text-decoration-none text-dark card-trigger">
       <!-- Descripción -->
       <p class="mb-3 text-wrap" style="font-size: 0.9rem;">
         {{ OfertaUnica.descripcion }}

@@ -4,17 +4,11 @@ import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { MenuUsuarioComponent } from './components/usuario/menu-usuario/menu-usuario.component';
 import { NavbarUsuarioComponent } from './components/usuario/navbar-usuario/navbar-usuario.component';
-import { NavbarEmpresaUserComponent } from './components/emrpesa/navbar-empresa-user/navbar-empresa-user.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    MenuUsuarioComponent,
-    NavbarUsuarioComponent,
-    NavbarEmpresaUserComponent
-  ],
+  imports: [RouterOutlet, MenuUsuarioComponent, NavbarUsuarioComponent],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
@@ -27,7 +21,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     // Cada vez que cambie la URL (p.ej. tras un login)
     this.router.events
-      .pipe(filter(e => e instanceof NavigationEnd))
+      .pipe(filter((e) => e instanceof NavigationEnd))
       .subscribe(() => {
         this.localUser = localStorage.getItem('rol');
       });

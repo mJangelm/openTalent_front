@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Proyecto } from '../interfaces/proyecto';
 import { ProyectosView } from '../interfaces/proyectos-view';
+import { IFavoritosCambiar } from '../interfaces/ifavoritos-cambiar';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,18 @@ export class ProyectosService {
   getById(_id: number): Observable<ProyectosView> {
     return this.httpClient.get<ProyectosView>(
       this.baseUrl + 'usuario/proyectos/' + _id
+    );
+  }
+  cambiarEstadoFavorito(estado: IFavoritosCambiar): Observable<any> {
+    return this.httpClient.post<any>(
+      this.baseUrl + 'usuario/proyectos/favoritos/cambiar',
+      estado
+    );
+  }
+
+  getFavoritos(): Observable<Proyecto[]> {
+    return this.httpClient.get<Proyecto[]>(
+      this.baseUrl + 'usuario/proyectos/favoritos'
     );
   }
 }

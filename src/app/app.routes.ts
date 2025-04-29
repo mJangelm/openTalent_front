@@ -11,6 +11,8 @@ import { ProyectoViewComponent } from './pages/estudiante/proyecto-view/proyecto
 import { ListaOfertasFavComponent } from './pages/estudiante/favoritos/ofertasFavoritas/lista-ofertas-fav/lista-ofertas-fav.component';
 import { EmpresaViewComponent } from './pages/estudiante/empresa-view/empresa-view.component';
 import { EmpresaVistaPrincipalComponent } from './pages/empresa/empresa-vista-principal/empresa-vista-principal.component';
+import { AnadirOfertaComponent } from './pages/empresa/anadir-oferta/anadir-oferta.component';
+import { MisOfertasComponent } from './pages/empresa/mis-ofertas/mis-ofertas.component';
 
 export const routes: Routes = [
   {
@@ -70,12 +72,28 @@ export const routes: Routes = [
     ],
   },
   {
-    path: 'empresaUser',
+    path: 'empresa',
     data: { roles: ['EMPRESA'] },
     canActivate: [loginGuard],
     children: [
-      { path: 'home', component: EmpresaVistaPrincipalComponent },
-
+      {
+        path: 'home',
+        component: EmpresaVistaPrincipalComponent,
+        data: { roles: ['EMPRESA'] },
+        canActivate: [loginGuard],
+      },
+      {
+        path: 'add',
+        component: AnadirOfertaComponent,
+        data: { roles: ['EMPRESA'] },
+        canActivate: [loginGuard],
+      },
+      {
+        path: 'ofertas',
+        data: { roles: ['EMPRESA'] },
+        canActivate: [loginGuard],
+        component: MisOfertasComponent,
+      },
     ],
   },
 
@@ -83,5 +101,4 @@ export const routes: Routes = [
     path: '**',
     redirectTo: '',
   },
-  
 ];
