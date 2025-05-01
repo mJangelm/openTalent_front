@@ -1,1 +1,121 @@
-<p>anadir-oferta works!</p>
+<form [formGroup]="modelForm" (ngSubmit)="registro()">
+    <div class="row">
+      <!-- Columna 1: Datos de la oferta -->
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="titulo">Título de la oferta</label>
+          <input
+            type="text"
+            id="titulo"
+            formControlName="titulo"
+            class="form-control"
+            placeholder="Introduce el título"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="descripcion">Descripción</label>
+          <textarea
+            id="descripcion"
+            formControlName="descripcion"
+            class="form-control"
+            placeholder="Introduce la descripción"
+          ></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="nombreSector">Sector</label>
+          <select
+            id="nombreSector"
+            formControlName="nombreSector"
+            class="form-select"
+          >
+            <option value="" disabled selected>Selecciona sector</option>
+            <option value="Tecnología">Tecnología</option>
+            <option value="Marketing">Marketing</option>
+            <option value="Educación">Educación</option>
+            <option value="Medio Ambiente">Medio Ambiente</option>
+            <option value="Recursos Humanos">Recursos Humanos</option>
+          </select>
+          
+        </div>
+      </div>
+  
+      <!-- Columna 2: Imágenes y plazas -->
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="fotoContenido">Foto del contenido (URL)</label>
+          <input
+            type="text"
+            id="fotoContenido"
+            formControlName="fotoContenido"
+            class="form-control"
+            placeholder="URL de la foto"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="numeroPlazas">Número de plazas</label>
+          <input
+            type="number"
+            id="numeroPlazas"
+            formControlName="numeroPlazas"
+            class="form-control"
+            placeholder="Introduce el número de plazas"
+            min="1"
+          />
+        </div>
+        <div class="mb-3">
+          <label for="tipoOferta">Tipo de oferta</label>
+          <select
+            id="tipoOferta"
+            formControlName="tipoOferta"
+            class="form-select"
+          >
+            <option value="" disabled selected>Selecciona tipo</option>
+            <option value="PRACTICAS">PRACTICAS</option>
+            <option value="EMPRESA">EMPLEO</option>
+          
+          </select>
+        </div>
+      </div>
+  
+      <!-- Columna 3: Modalidad y fecha -->
+      <div class="col-md-4">
+        <div class="mb-3">
+          <label for="modalidad">Modalidad</label>
+          <select
+            id="modalidad"
+            formControlName="modalidad"
+            class="form-select"
+          >
+            <option value="" disabled selected>Selecciona modalidad</option>
+            <option value="PRESENCIAL">PRESENCIAL</option>
+            <option value="ONLINE">ONLINE</option>
+            <!-- Añade más opciones si es necesario -->
+          </select>
+        </div>
+        <div class="mb-3">
+          <label for="fechaFin">Fecha fin</label>
+          <input
+            type="date"
+            id="fechaFin"
+            formControlName="fechaFin"
+            class="form-control"
+          />
+        </div>
+      </div>
+    </div>
+  
+    <br />
+  <div style="padding-left:800px">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button
+      type="button"
+      class="btn btn-secondary"
+      style="margin-left: 20px;"
+      (click)="volver()"
+    >
+      Volver
+    </button>
+  </div>
+
+  </form>
+  

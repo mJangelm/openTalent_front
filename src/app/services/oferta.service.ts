@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Oferta } from '../interfaces/oferta';
 import { OfertaDetalle } from '../interfaces/oferta-detalle';
 import { IFavoritosCambiar } from '../interfaces/ifavoritos-cambiar';
+import { IanadirOferta } from '../interfaces/ianadir-oferta';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,10 @@ export class OfertaService {
   private baseUrl: string = 'http://localhost:9009';
 
   constructor() {}
+
+  anadirOferta(oferta: IanadirOferta): Observable<IanadirOferta> {
+    return this.httpClient.post<IanadirOferta>(this.baseUrl + '/empresa/ofertas/', oferta)
+  }
 
   getAllOfertas(): Observable<Oferta[]> {
     return this.httpClient.get<Oferta[]>(this.baseUrl + '/usuario/ofertas/');
