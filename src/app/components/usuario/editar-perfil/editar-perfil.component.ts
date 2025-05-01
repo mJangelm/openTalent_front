@@ -5,6 +5,7 @@ import { EmpresaRegistroDto } from '../../../interfaces/empresa-registro-dto';
 import { EditUserService } from '../../../services/edit-user.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
+import { Estudiante } from '../../../interfaces/estudiante';
 
 @Component({
   selector: 'app-editar-perfil',
@@ -14,16 +15,40 @@ import { CommonModule } from '@angular/common';
   styleUrl: './editar-perfil.component.css'
 })
 export class EditarPerfilComponent {
-volver() {
-throw new Error('Method not implemented.');
-}
+
+  rol: string = localStorage.getItem('rol') || '';
+  router = inject(Router);
+  loading = false;
+  editPerfilService = inject(EditUserService); 
+
+
+
+userEstudiante! : Estudiante;
+modelForm = new FormGroup(
+  {
+    nombre: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      apellidos: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      email: new FormControl(null, [Validators.required, Validators.email]),
+      username: new FormControl(null, [Validators.required, Validators.minLength(3)]),
+      password: new FormControl(null, [Validators.required, Validators.minLength(6)]),
+      fechaNacimiento: new FormControl(null, [Validators.required]),
+      telefono: new FormControl(null, [Validators.required]),
+      pais: new FormControl(null, [Validators.required]),
+      calle: new FormControl(null, [Validators.required]),
+      poblacion: new FormControl(null, [Validators.required]),
+      codigoPostal: new FormControl(null, [Validators.required]),
+      provincia: new FormControl(null, [Validators.required]),
+      estudios: new FormControl(null, [Validators.required]),
+      experiencia: new FormControl(null, [Validators.required]),
+      cv: new FormControl(null),
+      fotoPerfil: new FormControl(null)
+  }
+)
+
+
 
 userEmpresa! : EmpresaRegistroDto;
 
-rol: string = localStorage.getItem('rol') || '';
-router = inject(Router);
-loading = false;
-editPerfilService = inject(EditUserService);
 registroForm = new FormGroup(
   {
     nombre:            new FormControl('', Validators.required),
@@ -40,7 +65,7 @@ registroForm = new FormGroup(
     calle:             new FormControl('', Validators.required),
     codigoPostal:      new FormControl('', Validators.required),
     fotoPerfil:        new FormControl('', Validators.required),
-    cif:               new FormControl('', Validators.required),
+   // cif:               new FormControl('', Validators.required),
   },
   {
     validators: this.passwordsMatchValidator.bind(this)
@@ -51,6 +76,8 @@ registroForm = new FormGroup(
 constructor() {
 
 }
+
+
 
 ngOnInit() {
 if (this.rol === 'EMPRESA') {
@@ -67,7 +94,7 @@ this.registroForm.patchValue( {
     email:           user.email,
     username:        user.username,
     fotoPerfil:      user.fotoPerfil,
-    cif: user.cif ?? user.empresaCif ?? '',
+ //   cif: user.cif ?? user.empresaCif ?? '',
     telefono:        user.telefono ?? '',
     fechaNacimiento: user.fechaNacimiento
                        ? new Date(user.fechaNacimiento)
@@ -84,7 +111,39 @@ this.registroForm.patchValue( {
 });
 
 }
+} else if (this.rol === 'USUARIO') {
+  const stored = localStorage.getItem('user');
+if (!stored) return;
+
+if (stored) {
+  const user   = JSON.parse(stored);
+  console.log(user)
+
+  this.modelForm.patchValue( {
+        // raiz
+        nombre:          user.nombre,
+        apellidos:        user.apellidos,          // de apellidos → apellido
+        email:           user.email,
+        username:        user.username,
+        fotoPerfil:      user.fotoPerfil,
+        telefono:        user.telefono ?? '',
+        fechaNacimiento: user.fechaNacimiento,
+        cv:              user.cv,
+        experiencia:  user.experiencia,
+        estudios: user.estudios,
+    
+        // campos de direccion
+        calle:           user.direccion?.calle        ?? '',
+        pais:            user.direccion?.pais         ?? '',
+        provincia:       user.direccion?.provincia    ?? '',
+        poblacion:       user.direccion?.poblacion    ?? '',
+        codigoPostal:    user.direccion?.codigoPostal ?? ''
+
+  });
 }
+}
+
+
 }
 
 
@@ -112,7 +171,7 @@ onSubmit() {
     calle,
     codigoPostal,
     fotoPerfil,
-    cif
+   // cif
   } = this.registroForm.value;
 
   const edicionPerfilEmpresa: EmpresaRegistroDto = {
@@ -132,7 +191,7 @@ onSubmit() {
     calle:             calle           ?? '',
     codigoPostal:      codigoPostal    ?? '',
     fotoPerfil:        fotoPerfil      ?? '',
-    cif:               cif             ?? ''
+   // cif:               cif             ?? ''
   };
 
   this.editPerfilService.editarPerfilEmpresaUser(edicionPerfilEmpresa).subscribe( {
@@ -158,6 +217,52 @@ onSubmit() {
   })
 
 
+  }
+
+actualizarEstudiante() {
+  console.log('hola')
+  if (this.modelForm.invalid) {
+    console.log('invalido');
+    Object.keys(this.modelForm.controls).forEach(key => {
+      const control = this.modelForm.get(key)!;
+      if (control.invalid) {
+        console.log(`Control "${key}" inválido:`, control.errors);
+      }
+    });
+  this.modelForm.markAllAsTouched();
+  return;
+  }
+
+  const registroDeEstudiante :Estudiante = this.modelForm.value as unknown as Estudiante;
+
+  this.editPerfilService.editarPerfilEstudiante(registroDeEstudiante).subscribe( {
+    next: resp => {Swal.fire( {
+      title: 'Usuario actualizado',
+      text: 'Información actualizada con éxito',
+      icon: 'success',
+      confirmButtonText: 'Aceptar'
+    }).then(() => {
+      this.router.navigate(['usuario/home']);
+    });
+  },
+  error : err => {
+    Swal.fire( {
+      title: 'Error',
+      text: 'No se ha podido actualizar el usuario',
+      icon: 'error',
+       confirmButtonText: 'Aceptar'
+    })
+
+
+    }
+  })
+
+
+
+}
+
+ volver() {
+    this.router.navigate(['empresa/home']);
   }
 
 

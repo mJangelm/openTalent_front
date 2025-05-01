@@ -70,6 +70,12 @@ export const routes: Routes = [
         canActivate: [loginGuard],
         children: [{ path: ':cif', component: EmpresaViewComponent }],
       },
+      {
+        path: 'configuracion',
+        data: { roles: ['USUARIO'] },
+        canActivate: [loginGuard],
+        component: EditarPerfilComponent,
+      },
     ],
   },
   {

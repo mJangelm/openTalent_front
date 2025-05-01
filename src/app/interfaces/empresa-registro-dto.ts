@@ -15,6 +15,6 @@ export interface EmpresaRegistroDto {
     codigoPostal: string,
 
     fotoPerfil: string,
-    cif:string
+    cif?:string
 
 }
