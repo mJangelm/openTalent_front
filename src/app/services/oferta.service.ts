@@ -20,6 +20,10 @@ export class OfertaService {
     return this.httpClient.post<IanadirOferta>(this.baseUrl + '/empresa/ofertas/', oferta)
   }
 
+  getMisOfertas(): Observable<Oferta[]> {
+    return this.httpClient.get<Oferta[]>(this.baseUrl + '/empresa/ofertas/');
+  }
+
   getAllOfertas(): Observable<Oferta[]> {
     return this.httpClient.get<Oferta[]>(this.baseUrl + '/usuario/ofertas/');
   }

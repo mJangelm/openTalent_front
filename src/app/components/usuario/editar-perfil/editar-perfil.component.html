@@ -1,0 +1,151 @@
+@if (rol === 'EMPRESA') {
+
+      <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" class="row g-4">
+    <!-- Columna 1 -->
+    <div class="col-md-4">
+      <div class="mb-2">
+        <label class="form-label">CIF</label>
+        <input formControlName="cif" type="text" class="form-control" placeholder="CIF">
+        @if (registroForm.get('cif')?.touched && registroForm.get('cif')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Nombre</label>
+        <input formControlName="nombre" type="text" class="form-control">
+        @if (registroForm.get('nombre')?.touched && registroForm.get('nombre')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Apellido</label>
+        <input formControlName="apellido" type="text" class="form-control">
+        @if (registroForm.get('apellido')?.touched && registroForm.get('apellido')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Username</label>
+        <input formControlName="username" type="text" class="form-control">
+        @if (registroForm.get('username')?.touched && registroForm.get('username')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Email</label>
+        <input formControlName="email" type="email" class="form-control">
+        @if (registroForm.get('email')?.touched && registroForm.get('email')?.errors) {
+        <div class="text-danger small">
+          @if (registroForm.get('email')?.errors?.['required']) { El correo es obligatorio. }
+          @else if (registroForm.get('email')?.errors?.['email']) { Correo no válido. }
+        </div>
+        }
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Contraseña</label>
+        <input formControlName="password" type="password" class="form-control">
+        @if (registroForm.get('password')?.touched && registroForm.get('password')?.errors) {
+        <div class="text-danger small">
+          @if (registroForm.get('password')?.errors?.['required']) { La contraseña es obligatoria. }
+          @else if (registroForm.get('password')?.errors?.['minlength']) { Mínimo 6 caracteres. }
+        </div>
+        }
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">Repite contraseña</label>
+        <input formControlName="confirmarPassword" type="password" class="form-control">
+        @if (registroForm.errors?.['passwordsMismatch'] && registroForm.get('confirmarPassword')?.touched) {
+        <div class="text-danger small">Las contraseñas no coinciden.</div>
+        }
+      </div>
+    </div>
+
+    <!-- Columna 2 -->
+    <div class="col-md-4">
+      <div class="mb-2">
+        <label class="form-label">Fecha nacimiento</label>
+        <input formControlName="fechaNacimiento" type="date" class="form-control">
+        @if (registroForm.get('fechaNacimiento')?.touched && registroForm.get('fechaNacimiento')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Teléfono</label>
+        <input formControlName="telefono" type="text" class="form-control">
+        @if (registroForm.get('telefono')?.touched && registroForm.get('telefono')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
+      </div>
+      <div class="mb-2">
+        <label class="form-label">País</label>
+        <input formControlName="pais" type="text" class="form-control">
+        @if (registroForm.get('pais')?.touched && registroForm.get('pais')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Provincia</label>
+        <input formControlName="provincia" type="text" class="form-control">
+        @if (registroForm.get('provincia')?.touched && registroForm.get('provincia')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Población</label>
+        <input formControlName="poblacion" type="text" class="form-control">
+        @if (registroForm.get('poblacion')?.touched && registroForm.get('poblacion')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
+      </div>
+      <div class="mb-2">
+        <label class="form-label">Código postal</label>
+        <input formControlName="codigoPostal" type="text" class="form-control">
+        @if (registroForm.get('codigoPostal')?.touched && registroForm.get('codigoPostal')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
+      </div>
+    </div>
+
+    <!-- Columna 3 -->
+    <div class="col-md-4">
+      <div class="mb-2">
+        <label class="form-label">Calle</label>
+        <input formControlName="calle" type="text" class="form-control">
+        @if (registroForm.get('cif')?.touched && registroForm.get('cif')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
+      </div>
+
+      <div class="mb-2">
+        <label class="form-label">URL de foto de perfil</label>
+        <input formControlName="fotoPerfil" type="text" class="form-control" placeholder="https://...">
+        @if (registroForm.get('cif')?.touched && registroForm.get('cif')?.invalid) {
+        <div class="text-danger small">Campo obligatorio.</div>
+        }
+        <small class="text-muted">Debe ser una URL a una imagen válida</small>
+      </div>
+    </div>
+
+    <!-- Botones -->
+    <div class="col-12 d-flex justify-content-center gap-4 mt-4">
+      <button type="submit" class="btn btn-primary px-4" style="background-color: #373D8C; border: none;"
+        [disabled]="loading || registroForm.invalid">
+        @if (loading) {
+        <span class="spinner-border spinner-border-sm me-2"></span>
+        }
+        Registrarse
+      </button>
+      <a [routerLink]="['/login']" class="btn btn-secondary px-4" style="background-color: #373D8C; border: none;">
+        Volver
+      </a>
+    </div>
+  </form>
+
+
+}

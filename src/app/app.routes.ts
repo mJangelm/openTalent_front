@@ -13,6 +13,7 @@ import { EmpresaViewComponent } from './pages/estudiante/empresa-view/empresa-vi
 import { EmpresaVistaPrincipalComponent } from './pages/empresa/empresa-vista-principal/empresa-vista-principal.component';
 import { AnadirOfertaComponent } from './pages/empresa/anadir-oferta/anadir-oferta.component';
 import { MisOfertasComponent } from './pages/empresa/mis-ofertas/mis-ofertas.component';
+import { EditarPerfilComponent } from './components/usuario/editar-perfil/editar-perfil.component';
 
 export const routes: Routes = [
   {
@@ -93,6 +94,12 @@ export const routes: Routes = [
         data: { roles: ['EMPRESA'] },
         canActivate: [loginGuard],
         component: MisOfertasComponent,
+      },
+      {
+        path: 'configuracion',
+        data: { roles: ['EMPRESA'] },
+        canActivate: [loginGuard],
+        component: EditarPerfilComponent,
       },
     ],
   },
