@@ -17,6 +17,7 @@ export class MisProyectosComponent {
   router = inject(Router);
   arrProyectos!: Proyecto[];
   isMenuOpenHome: boolean = false;
+  editable: boolean = true;
 
   ngOnInit() {
     this.servicioProyectos.getMisProyectos().subscribe((response: any) => {

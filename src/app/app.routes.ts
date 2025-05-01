@@ -76,7 +76,10 @@ export const routes: Routes = [
         path: 'misproyectos',
         data: { roles: ['USUARIO'] },
         canActivate: [loginGuard],
-        component: MisProyectosComponent
+        component: MisProyectosComponent,
+        children: [
+          { path: 'editar/_id', component: EmpresaViewComponent }
+        ],
       },
       {
         path: 'empresas',

@@ -11,16 +11,18 @@ import { BotoneraComponent } from '../oferta/botonera/botonera.component';
 import { Router, RouterLink } from '@angular/router';
 import { IFavoritosCambiar } from '../../../interfaces/ifavoritos-cambiar';
 import { ProyectosService } from '../../../services/proyectos.service';
+import { BotonEditProyectoComponent } from "../boton-edit-proyecto/boton-edit-proyecto.component";
 
 @Component({
   selector: 'app-proyectos-usuario-card',
-  imports: [RouterLink],
+  imports: [RouterLink, BotonEditProyectoComponent, BotonEditProyectoComponent],
   standalone: true,
   templateUrl: './proyectos-usuario-card.component.html',
   styleUrl: './proyectos-usuario-card.component.css',
 })
 export class ProyectosUsuarioCardComponent {
   @Input() proyectoUnico!: Proyecto;
+  @Input() esEditable!: boolean;
   @Output() quitarFavoritoProyecto = new EventEmitter<Proyecto>();
 
   proyectoService = inject(ProyectosService);

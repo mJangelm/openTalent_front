@@ -20,6 +20,11 @@ export class ProyectosService {
     return this.httpClient.post<ProyectoRequestI>(this.baseUrl +'usuario/proyectos/annadirproyecto' ,proyectoNew)
   }
 
+ editarProyecto(proyectoEdit: ProyectoRequestI): Observable<ProyectoRequestI> {
+    return this.httpClient.put<ProyectoRequestI>(this.baseUrl +'usuario/proyectos/' ,proyectoEdit)
+  }
+ 
+
   getAllProyectos(): Observable<Proyecto[]> {
     return this.httpClient.get<Proyecto[]>(this.baseUrl + 'usuario/proyectos/');
   }

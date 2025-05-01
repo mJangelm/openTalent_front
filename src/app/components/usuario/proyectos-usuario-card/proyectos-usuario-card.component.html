@@ -39,5 +39,10 @@
       <img [src]="proyectoUnico.fotoContenido" alt="contenido" class="img-fluid rounded mb-2"
         style="max-height: 150px; object-fit: cover; width: 100%;">
     </a>
+    @if (esEditable) {
+      <div class="justify-content-center">
+        <app-boton-edit-proyecto [_id]="proyectoUnico.idProyecto"></app-boton-edit-proyecto>
+      </div>
+    }
   </div>
 </div>

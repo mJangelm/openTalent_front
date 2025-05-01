@@ -7,7 +7,7 @@
     <div class="row">
       @for (proyecto of arrProyectos; track proyecto.idProyecto) {
         <div class="col-md-4 mb-3">
-          <app-proyectos-usuario-card [proyectoUnico]="proyecto"></app-proyectos-usuario-card>
+          <app-proyectos-usuario-card [esEditable]="editable" [proyectoUnico]="proyecto"></app-proyectos-usuario-card>
           </div>
       }
       @empty {
