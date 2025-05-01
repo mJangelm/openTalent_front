@@ -67,6 +67,7 @@ this.registroForm.patchValue( {
     email:           user.email,
     username:        user.username,
     fotoPerfil:      user.fotoPerfil,
+    cif: user.cif ?? user.empresaCif ?? '',
     telefono:        user.telefono ?? '',
     fechaNacimiento: user.fechaNacimiento
                        ? new Date(user.fechaNacimiento)
