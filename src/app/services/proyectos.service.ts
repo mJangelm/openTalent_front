@@ -40,4 +40,10 @@ export class ProyectosService {
       this.baseUrl + 'usuario/proyectos/favoritos'
     );
   }
+
+  getMisProyectos(): Observable<Proyecto[]> {
+    return this.httpClient.get<Proyecto[]>(
+      this.baseUrl + 'usuario/proyectos/mis-proyectos'
+    );
+  }
 }

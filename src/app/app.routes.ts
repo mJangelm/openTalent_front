@@ -15,6 +15,7 @@ import { AnadirOfertaComponent } from './pages/empresa/anadir-oferta/anadir-ofer
 import { MisOfertasComponent } from './pages/empresa/mis-ofertas/mis-ofertas.component';
 import { EditarPerfilComponent } from './components/usuario/editar-perfil/editar-perfil.component';
 import { AnadirProyectoComponent } from './pages/estudiante/anadir-proyecto/anadir-proyecto.component';
+import { MisProyectosComponent } from './pages/estudiante/mis-proyectos/mis-proyectos.component';
 
 export const routes: Routes = [
   {
@@ -70,6 +71,12 @@ export const routes: Routes = [
         data: { roles: ['USUARIO'] },
         canActivate: [loginGuard],
         component: AnadirProyectoComponent
+      },
+      {
+        path: 'misproyectos',
+        data: { roles: ['USUARIO'] },
+        canActivate: [loginGuard],
+        component: MisProyectosComponent
       },
       {
         path: 'empresas',
