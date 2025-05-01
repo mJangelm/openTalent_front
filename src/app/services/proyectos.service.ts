@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Proyecto } from '../interfaces/proyecto';
 import { ProyectosView } from '../interfaces/proyectos-view';
 import { IFavoritosCambiar } from '../interfaces/ifavoritos-cambiar';
+import { ProyectoRequestI } from '../interfaces/proyecto-request-i';
 
 @Injectable({
   providedIn: 'root',
@@ -14,6 +15,10 @@ export class ProyectosService {
   private baseUrl: string = 'http://localhost:9009/';
 
   constructor() {}
+
+  anadirNuevoProyecto(proyectoNew: ProyectoRequestI): Observable<ProyectoRequestI> {
+    return this.httpClient.post<ProyectoRequestI>(this.baseUrl +'usuario/proyectos/annadirproyecto' ,proyectoNew)
+  }
 
   getAllProyectos(): Observable<Proyecto[]> {
     return this.httpClient.get<Proyecto[]>(this.baseUrl + 'usuario/proyectos/');
