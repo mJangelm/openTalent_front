@@ -16,6 +16,7 @@ import { MisOfertasComponent } from './pages/empresa/mis-ofertas/mis-ofertas.com
 import { EditarPerfilComponent } from './components/usuario/editar-perfil/editar-perfil.component';
 import { AnadirProyectoComponent } from './pages/estudiante/anadir-proyecto/anadir-proyecto.component';
 import { MisProyectosComponent } from './pages/estudiante/mis-proyectos/mis-proyectos.component';
+import { EditarProyectoComponent } from './pages/estudiante/editar-proyecto/editar-proyecto.component';
 
 export const routes: Routes = [
   {
@@ -74,13 +75,13 @@ export const routes: Routes = [
       },
       {
         path: 'misproyectos',
-        data: { roles: ['USUARIO'] },
-        canActivate: [loginGuard],
         component: MisProyectosComponent,
-        children: [
-          { path: 'editar/_id', component: EmpresaViewComponent }
-        ],
       },
+      {
+        path: 'misproyectos/edit/:_id',
+        component: EditarProyectoComponent
+      },
+
       {
         path: 'empresas',
         data: { roles: ['USUARIO'] },

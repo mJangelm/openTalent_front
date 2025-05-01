@@ -7,5 +7,5 @@ export interface ProyectoRequestI {
     foto: string,
     fotoContenido: string,
     plazas: number,
-    activo: true
+    activo: boolean,
 }

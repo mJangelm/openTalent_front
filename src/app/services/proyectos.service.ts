@@ -33,6 +33,12 @@ export class ProyectosService {
       this.baseUrl + 'usuario/proyectos/' + _id
     );
   }
+
+  getProyectoAEditarById(_id: number): Observable<ProyectoRequestI> {
+    return this.httpClient.get<ProyectoRequestI>(
+      this.baseUrl + 'usuario/proyectos/' + _id
+    );
+  }
   cambiarEstadoFavorito(estado: IFavoritosCambiar): Observable<any> {
     return this.httpClient.post<any>(
       this.baseUrl + 'usuario/proyectos/favoritos/cambiar',

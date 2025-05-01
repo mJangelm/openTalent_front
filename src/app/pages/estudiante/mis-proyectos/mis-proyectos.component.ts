@@ -1,12 +1,12 @@
 import { Component, inject } from '@angular/core';
 import { ProyectosUsuarioCardComponent } from "../../../components/usuario/proyectos-usuario-card/proyectos-usuario-card.component";
 import { ProyectosService } from '../../../services/proyectos.service';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { Proyecto } from '../../../interfaces/proyecto';
 
 @Component({
   selector: 'app-mis-proyectos',
-  imports: [ProyectosUsuarioCardComponent],
+  imports: [ProyectosUsuarioCardComponent, RouterModule],
   standalone:true,
   templateUrl: './mis-proyectos.component.html',
   styleUrl: './mis-proyectos.component.css'
