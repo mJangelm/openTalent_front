@@ -64,14 +64,19 @@ export const routes: Routes = [
         canActivate: [loginGuard],
         children: [
           { path: '', component: ProyectosComponent },
-          { path: ':_id', component: ProyectoViewComponent },
+          {
+            path: ':_id',
+            component: ProyectoViewComponent,
+            data: { roles: ['USUARIO'] },
+            canActivate: [loginGuard],
+          },
+          {
+            path: 'anadirproyecto',
+            data: { roles: ['USUARIO'] },
+            canActivate: [loginGuard],
+            component: AnadirProyectoComponent,
+          },
         ],
-      },
-      {
-        path: 'anadirproyecto',
-        data: { roles: ['USUARIO'] },
-        canActivate: [loginGuard],
-        component: AnadirProyectoComponent
       },
       {
         path: 'misproyectos',
@@ -79,7 +84,7 @@ export const routes: Routes = [
       },
       {
         path: 'misproyectos/edit/:_id',
-        component: EditarProyectoComponent
+        component: EditarProyectoComponent,
       },
 
       {

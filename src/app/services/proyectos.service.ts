@@ -16,14 +16,21 @@ export class ProyectosService {
 
   constructor() {}
 
-  anadirNuevoProyecto(proyectoNew: ProyectoRequestI): Observable<ProyectoRequestI> {
-    return this.httpClient.post<ProyectoRequestI>(this.baseUrl +'usuario/proyectos/annadirproyecto' ,proyectoNew)
+  anadirNuevoProyecto(
+    proyectoNew: ProyectoRequestI
+  ): Observable<ProyectoRequestI> {
+    return this.httpClient.post<ProyectoRequestI>(
+      this.baseUrl + 'usuario/proyectos/annadirproyecto',
+      proyectoNew
+    );
   }
 
- editarProyecto(proyectoEdit: ProyectoRequestI): Observable<ProyectoRequestI> {
-    return this.httpClient.put<ProyectoRequestI>(this.baseUrl +'usuario/proyectos/' ,proyectoEdit)
+  editarProyecto(proyectoEdit: ProyectoRequestI): Observable<ProyectoRequestI> {
+    return this.httpClient.put<ProyectoRequestI>(
+      this.baseUrl + 'usuario/proyectos/',
+      proyectoEdit
+    );
   }
- 
 
   getAllProyectos(): Observable<Proyecto[]> {
     return this.httpClient.get<Proyecto[]>(this.baseUrl + 'usuario/proyectos/');
@@ -36,7 +43,7 @@ export class ProyectosService {
 
   getProyectoAEditarById(_id: number): Observable<ProyectoRequestI> {
     return this.httpClient.get<ProyectoRequestI>(
-      this.baseUrl + 'usuario/proyectos/' + _id
+      this.baseUrl + 'usuario/proyectos/detalles/editar/' + _id
     );
   }
   cambiarEstadoFavorito(estado: IFavoritosCambiar): Observable<any> {
