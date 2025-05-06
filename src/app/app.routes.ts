@@ -65,16 +65,16 @@ export const routes: Routes = [
         children: [
           { path: '', component: ProyectosComponent },
           {
+            path: 'add',
+            data: { roles: ['USUARIO'] },
+            canActivate: [loginGuard],
+            component: AnadirProyectoComponent,
+          },
+          {
             path: ':_id',
             component: ProyectoViewComponent,
             data: { roles: ['USUARIO'] },
             canActivate: [loginGuard],
-          },
-          {
-            path: 'anadirproyecto',
-            data: { roles: ['USUARIO'] },
-            canActivate: [loginGuard],
-            component: AnadirProyectoComponent,
           },
         ],
       },

@@ -10,8 +10,8 @@
       <h5 class="m-0 fw-bold flex-grow-1">
         {{ proyectoUnico.nombre }}
       </h5>
-
-      <button (click)="toggleFavorita()" class="p-0 m-0 border-0 bg-transparent"
+      @if(!esEditable){
+              <button (click)="toggleFavorita()" class="p-0 m-0 border-0 bg-transparent"
         style="outline: none; box-shadow: none; cursor: pointer;">
         @if(proyectoUnico.esFavorito) {
         <i class="fa-solid fa-star"></i>
@@ -19,6 +19,8 @@
         <i class="fa-regular fa-star"></i>
         }
       </button>
+      }
+
 
     </div>
 
