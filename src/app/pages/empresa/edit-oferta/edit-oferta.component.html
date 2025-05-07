@@ -1,113 +1,112 @@
 <div class="text-center mb-4">
-    <h2>Editar oferta</h2>
+  <h2>Editar oferta</h2>
+</div>
+
+<form [formGroup]="modelForm" (ngSubmit)="onSubmit()">
+  <div class="row">
+    <!-- Columna izquierda -->
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="titulo" class="form-label">Título</label>
+        <input
+          id="titulo"
+          type="text"
+          class="form-control"
+          formControlName="titulo"
+          placeholder="Introduce el título"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea
+          id="descripcion"
+          class="form-control"
+          formControlName="descripcion"
+          rows="4"
+          placeholder="Introduce la descripción"
+        ></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="nombreSector" class="form-label">Sector</label>
+        <input
+          id="nombreSector"
+          type="text"
+          class="form-control"
+          formControlName="nombreSector"
+          placeholder="Introduce el sector"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="tipoOferta" class="form-label">Tipo de oferta</label>
+        <input
+          id="tipoOferta"
+          type="text"
+          class="form-control"
+          formControlName="tipoOferta"
+          placeholder="Ej. Prácticas, Contrato..."
+        />
+      </div>
+      <div class="mb-3">
+        <label for="modalidad" class="form-label">Modalidad</label>
+        <input
+          id="modalidad"
+          type="text"
+          class="form-control"
+          formControlName="modalidad"
+          placeholder="Presencial / Remoto / Mixto"
+        />
+      </div>
+    </div>
+
+    <!-- Columna derecha -->
+    <div class="col-md-6">
+      <div class="mb-3">
+        <label for="numeroPlazas" class="form-label">Número de plazas</label>
+        <input
+          id="numeroPlazas"
+          type="number"
+          class="form-control"
+          formControlName="numeroPlazas"
+          min="1"
+          placeholder="Introduce número de plazas"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="fotoContenido" class="form-label">URL foto de contenido</label>
+        <input
+          id="fotoContenido"
+          type="text"
+          class="form-control"
+          formControlName="fotoContenido"
+          placeholder="Introduce URL de la foto"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="fechaFin" class="form-label">Fecha fin</label>
+        <input
+          id="fechaFin"
+          type="date"
+          class="form-control"
+          formControlName="fechaFin"
+        />
+      </div>
+    </div>
   </div>
-  
-  <form [formGroup]="modelForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-      <!-- Columna izquierda -->
-      <div class="col-md-6">
-        <div class="mb-3">
-          <label for="titulo" class="form-label">Título</label>
-          <input
-            id="titulo"
-            type="text"
-            class="form-control"
-            formControlName="titulo"
-            placeholder="Introduce el título"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="descripcion" class="form-label">Descripción</label>
-          <textarea
-            id="descripcion"
-            class="form-control"
-            formControlName="descripcion"
-            rows="4"
-            placeholder="Introduce la descripción"
-          ></textarea>
-        </div>
-        <div class="mb-3">
-          <label for="nombreSector" class="form-label">Sector</label>
-          <input
-            id="nombreSector"
-            type="text"
-            class="form-control"
-            formControlName="nombreSector"
-            placeholder="Introduce el sector"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="tipoOferta" class="form-label">Tipo de oferta</label>
-          <input
-            id="tipoOferta"
-            type="text"
-            class="form-control"
-            formControlName="tipoOferta"
-            placeholder="Ej. Prácticas, Contrato..."
-          />
-        </div>
-        <div class="mb-3">
-          <label for="modalidad" class="form-label">Modalidad</label>
-          <input
-            id="modalidad"
-            type="text"
-            class="form-control"
-            formControlName="modalidad"
-            placeholder="Presencial / Remoto / Mixto"
-          />
-        </div>
-      </div>
-  
-      <!-- Columna derecha -->
-      <div class="col-md-6">
-        <div class="mb-3">
-          <label for="numeroPlazas" class="form-label">Número de plazas</label>
-          <input
-            id="numeroPlazas"
-            type="number"
-            class="form-control"
-            formControlName="numeroPlazas"
-            min="1"
-            placeholder="Introduce número de plazas"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="fotoContenido" class="form-label">URL foto de contenido</label>
-          <input
-            id="fotoContenido"
-            type="text"
-            class="form-control"
-            formControlName="fotoContenido"
-            placeholder="Introduce URL de la foto"
-          />
-        </div>
-        <div class="mb-3">
-          <label for="fechaFin" class="form-label">Fecha fin</label>
-          <input
-            id="fechaFin"
-            type="date"
-            class="form-control"
-            formControlName="fechaFin"
-          />
-        </div>
-      </div>
-    </div>
-  
-    <div class="text-center mt-4">
-      <button
-        type="button"
-        class="btn btn-secondary me-2"
-        (click)="volver()"
-      >
-        Volver
-      </button>
-      <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="modelForm.invalid"
-      >
-        Guardar
-      </button>
-    </div>
-  </form>
-  
+
+  <div class="text-center mt-4">
+    <button
+      type="button"
+      class="btn btn-secondary me-2"
+      (click)="volver()"
+    >
+      Volver
+    </button>
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="modelForm.invalid"
+    >
+      Guardar
+    </button>
+  </div>
+</form>

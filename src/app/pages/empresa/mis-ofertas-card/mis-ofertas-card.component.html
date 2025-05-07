@@ -54,14 +54,14 @@
         <i class="fa-solid fa-trash me-1"></i>
         Eliminar
       </button>
-      <button
+      <a
         type="button"
         class="btn btn-outline-primary me-2"
-        (click)="editarOferta(OfertaUnica.idOferta)"
+        [routerLink]="['/empresa', 'ofertas', OfertaUnica.idOferta]"
       >
         <i class="fa-solid fa-pen me-1"></i>
         Editar
-      </button>
+      </a>
       <button
         type="button"
         class="btn btn-outline-secondary"

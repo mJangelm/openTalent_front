@@ -13,10 +13,13 @@ import { OfertaService } from '../../../services/oferta.service';
 })
 export class MisOfertasCardComponent {
 
+  router = inject(Router)
+
 servicioOferta = inject(OfertaService)
 
-editarOferta(arg0: number) {
-throw new Error('Method not implemented.');
+editarOferta(id: number): void {
+  // Usando un array de segmentos de ruta
+  this.router.navigate(['/ofertas/edit', id]);
 }
 eliminarOferta(id: number): void {
   Swal.fire({
