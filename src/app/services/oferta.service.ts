@@ -20,9 +20,14 @@ export class OfertaService {
     return this.httpClient.post<IanadirOferta>(this.baseUrl + '/empresa/ofertas/', oferta)
   }
 
+  editarOferta(id: number): Observable<Oferta> {
+    return this.httpClient.get<Oferta>(this.baseUrl + '/empresa/ofertas/'+id);
+  }
+
   getMisOfertas(): Observable<Oferta[]> {
     return this.httpClient.get<Oferta[]>(this.baseUrl + '/empresa/ofertas/');
   }
+
 
   getAllOfertas(): Observable<Oferta[]> {
     return this.httpClient.get<Oferta[]>(this.baseUrl + '/usuario/ofertas/');
@@ -31,6 +36,12 @@ export class OfertaService {
   getById(_id: number): Observable<OfertaDetalle> {
     return this.httpClient.get<OfertaDetalle>(
       this.baseUrl + '/usuario/ofertas/' + _id
+    );
+  }
+
+  getMiofertas(): Observable<Oferta[]> {
+    return this.httpClient.get<Oferta[]>(
+      this.baseUrl + '/empresa/ofertas/'
     );
   }
 

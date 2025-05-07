@@ -1,1 +1,22 @@
-<p>mis-ofertas works!</p>
+<br>
+<div class="text-center">
+    <h2>Mis ofertas</h2>
+  </div>
+
+<div class="container">
+    <div class="row">
+      @for (oferta of arrOfertas; track oferta.idOferta) {
+        <div class="col-md-4 mb-3">
+          <app-mis-ofertas-card [OfertaUnica]="oferta"></app-mis-ofertas-card>
+          </div>
+      }
+      @empty {
+        <div class="col-12 text-muted text-center fs-5 mt-4">
+          No hay empresas disponibles. Quizás sea problema del servidor o de su conexión a Internet.
+          <br><br>
+          Inténtelo más tarde.
+        </div>
+      }
+    </div>
+  </div>
+  

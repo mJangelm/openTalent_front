@@ -1,0 +1,76 @@
+<div class="card shadow-sm mb-3 mt-5 hover-card" style="border-radius: 12px;">
+  <div class="card-body">
+
+    <!-- Encabezado: imagen + título + acción favorita -->
+    <div class="d-flex align-items-center mb-2">
+      <a
+        [routerLink]="['/usuario/ofertas/' + OfertaUnica.idOferta]"
+        class="text-decoration-none text-dark card-trigger"
+      >
+        <img
+          [src]="OfertaUnica.foto"
+          alt="logo"
+          class="rounded-circle border me-3"
+          style="width: 50px; height: 50px; object-fit: cover;"
+        />
+      </a>
+      <h5 class="m-0 fw-bold flex-grow-1">
+        {{ OfertaUnica.titulo }}
+      </h5>
+      <button
+        (click)="toggleFavorita()"
+        class="p-0 m-0 border-0 bg-transparent"
+        style="outline: none; box-shadow: none; cursor: pointer;"
+      >
+ 
+      </button>
+    </div>
+
+ 
+
+    <!-- Enlace con descripción e imagen -->
+    <a
+      [routerLink]="['/usuario/ofertas/' + OfertaUnica.idOferta]"
+      class="text-decoration-none text-dark card-trigger"
+    >
+      <p class="mb-3 text-wrap" style="font-size: 0.9rem;">
+        {{ OfertaUnica.descripcion }}
+      </p>
+      <img
+        [src]="OfertaUnica.foto"
+        alt="contenido"
+        class="img-fluid rounded mb-2"
+        style="max-height: 150px; object-fit: cover; width: 100%;"
+      />
+    </a>
+
+    <!-- Botones de acción -->
+    <div class="d-flex justify-content-end mt-3">
+      <button
+        type="button"
+        class="btn btn-outline-danger me-2"
+        (click)="eliminarOferta(OfertaUnica.idOferta)"
+      >
+        <i class="fa-solid fa-trash me-1"></i>
+        Eliminar
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-primary me-2"
+        (click)="editarOferta(OfertaUnica.idOferta)"
+      >
+        <i class="fa-solid fa-pen me-1"></i>
+        Editar
+      </button>
+      <button
+        type="button"
+        class="btn btn-outline-secondary"
+        (click)="verPostulantes(OfertaUnica.idOferta)"
+      >
+        <i class="fa-solid fa-user me-1"></i>
+        Postulantes
+      </button>
+    </div>
+
+  </div>
+</div>
