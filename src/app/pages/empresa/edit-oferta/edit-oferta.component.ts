@@ -41,6 +41,7 @@ export class EditOfertaComponent {
 
     this.servicioOfertas.getOfertaParaEditar(this.idOferta).subscribe({
       next: (oferta) => {
+        console.log('Oferta recibida del backend ->', oferta);
         const fechaIso = oferta.fechaFin
           ? new Date(oferta.fechaFin).toISOString().slice(0, 10)
           : '';
@@ -50,8 +51,8 @@ export class EditOfertaComponent {
           nombreSector:  oferta.nombreSector,
           tipoOferta:    oferta.tipoOferta,
           modalidad:     oferta.modalidad,
-          numeroPlazas:  oferta.numeroPlazas,
-          fotoContenido: oferta.fotoContenido,
+          numeroPlazas:  oferta.vacantesDisponibles,
+          fotoContenido: oferta.foto,
           fechaFin:      fechaIso,
         });
       },

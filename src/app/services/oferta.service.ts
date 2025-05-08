@@ -32,9 +32,9 @@ export class OfertaService {
     );
   }
 
-  getOfertaParaEditar(id: number): Observable<IanadirOferta> {
+  getOfertaParaEditar(id: number): Observable<any> {
     // ← también corregido
-    return this.httpClient.get<IanadirOferta>(
+    return this.httpClient.get<any>(
       `${this.baseUrl}/empresa/ofertas/${id}`
     );
   }

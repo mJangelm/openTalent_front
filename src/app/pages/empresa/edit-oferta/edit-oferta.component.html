@@ -38,23 +38,28 @@
       </div>
       <div class="mb-3">
         <label for="tipoOferta" class="form-label">Tipo de oferta</label>
-        <input
+        <select
           id="tipoOferta"
-          type="text"
-          class="form-control"
+          class="form-select"
           formControlName="tipoOferta"
-          placeholder="Ej. Prácticas, Contrato..."
-        />
+        >
+          <option value="" disabled>Selecciona un tipo</option>
+          <option value="PRACTICAS">Prácticas</option>
+          <option value="CONTRATO">Contrato</option>
+        </select>
       </div>
       <div class="mb-3">
         <label for="modalidad" class="form-label">Modalidad</label>
-        <input
+        <select
           id="modalidad"
-          type="text"
-          class="form-control"
+          class="form-select"
           formControlName="modalidad"
-          placeholder="Presencial / Remoto / Mixto"
-        />
+        >
+          <option value="" disabled>Selecciona una modalidad</option>
+          <option value="PRESENCIAL">Presencial</option>
+          <option value="REMOTO">Remoto</option>
+          <option value="MIXTO">Mixto</option>
+        </select>
       </div>
     </div>
 
