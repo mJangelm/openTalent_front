@@ -5,6 +5,7 @@ import { Oferta } from '../interfaces/oferta';
 import { OfertaDetalle } from '../interfaces/oferta-detalle';
 import { IFavoritosCambiar } from '../interfaces/ifavoritos-cambiar';
 import { IanadirOferta } from '../interfaces/ianadir-oferta';
+import { PostulanteI } from '../interfaces/postulante';
 
 @Injectable({
   providedIn: 'root',
@@ -49,8 +50,6 @@ export class OfertaService {
     );
   }
 
-
-
   getMisOfertas(): Observable<Oferta[]> {
     return this.httpClient.get<Oferta[]>(this.baseUrl + '/empresa/ofertas/');
   }
@@ -70,6 +69,12 @@ export class OfertaService {
     return this.httpClient.get<IanadirOferta>(
       this.baseUrl + '/empresa/ofertas/' + _id
     );
+  }
+
+  getPostulantes(_id:number) : Observable<PostulanteI[]> {
+    return this.httpClient.get<PostulanteI[]>(
+      this.baseUrl + '/empresa/ofertas/'+_id+'/postulantes'
+    )
   }
 
 

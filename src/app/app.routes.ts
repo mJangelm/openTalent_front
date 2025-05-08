@@ -18,6 +18,7 @@ import { AnadirProyectoComponent } from './pages/estudiante/anadir-proyecto/anad
 import { MisProyectosComponent } from './pages/estudiante/mis-proyectos/mis-proyectos.component';
 import { EditarProyectoComponent } from './pages/estudiante/editar-proyecto/editar-proyecto.component';
 import { EditOfertaComponent } from './pages/empresa/edit-oferta/edit-oferta.component';
+import { MiOfertaPostulantesComponent } from './pages/empresa/mi-oferta-postulantes/mi-oferta-postulantes.component';
 
 export const routes: Routes = [
   {
@@ -130,6 +131,12 @@ export const routes: Routes = [
         data: { roles: ['EMPRESA'] },
         canActivate: [loginGuard],
         component: EditOfertaComponent,
+      },
+      {
+        path: 'ofertas/verpostulantes/:idOferta',
+        data: { roles: ['EMPRESA'] },
+        canActivate: [loginGuard],
+        component: MiOfertaPostulantesComponent,
       },
       {
         path: 'configuracion',
