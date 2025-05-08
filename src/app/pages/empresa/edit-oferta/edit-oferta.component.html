@@ -28,13 +28,10 @@
       </div>
       <div class="mb-3">
         <label for="nombreSector" class="form-label">Sector</label>
-        <input
-          id="nombreSector"
-          type="text"
-          class="form-control"
-          formControlName="nombreSector"
-          placeholder="Introduce el sector"
-        />
+          <select id="nombreSector" formControlName="nombreSector" class="form-select">
+            <option *ngFor="let sector of arrSectores" [value]="sector.nombre">
+              {{ sector.nombre }}
+          </select>
       </div>
       <div class="mb-3">
         <label for="tipoOferta" class="form-label">Tipo de oferta</label>

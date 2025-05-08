@@ -5,10 +5,13 @@ import { IanadirOferta } from '../../../interfaces/ianadir-oferta';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OfertaService } from '../../../services/oferta.service';
+import { SectorI } from '../../../interfaces/sector-i';
+import { EmpresaService } from '../../../services/empresa.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-edit-oferta',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CommonModule],
   standalone:true,
   templateUrl: './edit-oferta.component.html',
   styleUrl: './edit-oferta.component.css'
@@ -17,9 +20,11 @@ export class EditOfertaComponent {
   private activatedRouter = inject(ActivatedRoute);
   private router = inject(Router);
   private servicioOfertas = inject(OfertaService);
+  private servicioEmpresa = inject(EmpresaService);
 
   modelForm: FormGroup;
   private idOferta!: number;
+  public arrSectores: SectorI[] = [];
 
   constructor() {
     this.modelForm = new FormGroup({
@@ -35,6 +40,17 @@ export class EditOfertaComponent {
   }
 
   ngOnInit(): void {
+
+    
+this.servicioEmpresa.getSectores().subscribe({
+  next: (sector) => {
+    console.log('sectores recibidos', sector);
+    this.arrSectores = sector
+  }
+})
+
+
+
     const idParam : any = this.activatedRouter.snapshot.paramMap.get('idOferta');
 
     this.idOferta = +idParam;

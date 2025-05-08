@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Empresa } from '../interfaces/empresa';
 import { IEmpresaDetalle } from '../interfaces/iempresa-detalle';
+import { SectorI } from '../interfaces/sector-i';
 
 @Injectable({
   providedIn: 'root',
@@ -21,5 +22,12 @@ export class EmpresaService {
     return this.httpClient.get<IEmpresaDetalle>(
       this.baseUrl + '/usuario/empresas/' + cif
     );
+  }
+
+  getSectores(): Observable<SectorI[]> {
+    return this.httpClient.get<SectorI[]>(
+      this.baseUrl + '/empresa/sectores'
+    );
+
   }
 }
