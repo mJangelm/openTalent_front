@@ -20,11 +20,15 @@ export class OfertaService {
     return this.httpClient.post<IanadirOferta>(this.baseUrl + '/empresa/ofertas/', oferta)
   }
 
-  editarOferta(id: number, oferta: IanadirOferta): Observable<IanadirOferta> {
-    // ← URL corregida
-    return this.httpClient.put<IanadirOferta>(
-      `${this.baseUrl}/empresa/ofertas/${id}`,
-      oferta
+  editarOferta(
+    id: number,
+    oferta: IanadirOferta
+  ): Observable<string> {
+    const url = `${this.baseUrl}/empresa/ofertas/${id}`;
+    return this.httpClient.put(
+      url,
+      oferta,
+      { responseType: 'text' }
     );
   }
 

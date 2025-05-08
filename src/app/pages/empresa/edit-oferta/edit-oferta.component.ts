@@ -40,7 +40,7 @@ export class EditOfertaComponent {
     this.idOferta = +idParam;
 
     this.servicioOfertas.getOfertaParaEditar(this.idOferta).subscribe({
-      next: (oferta: IanadirOferta) => {
+      next: (oferta) => {
         const fechaIso = oferta.fechaFin
           ? new Date(oferta.fechaFin).toISOString().slice(0, 10)
           : '';
@@ -75,6 +75,17 @@ export class EditOfertaComponent {
       fotoContenido:this.modelForm.value.fotoContenido,
       fechaFin:     new Date(this.modelForm.value.fechaFin),
     };
+    console.log('Payload a enviar:', {
+      titulo:        this.modelForm.value.titulo,
+      descripcion:   this.modelForm.value.descripcion,
+      nombreSector:  this.modelForm.value.nombreSector,
+      fotoContenido: this.modelForm.value.fotoContenido,
+      numeroPlazas:  this.modelForm.value.numeroPlazas,
+      tipoOferta:    this.modelForm.value.tipoOferta,
+      modalidad:     this.modelForm.value.modalidad,
+      // ojo: cadena YYYY-MM-DD, igual que Postman
+      fechaFin:      this.modelForm.value.fechaFin
+    });
 
     this.servicioOfertas
     .editarOferta(this.idOferta, ofertaEditada)
@@ -86,7 +97,7 @@ export class EditOfertaComponent {
           icon:  'success',
           confirmButtonText: 'Aceptar'
         }).then(() => {
-          this.router.navigate(['/usuario/ofertas']);
+          this.router.navigate(['/empresa/ofertas']);
         });
       },
 
@@ -108,6 +119,6 @@ export class EditOfertaComponent {
   }
 
   volver(): void {
-    this.router.navigate(['/usuario/ofertas']);
+    this.router.navigate(['/empresa/ofertas']);
   }
 }
