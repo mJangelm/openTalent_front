@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Oferta } from '../interfaces/oferta';
 import { OfertaDetalle } from '../interfaces/oferta-detalle';
 import { IFavoritosCambiar } from '../interfaces/ifavoritos-cambiar';
@@ -20,6 +20,16 @@ export class OfertaService {
     return this.httpClient.post<IanadirOferta>(this.baseUrl + '/empresa/ofertas/', oferta)
   }
 
+  cerrarOferta(id: number): Observable<Oferta> {
+    const url = `${this.baseUrl}/empresa/ofertas/${id}/cerrar`;
+    console.log('>> cerrarOferta() llamando a:', url);
+    return this.httpClient.put<Oferta>(url, {}).pipe(
+      tap({
+        next: oferta => console.log('<< cerrarOferta() respuesta:', oferta),
+        error: err => console.error('¡¡ cerrarOferta() error:', err)
+      })
+    );
+  }
   editarOferta(
     id: number,
     oferta: IanadirOferta

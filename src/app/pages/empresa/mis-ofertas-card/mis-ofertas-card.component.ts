@@ -22,24 +22,18 @@ editarOferta(id: number): void {
   this.router.navigate(['/ofertas/edit', id]);
 }
 eliminarOferta(id: number): void {
-  Swal.fire({
-    title: 'Vas a eliminar esta oferta. ¿Está seguro?',
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Sí',
-    cancelButtonText: 'No'
-  }).then(result => {
-    if (result.isConfirmed) {
-      Swal.fire(
-        'Eliminada',
-        'La oferta ha sido eliminada correctamente.',
-        'success'
-      );
-    }
-    // si pulsa "No", SweetAlert cierra automáticamente y no hacemos nada más
-  });
+  console.log('onCerrarOferta() id →', id);
+  this.servicioOferta.cerrarOferta(id)
+    .subscribe({
+      next: oferta => {
+        console.log('CerrarOferta subscription next →', oferta);
+        // aquí puedes, p.ej., actualizar la lista o mostrar un mensaje
+      },
+      error: err => {
+        console.error('CerrarOferta subscription error →', err);
+      }
+    });
 }
-
 
 verPostulantes(arg0: number) {
 throw new Error('Method not implemented.');
