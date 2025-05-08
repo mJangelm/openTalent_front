@@ -5,9 +5,9 @@
 
 <div class="container">
     <div class="row">
-      @for (oferta of arrOfertas; track oferta.idOferta) {
+      @for (oferta of arrOfertas; track trackByOferta) {
         <div class="col-md-4 mb-3">
-          <app-mis-ofertas-card [OfertaUnica]="oferta"></app-mis-ofertas-card>
+          <app-mis-ofertas-card     (deleted)="onOfferDeleted($event)" [OfertaUnica]="oferta"></app-mis-ofertas-card>
           </div>
       }
       @empty {

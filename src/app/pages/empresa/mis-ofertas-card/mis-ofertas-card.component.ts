@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Oferta } from '../../../interfaces/iempresa-detalle';
 import Swal from 'sweetalert2';
@@ -13,6 +13,10 @@ import { OfertaService } from '../../../services/oferta.service';
 })
 export class MisOfertasCardComponent {
 
+  @Input() OfertaUnica!: Oferta;
+  @Output() deleted = new EventEmitter<number>();
+  
+
   router = inject(Router)
 
 servicioOferta = inject(OfertaService)
@@ -22,17 +26,30 @@ editarOferta(id: number): void {
   this.router.navigate(['/ofertas/edit', id]);
 }
 eliminarOferta(id: number): void {
-  console.log('onCerrarOferta() id →', id);
-  this.servicioOferta.cerrarOferta(id)
-    .subscribe({
-      next: oferta => {
-        console.log('CerrarOferta subscription next →', oferta);
-        // aquí puedes, p.ej., actualizar la lista o mostrar un mensaje
-      },
-      error: err => {
-        console.error('CerrarOferta subscription error →', err);
-      }
-    });
+  Swal.fire({
+    title: '¿Estás seguro?',
+    text: 'Esta acción eliminará la oferta.',
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Sí,  eliminar oferta',
+    cancelButtonText: 'Cancelar'
+  }).then(result => {
+    if (result.isConfirmed) {
+      console.log('onCerrarOferta() id →', id);
+      this.servicioOferta.cerrarOferta(id)
+        .subscribe({
+          next: oferta => {
+            Swal.fire('Oferta eliminada','La oferta se ha eliminado correctamente','success');
+            // Avisamos al padre para que la borre del array
+            this.deleted.emit(id);
+          },
+          error: err => {
+            console.error('CerrarOferta subscription error →', err);
+            Swal.fire('Error','No se pudo eliminar la oferta','error');
+          }
+        });
+    }
+  });
 }
 
 verPostulantes(arg0: number) {
@@ -42,6 +59,6 @@ toggleFavorita() {
 throw new Error('Method not implemented.');
 }
 
-  @Input() OfertaUnica!: Oferta;
+
 
 }

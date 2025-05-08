@@ -26,4 +26,14 @@ export class MisOfertasComponent {
     });
   }
 
+  
+  onOfferDeleted(id: number) {
+    // filtramos el array para eliminar la oferta cerrada
+    this.arrOfertas = this.arrOfertas.filter(o => o.idOferta !== id);
+  }
+
+  trackByOferta(index: number, oferta: any) {
+    return oferta.idOferta;
+  }
+
 }
