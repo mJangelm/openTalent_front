@@ -17,6 +17,14 @@ export class OfertaService {
 
   constructor() {}
 
+  aceptarPostulante(idOferta:number,idUsuario: number): Observable<PostulanteI> {
+    return   this.httpClient.put<PostulanteI>(this.baseUrl + '/empresa/ofertas/'+idOferta+'/postulantes/'+idUsuario+'/aceptar', {})
+  }
+
+  rechazarPostulante(idOferta:number,idUsuario: number): Observable<PostulanteI> {
+    return   this.httpClient.put<PostulanteI>(this.baseUrl + '/empresa/ofertas/'+idOferta+'/postulantes/'+idUsuario+'/rechazar', {})
+  }
+
   anadirOferta(oferta: IanadirOferta): Observable<IanadirOferta> {
     return this.httpClient.post<IanadirOferta>(this.baseUrl + '/empresa/ofertas/', oferta)
   }

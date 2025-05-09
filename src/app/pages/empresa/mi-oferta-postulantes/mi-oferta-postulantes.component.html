@@ -1,1 +1,22 @@
-<p>mi-oferta-postulantes works!</p>
+<br>
+<div class="text-center">
+    <h2>Postulantes</h2>
+  </div>
+
+<div class="container">
+    <div class="row">
+      @for (postulante of arrPostulantes; track postulante.idUsuario) {
+        <div class="col-md-4 mb-3">
+          <app-postulante-card [idOferta]="idOferta" [postulanteUnico]="postulante"></app-postulante-card>
+          </div>
+      }
+      @empty {
+        <div class="col-12 text-muted text-center fs-5 mt-4">
+          No hay empresas disponibles. Quizás sea problema del servidor o de su conexión a Internet.
+          <br><br>
+          Inténtelo más tarde.
+        </div>
+      }
+    </div>
+  </div>
+  
