@@ -1,13 +1,13 @@
 <br>
 <div class="text-center">
-    <h2>Mis ofertas</h2>
+    <h2>Postulantes</h2>
   </div>
 
 <div class="container">
     <div class="row">
-      @for (oferta of arrOfertas; track trackByOferta) {
+      @for (postulante of arrPostulantes; track postulante.idUsuario) {
         <div class="col-md-4 mb-3">
-          <app-mis-ofertas-card     (deleted)="onOfferDeleted($event)" [OfertaUnica]="oferta"></app-mis-ofertas-card>
+          <app-postulante-card [idOferta]="idOferta" [postulanteUnico]="postulante"></app-postulante-card>
           </div>
       }
       @empty {
