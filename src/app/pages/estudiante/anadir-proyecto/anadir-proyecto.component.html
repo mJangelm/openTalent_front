@@ -16,9 +16,11 @@
               class="form-control custom-input"
               [ngClass]="{'is-invalid': isInvalid('nombre'), 'is-valid': isValid('nombre')}"
               placeholder="Nombre del proyecto" />
-            <div *ngIf="isInvalid('nombre')" class="invalid-feedback">
-              {{ getErrorMessage('nombre') }}
-            </div>
+            @if (isInvalid('nombre')) {
+              <div class="invalid-feedback">
+                {{ getErrorMessage('nombre') }}
+              </div>
+            }
           </div>
 
           <div class="mb-3">
@@ -29,9 +31,11 @@
               [ngClass]="{'is-invalid': isInvalid('descripcion'), 'is-valid': isValid('descripcion')}"
               rows="5"
               placeholder="Describe el proyecto con detalle"></textarea>
-            <div *ngIf="isInvalid('descripcion')" class="invalid-feedback">
-              {{ getErrorMessage('descripcion') }}
-            </div>
+            @if (isInvalid('descripcion')) {
+              <div class="invalid-feedback">
+                {{ getErrorMessage('descripcion') }}
+              </div>
+            }
           </div>
         </div>
 
@@ -45,9 +49,11 @@
               class="form-control custom-input"
               [ngClass]="{'is-invalid': isInvalid('plazas'), 'is-valid': isValid('plazas')}"
               placeholder="Número de plazas disponibles" />
-            <div *ngIf="isInvalid('plazas')" class="invalid-feedback">
-              {{ getErrorMessage('plazas') }}
-            </div>
+            @if (isInvalid('plazas')) {
+              <div class="invalid-feedback">
+                {{ getErrorMessage('plazas') }}
+              </div>
+            }
           </div>
 
           <div class="mb-3">
@@ -58,9 +64,11 @@
               class="form-control custom-input"
               [ngClass]="{'is-invalid': isInvalid('fechaInicio'), 'is-valid': isValid('fechaInicio')}"
               placeholder="Fecha" />
-            <div *ngIf="isInvalid('fechaInicio')" class="invalid-feedback">
-              {{ getErrorMessage('fechaInicio') }}
-            </div>
+            @if (isInvalid('fechaInicio')) {
+              <div class="invalid-feedback">
+                {{ getErrorMessage('fechaInicio') }}
+              </div>
+            }
           </div>
 
           <div class="mb-3">
@@ -71,12 +79,16 @@
               class="form-control custom-input"
               [ngClass]="{'is-invalid': isInvalid('fechaFin') || hasFechaFinError(), 'is-valid': isValid('fechaFin') && !hasFechaFinError()}"
               placeholder="Fecha" />
-            <div *ngIf="isInvalid('fechaFin')" class="invalid-feedback">
-              {{ getErrorMessage('fechaFin') }}
-            </div>
-            <div *ngIf="hasFechaFinError()" class="invalid-feedback">
-              La fecha de fin debe ser posterior a la fecha de inicio
-            </div>
+            @if (isInvalid('fechaFin')) {
+              <div class="invalid-feedback">
+                {{ getErrorMessage('fechaFin') }}
+              </div>
+            }
+            @if (hasFechaFinError()) {
+              <div class="invalid-feedback">
+                La fecha de fin debe ser posterior a la fecha de inicio
+              </div>
+            }
           </div>
 
           <div class="mb-3">
@@ -87,9 +99,11 @@
               class="form-control custom-input"
               [ngClass]="{'is-invalid': isInvalid('foto'), 'is-valid': isValid('foto')}"
               placeholder="https://ejemplo.com/imagen.jpg" />
-            <div *ngIf="isInvalid('foto')" class="invalid-feedback">
-              {{ getErrorMessage('foto') }}
-            </div>
+            @if (isInvalid('foto')) {
+              <div class="invalid-feedback">
+                {{ getErrorMessage('foto') }}
+              </div>
+            }
             <small class="text-muted">Debe comenzar con http:// o https://</small>
           </div>
 
@@ -101,9 +115,11 @@
               class="form-control custom-input"
               [ngClass]="{'is-invalid': isInvalid('fotoContenido'), 'is-valid': isValid('fotoContenido')}"
               placeholder="https://ejemplo.com/imagen-contenido.jpg" />
-            <div *ngIf="isInvalid('fotoContenido')" class="invalid-feedback">
-              {{ getErrorMessage('fotoContenido') }}
-            </div>
+            @if (isInvalid('fotoContenido')) {
+              <div class="invalid-feedback">
+                {{ getErrorMessage('fotoContenido') }}
+              </div>
+            }
             <small class="text-muted">Debe comenzar con http:// o https://</small>
           </div>
         </div>

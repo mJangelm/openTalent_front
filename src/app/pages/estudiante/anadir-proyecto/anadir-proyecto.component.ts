@@ -92,7 +92,7 @@ export class AnadirProyectoComponent {
           icon: 'success',
           confirmButtonText: 'Aceptar',
         }).then(() => {
-          this.router.navigate(['/usuario/home']);
+          this.router.navigate(['/usuario/misproyectos']);
         });
       },
       error: (err) => {
