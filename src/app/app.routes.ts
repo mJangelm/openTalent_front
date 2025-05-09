@@ -19,6 +19,7 @@ import { MisProyectosComponent } from './pages/estudiante/mis-proyectos/mis-proy
 import { EditarProyectoComponent } from './pages/estudiante/editar-proyecto/editar-proyecto.component';
 import { EditOfertaComponent } from './pages/empresa/edit-oferta/edit-oferta.component';
 import { MiOfertaPostulantesComponent } from './pages/empresa/mi-oferta-postulantes/mi-oferta-postulantes.component';
+import { AddResennaComponent } from './pages/add-resenna/add-resenna.component';
 
 export const routes: Routes = [
   {
@@ -51,13 +52,35 @@ export const routes: Routes = [
         data: { roles: ['USUARIO'] },
       },
       {
+        path: 'review',
+        component: AddResennaComponent,
+        canActivate: [loginGuard],
+        data: { roles: ['USUARIO'] },
+      },
+
+      {
         path: 'ofertas',
         data: { roles: ['USUARIO'] },
         canActivate: [loginGuard],
         children: [
-          { path: '', component: OfertasComponent },
-          { path: 'favoritas', component: ListaOfertasFavComponent },
-          { path: ':_id', component: OfertaViewComponent },
+          {
+            path: '',
+            component: OfertasComponent,
+            data: { roles: ['USUARIO'] },
+            canActivate: [loginGuard],
+          },
+          {
+            path: 'favoritas',
+            component: ListaOfertasFavComponent,
+            data: { roles: ['USUARIO'] },
+            canActivate: [loginGuard],
+          },
+          {
+            path: ':_id',
+            component: OfertaViewComponent,
+            data: { roles: ['USUARIO'] },
+            canActivate: [loginGuard],
+          },
         ],
       },
       {
@@ -65,7 +88,12 @@ export const routes: Routes = [
         data: { roles: ['USUARIO'] },
         canActivate: [loginGuard],
         children: [
-          { path: '', component: ProyectosComponent },
+          {
+            path: '',
+            component: ProyectosComponent,
+            data: { roles: ['USUARIO'] },
+            canActivate: [loginGuard],
+          },
           {
             path: 'add',
             data: { roles: ['USUARIO'] },
@@ -83,10 +111,14 @@ export const routes: Routes = [
       {
         path: 'misproyectos',
         component: MisProyectosComponent,
+        data: { roles: ['USUARIO'] },
+        canActivate: [loginGuard],
       },
       {
         path: 'misproyectos/edit/:_id',
         component: EditarProyectoComponent,
+        data: { roles: ['USUARIO'] },
+        canActivate: [loginGuard],
       },
 
       {

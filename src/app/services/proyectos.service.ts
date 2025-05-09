@@ -64,4 +64,11 @@ export class ProyectosService {
       this.baseUrl + 'usuario/proyectos/mis-proyectos'
     );
   }
+
+  solicitarProyecto(idProyecto: number): Observable<any> {
+    return this.httpClient.post<any>(
+      this.baseUrl + 'usuario/proyectos/solicitar/' + idProyecto,
+      {}
+    );
+  }
 }

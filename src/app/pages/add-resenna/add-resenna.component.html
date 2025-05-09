@@ -1,0 +1,100 @@
+<div class="container my-5">
+  <div class="card shadow border-0 p-4">
+    <div class="card-header bg-transparent border-0">
+      <h2 class="text-center mb-0">{{ empresaNombre }}</h2>
+    </div>
+    <div class="card-body">
+      <form [formGroup]="resennaForm" (ngSubmit)="enviarResenna()">
+        <!-- Puntuación con estrellas -->
+        <div class="mb-4 text-start">
+          <label class="form-label mb-2">Puntuación</label>
+          <div class="rating-stars-left">
+            <i class="fa-solid fa-star estrella"
+               [class.seleccionada]="puntuacion >= 1"
+               (mouseenter)="previewRating(1)"
+               (mouseleave)="resetPreview()"
+               (click)="setPuntuacion(1)"></i>
+            <i class="fa-solid fa-star estrella"
+               [class.seleccionada]="puntuacion >= 2"
+               (mouseenter)="previewRating(2)"
+               (mouseleave)="resetPreview()"
+               (click)="setPuntuacion(2)"></i>
+            <i class="fa-solid fa-star estrella"
+               [class.seleccionada]="puntuacion >= 3"
+               (mouseenter)="previewRating(3)"
+               (mouseleave)="resetPreview()"
+               (click)="setPuntuacion(3)"></i>
+            <i class="fa-solid fa-star estrella"
+               [class.seleccionada]="puntuacion >= 4"
+               (mouseenter)="previewRating(4)"
+               (mouseleave)="resetPreview()"
+               (click)="setPuntuacion(4)"></i>
+            <i class="fa-solid fa-star estrella"
+               [class.seleccionada]="puntuacion >= 5"
+               (mouseenter)="previewRating(5)"
+               (mouseleave)="resetPreview()"
+               (click)="setPuntuacion(5)"></i>
+          </div>
+        </div>
+
+        <!-- Título -->
+        <div class="mb-3 position-relative">
+          <label for="titulo" class="form-label">Título</label>
+          <input
+            type="text"
+            id="titulo"
+            formControlName="titulo"
+            class="form-control custom-input"
+            placeholder="Título de tu reseña"
+            [class.is-invalid]="resennaForm.get('titulo')?.invalid && resennaForm.get('titulo')?.touched"
+            [class.is-valid]="resennaForm.get('titulo')?.valid && resennaForm.get('titulo')?.touched">
+
+          @if (resennaForm.get('titulo')?.invalid && resennaForm.get('titulo')?.touched) {
+            <div class="invalid-feedback">
+              @if (resennaForm.get('titulo')?.errors?.['required']) {
+                <span>El título es obligatorio</span>
+              }
+              @if (resennaForm.get('titulo')?.errors?.['minlength']) {
+                <span>El título debe tener al menos 3 caracteres</span>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Comentario -->
+        <div class="mb-4 position-relative">
+          <label for="comentario" class="form-label">Comentario</label>
+          <textarea
+            id="comentario"
+            formControlName="comentario"
+            class="form-control custom-input"
+            rows="5"
+            placeholder="Escribe tu comentario"
+            [class.is-invalid]="resennaForm.get('comentario')?.invalid && resennaForm.get('comentario')?.touched"
+            [class.is-valid]="resennaForm.get('comentario')?.valid && resennaForm.get('comentario')?.touched"></textarea>
+
+          @if (resennaForm.get('comentario')?.invalid && resennaForm.get('comentario')?.touched) {
+            <div class="invalid-feedback">
+              @if (resennaForm.get('comentario')?.errors?.['required']) {
+                <span>El comentario es obligatorio</span>
+              }
+              @if (resennaForm.get('comentario')?.errors?.['minlength']) {
+                <span>El comentario debe tener al menos 10 caracteres</span>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Botones -->
+        <div class="d-flex justify-content-between mt-4">
+          <button type="button" class="btn btn-primary" (click)="volver()">
+            <i class="fas fa-arrow-left me-2"></i>Volver
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="resennaForm.invalid">
+            <i class="fas fa-paper-plane me-2"></i>Enviar reseña
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

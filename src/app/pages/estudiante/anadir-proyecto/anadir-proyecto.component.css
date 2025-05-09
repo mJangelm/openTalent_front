@@ -1,0 +1,197 @@
+.btn-save{
+border-radius: 9px;
+  background: var(--Primary-blue-700, #353D8D);
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  color: var(--Black-25, #F7F8FA);
+}
+
+/* Fondo y centrado general */
+.container {
+  min-height: 100vh;
+  background: var(--Black-25, #F7F8FA);
+}
+
+.card {
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 4px 20px 0 rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+}
+
+.custom-input {
+  background-color: #f7f8fc;
+  border: 1px solid #eaedf5;
+  border-radius: 10px;
+  box-shadow: none;
+  font-size: 0.95rem;
+  color: #333;
+  padding: 10px 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-input:focus {
+  border: 1.5px solid #535AA6;
+  box-shadow: 0 0 0 0.1rem #535AA633;
+  transform: translateY(-1px);
+}
+
+.custom-input::placeholder {
+  color: #a0a8c0;
+  font-weight: 300;
+}
+
+.custom-input.is-invalid {
+  border-color: #dc3545;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px top 10px;
+  background-size: 20px 20px;
+}
+
+/* Añadir tick verde para inputs válidos */
+.custom-input.is-valid {
+  border-color: #28a745;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px top 10px;
+  background-size: 16px 16px;
+}
+
+/* Corrige la superposición en inputs de fecha */
+input[type="date"].custom-input.is-invalid {
+  background-position: right 40px top 10px;
+}
+
+input[type="date"].custom-input.is-valid {
+  background-position: right 40px top 10px;
+}
+
+.invalid-feedback {
+  display: block;
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  font-weight: 400;
+}
+
+.btn-primary {
+  background-color: #535AA6;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 500;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn-primary:hover {
+  background-color: #373D8C;
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 12px rgba(0,0,0,0.15);
+}
+
+.btn-primary:disabled {
+  background-color: #9ba0d0;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.btn-secondary {
+  background-color: #535AA6;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  font-weight: 500;
+  padding: 10px 20px;
+  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.btn-secondary:hover {
+  background-color: #373D8C;
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 12px rgba(0,0,0,0.15);
+}
+
+.form-label {
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+}
+
+.form-check-input[type="checkbox"]:before {
+  content: '';
+  position: absolute;
+  left: 0.2em;
+  top: 0.2em;
+  width: 0.9em;
+  height: 0.9em;
+  background: #fff;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+
+.form-check-input[type="checkbox"]:checked:before {
+  transform: translateX(1.2em);
+}
+
+.form-check-label {
+  margin-left: 0.5rem;
+  color: #535AA6;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+@media (max-width: 768px) {
+  .card {
+    padding: 0.8rem !important;
+  }
+  .custom-input {
+    font-size: 0.9rem;
+  }
+  .btn-lg {
+    font-size: 0.95rem;
+    padding: 0.5rem 1rem;
+  }
+}
+
+/* Ajuste de tamaño del logo en la cabecera */
+.logo-header {
+  max-width: 140px;
+  height: 90px;
+  object-fit: contain;
+}
+
+h1.fw-bold {
+  font-size: 2.5rem;
+  vertical-align: middle;
+}
+
+.floating-label {
+  position: relative;
+  margin-bottom: 16px;
+}
+
+.floating-label .custom-input {
+  height: 50px;
+  padding: 16px 14px 0;
+}
+
+.floating-label label {
+  position: absolute;
+  top: 6px;
+  left: 14px;
+  font-size: 0.7rem;
+  color: #535AA6;
+  pointer-events: none;
+}
+
+textarea.custom-input {
+  min-height: 100px;
+  resize: vertical;
+}
+

@@ -5,10 +5,12 @@ import { Oferta } from '../../../interfaces/oferta';
 import { OfertaDetalle } from '../../../interfaces/oferta-detalle';
 import { IFavoritosCambiar } from '../../../interfaces/ifavoritos-cambiar';
 import Swal from 'sweetalert2';
+import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-oferta-view',
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   standalone: true,
   templateUrl: './oferta-view.component.html',
   styleUrl: './oferta-view.component.css',
@@ -18,6 +20,7 @@ export class OfertaViewComponent {
   detallesOferta = inject(OfertaService);
   miOferta: OfertaDetalle;
   favorita: IFavoritosCambiar;
+  solicitando: boolean = false;
 
   constructor() {
     this.miOferta = {} as OfertaDetalle;
@@ -32,7 +35,6 @@ export class OfertaViewComponent {
     this.activatedRouter.params.subscribe((response: any) => {
       const id: number = response._id as number;
       this.detallesOferta.getById(id).subscribe((data: OfertaDetalle) => {
-        console.log(data);
         this.miOferta = data;
       });
     });
@@ -58,78 +60,108 @@ export class OfertaViewComponent {
   }
 
   solicitarOferta() {
+    // Verificar si hay vacantes disponibles
+    if (this.miOferta.vacantesDisponibles <= 0) {
+      Swal.fire({
+        title: 'No hay vacantes',
+        text: 'Esta oferta no tiene plazas disponibles actualmente.',
+        icon: 'warning',
+        confirmButtonColor: '#535AA6',
+      });
+      return;
+    }
+
+    // Verificar estados previos
     if (this.miOferta.estadoAplicacion === 'PENDIENTE') {
-      this.mostrarInfo(
-        'Solicitud pendiente',
-        'Tu solicitud ya está en proceso de revisión.'
-      );
+      Swal.fire({
+        title: 'Solicitud pendiente',
+        text: 'Tu solicitud ya está en proceso de revisión.',
+        icon: 'info',
+        confirmButtonColor: '#535AA6',
+      });
       return;
     }
 
     if (this.miOferta.estadoAplicacion === 'ACEPTADO') {
-      this.mostrarExito(
-        '¡Felicidades!',
-        'Ya has sido aceptado en esta oferta.'
-      );
+      Swal.fire({
+        title: '¡Felicidades!',
+        text: 'Ya has sido aceptado en esta oferta.',
+        icon: 'success',
+        confirmButtonColor: '#535AA6',
+      });
       return;
     }
 
-    if (this.miOferta.vacantesDisponibles <= 0) {
-      this.mostrarError(
-        'Sin vacantes',
-        'No hay vacantes disponibles para esta oferta.'
-      );
-      return;
-    }
-    // Si es FAVORITO o RECHAZADO, dejamos inscribir
-
-    this.detallesOferta.inscribirseOferta(this.miOferta.idOferta).subscribe({
-      next: (response) => {
-        this.mostrarExito(
-          '¡Solicitud enviada!',
-          'Te has inscrito correctamente. Ahora tu solicitud está pendiente.'
-        );
-        this.miOferta.estadoAplicacion = 'PENDIENTE'; // actualizamos
-      },
-      error: (error) => {
-        if (error.status === 404) {
-          this.mostrarError('Error', 'Usuario u oferta no encontrada.');
-        } else if (error.status === 409) {
-          this.mostrarInfo('Ya inscrito', 'Ya estás inscrito en esta oferta.');
-          this.miOferta.estadoAplicacion = 'PENDIENTE';
-        } else {
-          this.mostrarError(
-            'Error inesperado',
-            'Ocurrió un error al intentar inscribirse.'
-          );
-        }
-      },
-    });
-  }
-  private mostrarError(titulo: string, texto: string) {
+    // Mostrar confirmación antes de solicitar
     Swal.fire({
-      icon: 'error',
-      title: titulo,
-      text: texto,
-      confirmButtonColor: '#4a4ea8',
-    });
-  }
+      title: '¿Solicitar participación?',
+      text: '¿Estás seguro de que quieres solicitar esta oferta?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, solicitar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#535AA6',
+      cancelButtonColor: '#535AA6',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Mostrar indicador de carga
+        this.solicitando = true;
+        Swal.fire({
+          title: 'Enviando solicitud...',
+          didOpen: () => {
+            Swal.showLoading();
+          },
+          allowOutsideClick: false,
+          allowEscapeKey: false,
+          allowEnterKey: false,
+        });
 
-  private mostrarInfo(titulo: string, texto: string) {
-    Swal.fire({
-      icon: 'info',
-      title: titulo,
-      text: texto,
-      confirmButtonColor: '#4a4ea8',
-    });
-  }
+        this.detallesOferta
+          .inscribirseOferta(this.miOferta.idOferta)
+          .subscribe({
+            next: (response) => {
+              this.solicitando = false;
 
-  private mostrarExito(titulo: string, texto: string) {
-    Swal.fire({
-      icon: 'success',
-      title: titulo,
-      text: texto,
-      confirmButtonColor: '#4a4ea8',
+              // Actualizar estado y decrementar vacantes
+              this.miOferta.estadoAplicacion = 'PENDIENTE';
+              this.miOferta.vacantesDisponibles--;
+
+              Swal.fire({
+                title: '¡Solicitud enviada!',
+                text: 'Te has inscrito correctamente. Ahora tu solicitud está pendiente.',
+                icon: 'success',
+                confirmButtonColor: '#535AA6',
+              });
+            },
+            error: (error: HttpErrorResponse) => {
+              this.solicitando = false;
+
+              if (error.status === 404) {
+                Swal.fire({
+                  title: 'Error',
+                  text: 'Usuario u oferta no encontrada.',
+                  icon: 'error',
+                  confirmButtonColor: '#535AA6',
+                });
+              } else if (error.status === 409) {
+                Swal.fire({
+                  title: 'Ya inscrito',
+                  text: 'Ya estás inscrito en esta oferta.',
+                  icon: 'info',
+                  confirmButtonColor: '#535AA6',
+                });
+                this.miOferta.estadoAplicacion = 'PENDIENTE';
+              } else {
+                Swal.fire({
+                  title: 'Error inesperado',
+                  text: 'Ocurrió un error al intentar inscribirse.',
+                  icon: 'error',
+                  confirmButtonColor: '#535AA6',
+                });
+              }
+            },
+          });
+      }
     });
   }
 }

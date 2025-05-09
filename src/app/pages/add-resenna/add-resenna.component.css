@@ -1,0 +1,130 @@
+.card {
+  background-color: #f5f6fa;
+  border-radius: 12px;
+}
+
+.card-header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  padding-bottom: 1rem;
+}
+
+/* Estilos para las estrellas */
+.rating-stars-left {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.estrella {
+  font-size: 1.5rem;
+  color: transparent;
+  -webkit-text-stroke: 1px #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.estrella:hover {
+  transform: scale(1.2);
+  color: #000;
+}
+
+.estrella.seleccionada {
+  color: #000;
+  transform: scale(1.2);
+}
+
+/* Estilos para los botones */
+.btn-primary {
+  background-color: #535AA6;
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s ease;
+  padding: 8px 16px;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: #373D8C;
+  transform: translateY(-2px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  border: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+  transform: translateY(-2px);
+}
+
+/* Estilos para los inputs */
+.custom-input {
+  background-color: #ffffff;
+  border: 1px solid #eaedf5;
+  border-radius: 10px;
+  box-shadow: none;
+  font-size: 0.95rem;
+  color: #333;
+  padding: 10px 14px;
+  transition: all 0.2s ease-in-out;
+}
+
+.custom-input:focus {
+  border: 1.5px solid #535AA6;
+  box-shadow: 0 0 0 0.1rem #535AA633;
+  transform: translateY(-1px);
+}
+
+.custom-input::placeholder {
+  color: #9b9ea6;
+  font-weight: 300;
+}
+
+/* Estilos para validación */
+.custom-input.is-invalid {
+  border-color: #dc3545;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px top 10px;
+  background-size: 20px 20px;
+}
+
+/* Añadir tick verde para inputs válidos */
+.custom-input.is-valid {
+  border-color: #28a745;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px top 10px;
+  background-size: 16px 16px;
+}
+
+.invalid-feedback {
+  display: block;
+  color: #dc3545;
+  font-size: 0.8rem;
+  margin-top: 0.25rem;
+  font-weight: 400;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 0.4rem;
+  font-size: 0.9rem;
+}
+
+/* Estilos para el icono de verificación */
+.check-icon {
+  top: 38px;
+  right: 10px;
+  font-size: 1.2rem;
+}
+
+textarea ~ .check-icon {
+  top: 10px;
+}

@@ -29,7 +29,26 @@
         <h5 class="fw-bold mb-2">Descripción del proyecto</h5>
         <p>{{ miProyecto.descripcion }}</p>
 
-        <button class="btn btn-primary mt-3">Solicitar</button>
+        <button class="btn btn-primary mt-3"
+                (click)="solicitarProyecto(miProyecto.idProyecto)"
+                [disabled]="solicitando || miProyecto.estadoAplicacion === 'PENDIENTE' || miProyecto.estadoAplicacion === 'ACEPTADO' || miProyecto.plazasRestantes <= 0">
+          @if(solicitando) {
+            <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+            Enviando...
+          } @else if(miProyecto.estadoAplicacion === 'PENDIENTE') {
+            <i class="fas fa-clock me-2"></i>Solicitud pendiente
+          } @else if(miProyecto.estadoAplicacion === 'ACEPTADO') {
+            <i class="fas fa-check-circle me-2"></i>Ya eres miembro
+          } @else if(miProyecto.plazasRestantes <= 0) {
+            <i class="fas fa-ban me-2"></i>No hay vacantes
+          } @else {
+            <i class="fas fa-paper-plane me-2"></i>Solicitar
+          }
+        </button>
+
+        <button class="btn btn-secondary ms-3 mt-3" [routerLink]="['/usuario/proyectos']">
+          <i class="fas fa-arrow-left me-2"></i>Volver
+        </button>
       </div>
 
       <!-- Imagen y estado -->
@@ -39,13 +58,17 @@
         </div>
         <div class="mb-2">
           <i class="fas fa-check-circle me-2"></i>
-          @if(miProyecto.estadoAplicacion === 'FAVORITO') {
-          NO APLICACO
-          }@else {
-          {{ miProyecto.estadoAplicacion }}
+          @if(miProyecto.estadoAplicacion === 'FAVORITO' || miProyecto.estadoAplicacion === 'NO_APLICADO') {
+          <span class="badge bg-secondary">No aplicado</span>
+          } @else if(miProyecto.estadoAplicacion === 'PENDIENTE') {
+          <span class="badge bg-warning text-dark">Pendiente</span>
+          } @else if(miProyecto.estadoAplicacion === 'ACEPTADO') {
+          <span class="badge bg-success">Aceptado</span>
+          } @else if(miProyecto.estadoAplicacion === 'RECHAZADO') {
+          <span class="badge bg-danger">Rechazado</span>
+          } @else {
+          <span class="badge bg-secondary">{{ miProyecto.estadoAplicacion }}</span>
           }
-
-
         </div>
 
         <img [src]="miProyecto.foto" alt="Foto proyecto" class="img-fluid mt-3 proyecto-img rounded">
@@ -62,6 +85,11 @@
           <span class="fw-semibold">{{ p.nombre }} {{ p.apellidos }}</span>
           <i class="fa-regular fa-envelope ms-auto"></i>
         </div>
+      </div>
+      }
+      @empty {
+      <div class="col-12 text-center text-muted">
+        <p>No hay participantes en este proyecto todavía</p>
       </div>
       }
     </div>
