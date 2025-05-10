@@ -1,8 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { Iuser } from '../interfaces/iuser';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Estudiante } from '../interfaces/estudiante';
+import { RegistroEstudianteDto } from '../interfaces/registro-estudiante-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -15,9 +16,11 @@ export class RegistroEstudianteService {
 
   constructor() { }
 
-  registro(user: Estudiante) : Promise<any> {
+  registro(user: RegistroEstudianteDto) : Observable<any> {
 
-    return lastValueFrom (this.httpClient.post<any>(this.baseUrl, user));
+    return this.httpClient.post<any>(this.baseUrl, user);
       }
+
+
   }
 
