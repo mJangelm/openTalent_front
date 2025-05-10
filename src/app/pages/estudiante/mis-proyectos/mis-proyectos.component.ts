@@ -17,10 +17,9 @@ export class MisProyectosComponent {
   isMenuOpenHome: boolean = false;
   editable: boolean = true;
 
-  constructor() {
+  ngOnInit() {
     this.loadProyectos();
   }
-
   private loadProyectos() {
     this.servicioProyectos.getMisProyectos().subscribe({
       next: (response: Proyecto[]) => {

@@ -16,7 +16,6 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-postulante-card',
-  standalone: true,
   imports: [
     CommonModule,
     MatIconModule,
@@ -30,7 +29,7 @@ import Swal from 'sweetalert2';
 export class PostulanteCardComponent {
   @Input() postulanteUnico!: PostulanteI;
   @Input() idProyecto!: number;
-  @Input() tipo: 'oferta' | 'proyecto' = 'proyecto';
+  @Input() tipo: 'oferta' | 'proyecto' | undefined;
   @Output() onAccept = new EventEmitter<number>();
   @Output() onReject = new EventEmitter<number>();
   @Input() idOferta!: number;
@@ -44,7 +43,7 @@ export class PostulanteCardComponent {
       confirmButtonText: 'Sí, aceptar',
       cancelButtonText: 'Cancelar',
       confirmButtonColor: '#535AA6',
-      cancelButtonColor: '#d33',
+      cancelButtonColor: '#010103',
     }).then((result) => {
       if (result.isConfirmed) {
         this.onAccept.emit(idUsuario);
@@ -60,8 +59,8 @@ export class PostulanteCardComponent {
       showCancelButton: true,
       confirmButtonText: 'Sí, rechazar',
       cancelButtonText: 'Cancelar',
-      confirmButtonColor: '#d33',
-      cancelButtonColor: '#535AA6',
+      confirmButtonColor: '#535AA6',
+      cancelButtonColor: '#010103',
     }).then((result) => {
       if (result.isConfirmed) {
         this.onReject.emit(idUsuario);

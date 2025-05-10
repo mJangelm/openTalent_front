@@ -21,11 +21,9 @@ export class OfertasComponent {
   toggleMenuHome() {
     this.isMenuOpenHome = !this.isMenuOpenHome;
   }
-
-  constructor() {
+  ngOnInit() {
     this.loadOfertas();
   }
-
   private loadOfertas() {
     this.isLoading = true;
     this.servicioOfertas.getAllOfertas().subscribe({

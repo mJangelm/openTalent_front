@@ -17,10 +17,9 @@ export class ProyectosComponent {
   arrProyectos: Proyecto[] = [];
   isLoading = true;
 
-  constructor() {
+  ngOnInit() {
     this.loadProyectos();
   }
-
   private loadProyectos() {
     this.isLoading = true;
     this.servicioProyectos.getAllProyectos().subscribe({

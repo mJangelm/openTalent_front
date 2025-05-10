@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -15,29 +15,42 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-anadir-proyecto',
+  standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './anadir-proyecto.component.html',
   styleUrl: './anadir-proyecto.component.css',
 })
-export class AnadirProyectoComponent {
-  modelForm!: FormGroup;
-  router = inject(Router);
-  servicioProyectos = inject(ProyectosService);
-  activatedRoute = inject(ActivatedRoute);
-  submitted = false;
+export class AnadirProyectoComponent implements OnInit {
+  private router = inject(Router);
+  private servicioProyectos = inject(ProyectosService);
+  private activatedRoute = inject(ActivatedRoute);
 
-  // Variables para modo edición
+  modelForm!: FormGroup;
+  submitted = false;
   modoEdicion = false;
   idProyecto = 0;
   activoOriginal = true;
   tituloFormulario = 'Crear nuevo proyecto';
 
-  constructor() {
-    // Verificar si estamos en modo edición comprobando la URL
+  ngOnInit() {
+    this.initializeComponent();
+  }
+
+  private initializeComponent() {
+    this.checkEditionMode();
+    this.initializeForm();
+
+    if (this.modoEdicion) {
+      this.setupEditionMode();
+    }
+  }
+
+  private checkEditionMode() {
     const url = this.router.url;
     this.modoEdicion = url.includes('/misproyectos/edit/');
+  }
 
-    // Se crea el FormGroup con los controles y validadores
+  private initializeForm() {
     this.modelForm = new FormGroup(
       {
         nombre: new FormControl('', [
@@ -72,30 +85,30 @@ export class AnadirProyectoComponent {
       },
       { validators: this.fechaFinPosteriorAInicioValidator }
     );
+  }
 
-    if (this.modoEdicion) {
-      this.tituloFormulario = 'Editar proyecto';
-      // Obtener el ID del proyecto de la URL
-      const idParam = this.activatedRoute.snapshot.paramMap.get('_id');
-      if (!idParam) {
-        this.router.navigate(['/usuario/misproyectos']);
-        return;
-      }
+  private setupEditionMode() {
+    this.tituloFormulario = 'Editar proyecto';
+    const idParam = this.activatedRoute.snapshot.paramMap.get('_id');
 
-      this.idProyecto = +idParam;
-
-      // En modo edición, no validamos que las fechas sean posteriores a hoy
-      this.modelForm.get('fechaInicio')?.clearValidators();
-      this.modelForm.get('fechaInicio')?.setValidators([Validators.required]);
-      this.modelForm.get('fechaInicio')?.updateValueAndValidity();
-
-      this.modelForm.get('fechaFin')?.clearValidators();
-      this.modelForm.get('fechaFin')?.setValidators([Validators.required]);
-      this.modelForm.get('fechaFin')?.updateValueAndValidity();
-
-      // Cargar los datos del proyecto
-      this.cargarDatosProyecto();
+    if (!idParam) {
+      this.router.navigate(['/usuario/misproyectos']);
+      return;
     }
+
+    this.idProyecto = +idParam;
+    this.updateValidatorsForEdition();
+    this.cargarDatosProyecto();
+  }
+
+  private updateValidatorsForEdition() {
+    this.modelForm.get('fechaInicio')?.clearValidators();
+    this.modelForm.get('fechaInicio')?.setValidators([Validators.required]);
+    this.modelForm.get('fechaInicio')?.updateValueAndValidity();
+
+    this.modelForm.get('fechaFin')?.clearValidators();
+    this.modelForm.get('fechaFin')?.setValidators([Validators.required]);
+    this.modelForm.get('fechaFin')?.updateValueAndValidity();
   }
 
   cargarDatosProyecto(): void {
@@ -196,7 +209,6 @@ export class AnadirProyectoComponent {
     });
   }
 
-  // Validador personalizado para fechas posteriores a hoy
   fechaPosteriorAHoyValidator(): (
     control: AbstractControl
   ) => ValidationErrors | null {
@@ -211,7 +223,6 @@ export class AnadirProyectoComponent {
     };
   }
 
-  // Validador personalizado para que la fecha fin sea posterior a la fecha inicio
   fechaFinPosteriorAInicioValidator(
     formGroup: AbstractControl
   ): ValidationErrors | null {
@@ -226,18 +237,15 @@ export class AnadirProyectoComponent {
     return fin <= inicio ? { fechaFinInvalida: true } : null;
   }
 
-  // Validador para URL (solo verifica http:// o https://)
   urlValidator(): (control: AbstractControl) => ValidationErrors | null {
     return (control: AbstractControl): ValidationErrors | null => {
       if (!control.value) return null;
 
-      // Solo verifica si comienza con http:// o https://
       const urlPattern = /^(https?:\/\/)/i;
       return urlPattern.test(control.value) ? null : { urlInvalida: true };
     };
   }
 
-  // Métodos de ayuda para el manejo de errores en la plantilla
   isInvalid(controlName: string): boolean {
     const control = this.modelForm.get(controlName);
     return !!control && control.invalid && control.touched;

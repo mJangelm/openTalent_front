@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { IReview } from '../../interfaces/ireview';
+import { EmpresaService } from '../../services/empresa.service';
 
 @Component({
   selector: 'app-add-resenna',
@@ -21,6 +23,7 @@ export class AddResennaComponent implements OnInit {
   empresaNombre: string = '';
   puntuacion: number = 0;
   previewPuntuacion: number = 0;
+  empresaService = inject(EmpresaService);
 
   private fb = inject(FormBuilder);
   private route = inject(ActivatedRoute);
@@ -96,17 +99,14 @@ export class AddResennaComponent implements OnInit {
     }
 
     // Datos de la reseña
-    const resennaData = {
+    const resennaData: IReview = {
       titulo: this.resennaForm.get('titulo')?.value,
       comentario: this.resennaForm.get('comentario')?.value,
       puntuacion: this.puntuacion,
-      empresaCif: this.empresaCif,
+      cif: this.empresaCif,
     };
 
-    console.log('Enviando reseña:', resennaData);
-
-    // Aquí iría la llamada al servicio para guardar la reseña
-    // Por ahora solo mostramos mensaje de éxito y redirigimos
+    this.empresaService.ponerResena(resennaData).subscribe();
 
     Swal.fire({
       icon: 'success',

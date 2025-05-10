@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Empresa } from '../interfaces/empresa';
 import { IEmpresaDetalle } from '../interfaces/iempresa-detalle';
 import { SectorI } from '../interfaces/sector-i';
+import { IReview } from '../interfaces/ireview';
 
 @Injectable({
   providedIn: 'root',
@@ -25,9 +26,13 @@ export class EmpresaService {
   }
 
   getSectores(): Observable<SectorI[]> {
-    return this.httpClient.get<SectorI[]>(
-      this.baseUrl + '/empresa/sectores'
-    );
+    return this.httpClient.get<SectorI[]>(this.baseUrl + '/empresa/sectores');
+  }
 
+  ponerResena(review: IReview): Observable<IReview> {
+    return this.httpClient.post<IReview>(
+      this.baseUrl + '/usuario/empresas/resenas',
+      review
+    );
   }
 }

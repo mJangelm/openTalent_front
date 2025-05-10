@@ -21,6 +21,8 @@ export class HomeEstudianteComponent {
 
   constructor() {
     this.arrEmpresas = [];
+  }
+  ngOnInit() {
     this.loadData();
   }
 

@@ -13,7 +13,7 @@
   border-radius: 15px !important;
   width: 45px;
   height: 45px;
-  background: #535AA6 !important; /* Color principal del navbar */
+  background: #535AA6 !important;
   color: #010103;
 }
 
@@ -33,7 +33,7 @@
 }
 
 .delete-button {
-  background: #f44336 !important; /* Mantenemos el rojo para eliminar por UX */
+  background: #f44336 !important;
 }
 
 /* Animación de ripple personalizada */
