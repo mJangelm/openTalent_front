@@ -1,39 +1,53 @@
 import { Component, inject } from '@angular/core';
-import { OfertaService } from '../../../services/oferta.service';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+
+import { OfertaService } from '../../../services/oferta.service';
 import { Oferta } from '../../../interfaces/oferta';
-import { OfertasUsuarioCardComponent } from "../../../components/usuario/ofertas-usuario-card/ofertas-usuario-card.component";
 import { MisOfertasCardComponent } from '../mis-ofertas-card/mis-ofertas-card.component';
 
 @Component({
   selector: 'app-mis-ofertas',
-  imports: [MisOfertasCardComponent],
-  standalone:true,
+  standalone: true,
+  imports: [
+    CommonModule,
+    MisOfertasCardComponent
+  ],
   templateUrl: './mis-ofertas.component.html',
-  styleUrl: './mis-ofertas.component.css'
+  styleUrls: ['./mis-ofertas.component.css']
 })
 export class MisOfertasComponent {
-  servicioOfertas = inject(OfertaService);
-  router = inject(Router);
-  arrOfertas!: Oferta[];
-  isMenuOpenHome: boolean = false;
-  editable: boolean = true;
+  private servicioOfertas = inject(OfertaService);
+  private router = inject(Router);
+
+  arrOfertas: Oferta[] = [];
+  isLoading = true;     // arranca en true
+  editable = true;
 
   ngOnInit() {
-    this.servicioOfertas.getMiofertas().subscribe((response: any) => {
-      this.arrOfertas = response;
-      console.log(response);
+    this.loadOfertas();
+  }
+
+  private loadOfertas() {
+    this.isLoading = true;
+    this.servicioOfertas.getMiofertas().subscribe({
+      next: (response: Oferta[]) => {
+        this.arrOfertas = response;
+        this.isLoading = false;    // ocultar spinner
+      },
+      error: err => {
+        console.error('Error al cargar mis ofertas:', err);
+        this.arrOfertas = [];
+        this.isLoading = false;    // ocultar spinner aun en error
+      }
     });
   }
 
-  
   onOfferDeleted(id: number) {
-    // filtramos el array para eliminar la oferta cerrada
     this.arrOfertas = this.arrOfertas.filter(o => o.idOferta !== id);
   }
 
-  trackByOferta(index: number, oferta: any) {
+  trackByOferta(_idx: number, oferta: Oferta) {
     return oferta.idOferta;
   }
-
 }

@@ -10,6 +10,7 @@ import { Estudiante } from '../../../interfaces/estudiante';
 @Component({
   selector: 'app-editar-perfil',
   imports: [ReactiveFormsModule, RouterLink,CommonModule],
+  standalone:true,
   templateUrl: './editar-perfil.component.html',
   styleUrl: './editar-perfil.component.css'
 })

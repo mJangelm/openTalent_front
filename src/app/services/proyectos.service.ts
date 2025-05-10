@@ -27,6 +27,14 @@ export class ProyectosService {
     );
   }
 
+
+cancelarProyecto(idProyecto: number): Observable<any> {
+  return this.httpClient.post<any>(
+    `${this.baseUrl}usuario/proyectos/${idProyecto}/cancelar`,
+    {}     // body vacío
+  );
+}
+
   editarProyecto(proyectoEdit: ProyectoRequestI): Observable<ProyectoRequestI> {
     return this.httpClient.put<ProyectoRequestI>(
       this.baseUrl + 'usuario/proyectos/',
