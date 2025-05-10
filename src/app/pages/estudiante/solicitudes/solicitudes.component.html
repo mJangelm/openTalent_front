@@ -21,10 +21,17 @@
         <p>No hay solicitudes pendientes</p>
       </div>
     } @else {
-      <div class="postulantes-grid ">
+      <div class="postulantes-grid">
         @for (postulante of postulantes; track postulante.idUsuario) {
-            <app-postulante-card [postulanteUnico]="postulante"
-            [tipo]="'proyecto'" [idProyecto]="idProyecto">></app-postulante-card>
+          <div class="postulante-wrapper" [attr.data-id]="postulante.idUsuario">
+            <app-postulante-card
+              [postulanteUnico]="postulante"
+              [idProyecto]="idProyecto"
+              [tipo]="'proyecto'"
+              (onAccept)="handleAcceptPostulante($event)"
+              (onReject)="handleRejectPostulante($event)">
+            </app-postulante-card>
+          </div>
         }
       </div>
     }

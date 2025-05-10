@@ -1,14 +1,18 @@
-import { Component, Input, inject } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  inject,
+  input,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { PostulanteI } from '../../interfaces/postulante';
-import { ProyectosService } from '../../services/proyectos.service';
-import { OfertaService } from '../../services/oferta.service';
-import { IEstadoSolicitud } from '../../interfaces/iestado-solicitud';
 import { Router, RouterLink } from '@angular/router';
-import { I } from '@angular/cdk/keycodes';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-postulante-card',
@@ -26,72 +30,42 @@ import { I } from '@angular/cdk/keycodes';
 export class PostulanteCardComponent {
   @Input() postulanteUnico!: PostulanteI;
   @Input() idProyecto!: number;
-  @Input() tipo: 'oferta' | 'proyecto' | undefined;
+  @Input() tipo: 'oferta' | 'proyecto' = 'proyecto';
+  @Output() onAccept = new EventEmitter<number>();
+  @Output() onReject = new EventEmitter<number>();
   @Input() idOferta!: number;
 
-  private ofertaService = inject(OfertaService);
-  private proyectoService = inject(ProyectosService);
-
-  sendMessage(idUsuario: number) {
-    console.log('Enviar mensaje a:', idUsuario);
-  }
-
   acceptPostulante(idUsuario: number) {
-    if (this.tipo === 'proyecto') {
-      const estado: IEstadoSolicitud = {
-        idProyecto: this.idProyecto,
-        idUsuario: idUsuario,
-        estado: 'ACEPTADO',
-      };
-      this.procesarSolicitudProyecto(estado);
-    } else {
-      this.procesarSolicitudOferta(idUsuario, true);
-    }
-  }
-
-  rejectPostulante(idUsuario: number) {
-    console.log(this.idProyecto);
-    if (this.tipo === 'proyecto') {
-      const estado: IEstadoSolicitud = {
-        idProyecto: this.idProyecto,
-        idUsuario: idUsuario,
-        estado: 'RECHAZADO',
-      };
-      this.procesarSolicitudProyecto(estado);
-    } else {
-      this.procesarSolicitudOferta(idUsuario, false);
-    }
-  }
-
-  private procesarSolicitudProyecto(estado: IEstadoSolicitud) {
-    this.proyectoService.modificarEstadoPostulante(estado).subscribe({
-      next: (response) => {
-        console.log('Estado de proyecto actualizado:', response);
-      },
-      error: (error) => {
-        console.error('Error al modificar estado del proyecto:', error);
-      },
+    Swal.fire({
+      title: '¿Aceptar postulante?',
+      text: '¿Estás seguro de que deseas aceptar a este postulante?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, aceptar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#535AA6',
+      cancelButtonColor: '#d33',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.onAccept.emit(idUsuario);
+      }
     });
   }
 
-  private procesarSolicitudOferta(idUsuario: number, aceptar: boolean) {
-    const service = aceptar
-      ? this.ofertaService.aceptarPostulante(this.idOferta, idUsuario)
-      : this.ofertaService.rechazarPostulante(this.idOferta, idUsuario);
-
-    service.subscribe({
-      next: (response) => {
-        console.log(
-          `Postulante ${aceptar ? 'aceptado' : 'rechazado'} correctamente:`,
-          response
-        );
-      },
-      error: (error) => {
-        console.error(
-          `Error al ${aceptar ? 'aceptar' : 'rechazar'} postulante:`,
-          error
-        );
-      },
+  rejectPostulante(idUsuario: number) {
+    Swal.fire({
+      title: '¿Rechazar postulante?',
+      text: '¿Estás seguro de que deseas rechazar a este postulante?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, rechazar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#535AA6',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.onReject.emit(idUsuario);
+      }
     });
   }
 }

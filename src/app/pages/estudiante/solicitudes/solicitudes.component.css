@@ -18,6 +18,23 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   gap: 2rem;
+  padding: 1rem;
+}
+
+.postulante-wrapper {
+  transition: all 400ms ease;
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 500px; /* Ajusta según el tamaño máximo de tu tarjeta */
+  overflow: hidden;
+}
+
+.postulante-wrapper.fade-out {
+  opacity: 0;
+  transform: translateY(-10px);
+  max-height: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .postulante-card {
@@ -137,6 +154,10 @@ mat-card-actions {
   }
 
   .postulante-card {
+    transition: none;
+  }
+
+  .postulante-wrapper {
     transition: none;
   }
 }

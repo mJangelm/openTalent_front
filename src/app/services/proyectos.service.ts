@@ -80,7 +80,7 @@ export class ProyectosService {
     );
   }
   modificarEstadoPostulante(estado: IEstadoSolicitud): Observable<any> {
-    return this.httpClient.put<any>(
+    return this.httpClient.post<any>(
       this.baseUrl + 'usuario/proyectos/responder-solicitud',
       estado
     );
