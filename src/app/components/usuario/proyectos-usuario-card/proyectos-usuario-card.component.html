@@ -24,11 +24,9 @@
 
     </div>
 
-    <!-- Ubicación + ícono adicional -->
     <div class="d-flex align-items-center mb-2">
       <i class="fa-solid fa-user me-2"></i>
       <span class="me-auto small"> {{proyectoUnico.plazasDisponibles}}</span>
-
       <i class="fa-regular fa-face-smile"></i>
     </div>
     <a (click)="verProyecto()" class="text-decoration-none text-dark card-trigger" [ngClass]="{'sinCursor': esEditable}">
@@ -36,7 +34,6 @@
       <p class="mb-3 text-wrap" style="font-size: 0.9rem;">
         {{ proyectoUnico.descripcion }}
       </p>
-
       <!-- Imagen inferior -->
       <app-image-loader
         [src]="proyectoUnico.fotoContenido"
@@ -46,7 +43,7 @@
     </a>
     @if (esEditable) {
       <div class="mt-2 justify-content-center">
-        <app-boton-edit-proyecto [_id]="proyectoUnico.idProyecto"></app-boton-edit-proyecto>
+        <app-boton-edit-proyecto [proyectoId]="proyectoUnico.idProyecto"></app-boton-edit-proyecto>
       </div>
     }
   </div>

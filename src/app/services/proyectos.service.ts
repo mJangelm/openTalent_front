@@ -5,6 +5,8 @@ import { Proyecto } from '../interfaces/proyecto';
 import { ProyectosView } from '../interfaces/proyectos-view';
 import { IFavoritosCambiar } from '../interfaces/ifavoritos-cambiar';
 import { ProyectoRequestI } from '../interfaces/proyecto-request-i';
+import { PostulanteI } from '../interfaces/postulante';
+import { IEstadoSolicitud } from '../interfaces/iestado-solicitud';
 
 @Injectable({
   providedIn: 'root',
@@ -69,6 +71,18 @@ export class ProyectosService {
     return this.httpClient.post<any>(
       this.baseUrl + 'usuario/proyectos/solicitar/' + idProyecto,
       {}
+    );
+  }
+
+  verPostulantes(idProyecto: number): Observable<PostulanteI[]> {
+    return this.httpClient.get<PostulanteI[]>(
+      this.baseUrl + 'usuario/proyectos/' + idProyecto + '/postulantes'
+    );
+  }
+  modificarEstadoPostulante(estado: IEstadoSolicitud): Observable<any> {
+    return this.httpClient.put<any>(
+      this.baseUrl + 'usuario/proyectos/responder-solicitud',
+      estado
     );
   }
 }

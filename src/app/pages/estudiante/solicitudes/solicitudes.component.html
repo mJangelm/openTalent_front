@@ -1,0 +1,32 @@
+<section class="solicitudes-container">
+  @if (isLoading) {
+    <div class="loader-container">
+      <div class="loader"></div>
+      <p>Cargando solicitudes...</p>
+    </div>
+  } @else if (error) {
+    <div class="error-message">
+      <mat-icon>error</mat-icon>
+      <p>{{ error }}</p>
+    </div>
+  } @else {
+    <div class="solicitudes-header">
+      <h1>Solicitudes del Proyecto</h1>
+      <p>Total de postulantes: {{ postulantes.length }}</p>
+    </div>
+
+    @if (postulantes.length === 0) {
+      <div class="empty-state">
+        <mat-icon>person_search</mat-icon>
+        <p>No hay solicitudes pendientes</p>
+      </div>
+    } @else {
+      <div class="postulantes-grid ">
+        @for (postulante of postulantes; track postulante.idUsuario) {
+            <app-postulante-card [postulanteUnico]="postulante"
+            [tipo]="'proyecto'" [idProyecto]="idProyecto">></app-postulante-card>
+        }
+      </div>
+    }
+  }
+</section>

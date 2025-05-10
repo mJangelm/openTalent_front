@@ -7,7 +7,6 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-empresa-view',
   imports: [RouterLink, CommonModule],
-  standalone: true,
   templateUrl: './empresa-view.component.html',
   styleUrl: './empresa-view.component.css',
 })

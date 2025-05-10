@@ -1,6 +1,6 @@
-<div class="card shadow-sm mb-3 mt-5 hover-card" style="border-radius: 12px;">
+<div class="bg-light card shadow-sm mb-3 mt-5 hover-card" style="border-radius: 12px;">
     <div class="card-body">
-  
+
       <!-- Encabezado: foto + nombre completo -->
       <div class="d-flex align-items-center mb-1">
         <a
@@ -18,7 +18,7 @@
           {{ postulanteUnico.nombre }} {{ postulanteUnico.apellidos }}
         </h5>
       </div>
-  
+
       <!-- Datos de contacto (fuente muy pequeña) -->
       <small
         class="d-block text-muted mb-3"
@@ -30,7 +30,7 @@
         <br>
         {{ postulanteUnico.telefono }}
       </small>
-  
+
       <!-- Datos adicionales -->
       <ul class="list-unstyled mb-4" style="font-size: 0.9rem;">
         <li><strong>País:</strong> {{ postulanteUnico.direccion.pais }}</li>
@@ -41,45 +41,37 @@
         <li><strong>Estudios:</strong> {{ postulanteUnico.estudios }}</li>
         <li><strong>Experiencia:</strong> {{ postulanteUnico.experiencia }}</li>
       </ul>
-  
-      <!-- Primero: Descargar CV y Enviar Mensaje -->
-      <div class="d-flex gap-2 mb-2">
-        <a
-          [href]="getCvUrl(postulanteUnico.cv)"
-          download
-          class="btn btn-sm btn-primary flex-grow-1"
-        >
-          Descargar CV
-        </a>
-  
-        <button
-          (click)="sendMessage(postulanteUnico.idUsuario)"
-          class="btn btn-sm btn-outline-secondary flex-grow-1"
-        >
-          Enviar Mensaje
-        </button>
+
+      <!-- Sección de botones de acción -->
+      <div class="action-buttons">
+        <!-- Botones de utilidad (superiores) -->
+        <div class="utility-actions">
+          <button class="action-btn utility-btn" matTooltip="Descargar CV">
+            <mat-icon>file_download</mat-icon>
+          </button>
+
+          <button class="action-btn utility-btn"
+                  (click)="sendMessage(postulanteUnico.idUsuario)"
+                  matTooltip="Enviar mensaje">
+            <mat-icon>mail_outline</mat-icon>
+          </button>
+        </div>
+
+        <!-- Botones de decisión (inferiores) -->
+        <div class="decision-actions">
+          <button class="action-btn decision-btn accept"
+                  (click)="acceptPostulante(postulanteUnico.idUsuario)"
+                  matTooltip="Aceptar postulante">
+            <mat-icon>check_circle_outline</mat-icon>
+          </button>
+
+          <button class="action-btn decision-btn reject"
+                  (click)="rejectPostulante(postulanteUnico.idUsuario)"
+                  matTooltip="Rechazar postulante">
+            <mat-icon>cancel_outline</mat-icon>
+          </button>
+        </div>
       </div>
-  
-      <!-- Después: Aceptar y Rechazar -->
-      <div class="d-flex gap-2 justify-content-center">
-        <button
-          (click)="acceptPostulante(postulanteUnico.idUsuario)"
-          class="btn btn-sm btn-outline-success"
-          style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;"
-          title="Aceptar"
-        >
-          ✓
-        </button>
-        <button
-          (click)="rejectPostulante(postulanteUnico.idUsuario)"
-          class="btn btn-sm btn-outline-danger"
-          style="width: 32px; height: 32px; padding: 0; display: flex; align-items: center; justify-content: center;"
-          title="Rechazar"
-        >
-          ✕
-        </button>
-      </div>
-  
+
     </div>
   </div>
-  

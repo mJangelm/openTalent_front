@@ -11,7 +11,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-oferta-view',
   imports: [RouterLink, CommonModule],
-  standalone: true,
   templateUrl: './oferta-view.component.html',
   styleUrl: './oferta-view.component.css',
 })

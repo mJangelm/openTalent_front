@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { OfertaService } from '../../../../../services/oferta.service';
 import { Router } from '@angular/router';
 import { Oferta } from '../../../../../interfaces/oferta';
-import { OfertaFavCardComponent } from '../oferta-fav-card/oferta-fav-card.component';
 import { OfertasUsuarioCardComponent } from '../../../../../components/usuario/ofertas-usuario-card/ofertas-usuario-card.component';
 import { Proyecto } from '../../../../../interfaces/proyecto';
 import { ProyectosService } from '../../../../../services/proyectos.service';
@@ -16,7 +15,6 @@ import { CommonModule } from '@angular/common';
     ProyectosUsuarioCardComponent,
     CommonModule,
   ],
-  standalone: true,
   templateUrl: './lista-ofertas-fav.component.html',
   styleUrl: './lista-ofertas-fav.component.css',
 })

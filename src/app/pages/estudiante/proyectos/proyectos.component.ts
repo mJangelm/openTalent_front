@@ -7,7 +7,6 @@ import { Proyecto } from '../../../interfaces/proyecto';
 
 @Component({
   selector: 'app-proyectos',
-  standalone: true,
   imports: [CommonModule, ProyectosUsuarioCardComponent],
   templateUrl: './proyectos.component.html',
   styleUrl: './proyectos.component.css',

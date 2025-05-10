@@ -1,24 +1,32 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import {
-  ActivatedRoute,
-  Router,
-  RouterLink,
-  RouterModule,
-} from '@angular/router';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-boton-edit-proyecto',
-  imports: [RouterLink],
-  standalone: true,
+  imports: [
+    CommonModule,
+    RouterLink,
+    MatIconModule,
+    MatTooltipModule,
+    MatButtonModule,
+  ],
   templateUrl: './boton-edit-proyecto.component.html',
   styleUrl: './boton-edit-proyecto.component.css',
 })
 export class BotonEditProyectoComponent {
-  @Input() _id!: number;
+  @Input() proyectoId!: number;
+  @Output() onDelete = new EventEmitter<number>();
+  @Output() onViewApplicants = new EventEmitter<number>();
 
-  private router = inject(Router);
+  handleDelete() {
+    this.onDelete.emit(this.proyectoId);
+  }
 
-  editarProyecto() {
-    this.router.navigate(['/usuario/misproyectos/edit', this._id]);
+  handleViewApplicants() {
+    this.onViewApplicants.emit(this.proyectoId);
   }
 }

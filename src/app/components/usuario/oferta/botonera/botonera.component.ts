@@ -4,16 +4,13 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-botonera',
   imports: [RouterLink],
-  standalone:true,
   templateUrl: './botonera.component.html',
-  styleUrl: './botonera.component.css'
+  styleUrl: './botonera.component.css',
 })
 export class BotoneraComponent {
-
-  @Input() _id! : number;
-  @Input() nombre! : string;
-borrarProducto(arg0: any) {
-throw new Error('Method not implemented.');
-}
-
+  @Input() _id!: number;
+  @Input() nombre!: string;
+  borrarProducto(arg0: any) {
+    throw new Error('Method not implemented.');
+  }
 }

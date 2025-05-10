@@ -12,7 +12,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 @Component({
   selector: 'app-proyecto-view',
   imports: [CommonModule, RouterLink],
-  standalone: true,
   templateUrl: './proyecto-view.component.html',
   styleUrl: './proyecto-view.component.css',
 })

@@ -9,7 +9,6 @@ import { EmpresasUsuarioCardComponent } from '../../../components/usuario/empres
 
 @Component({
   selector: 'app-home-estudiante',
-  standalone: true,
   imports: [CommonModule, EmpresasUsuarioCardComponent],
   templateUrl: './home-estudiante.component.html',
   styleUrl: './home-estudiante.component.css',

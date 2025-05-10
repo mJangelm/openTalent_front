@@ -8,7 +8,6 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-ofertas',
   imports: [OfertasUsuarioCardComponent, CommonModule],
-  standalone: true,
   templateUrl: './ofertas.component.html',
   styleUrl: './ofertas.component.css',
 })

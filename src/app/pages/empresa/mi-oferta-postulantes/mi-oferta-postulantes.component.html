@@ -7,7 +7,7 @@
     <div class="row">
       @for (postulante of arrPostulantes; track postulante.idUsuario) {
         <div class="col-md-4 mb-3">
-          <app-postulante-card [idOferta]="idOferta" [postulanteUnico]="postulante"></app-postulante-card>
+          <app-postulante-card [idOferta]="idOferta" [postulanteUnico]="postulante" [tipo]="'oferta'"></app-postulante-card>
           </div>
       }
       @empty {
@@ -19,4 +19,4 @@
       }
     </div>
   </div>
-  
+

@@ -10,12 +10,11 @@ import { ImageLoaderComponent } from '../../image-loader/image-loader.component'
 @Component({
   selector: 'app-proyectos-usuario-card',
   imports: [BotonEditProyectoComponent, CommonModule, ImageLoaderComponent],
-  standalone: true,
   templateUrl: './proyectos-usuario-card.component.html',
   styleUrl: './proyectos-usuario-card.component.css',
 })
 export class ProyectosUsuarioCardComponent {
-  @Input() proyectoUnico!: Proyecto;
+  @Input() proyectoUnico: Proyecto;
   @Input() esEditable!: boolean;
   @Output() quitarFavoritoProyecto = new EventEmitter<Proyecto>();
 
@@ -25,7 +24,9 @@ export class ProyectosUsuarioCardComponent {
 
   constructor() {
     this.favorita = {} as IFavoritosCambiar;
+    this.proyectoUnico = {} as Proyecto;
   }
+
   toggleFavorita() {
     const nuevaEsFavorito = !this.proyectoUnico.esFavorito;
 

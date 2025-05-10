@@ -8,7 +8,6 @@ import {
 
 @Component({
   selector: 'app-navbar-usuario',
-  standalone: true,
   imports: [RouterLink],
   templateUrl: './navbar-usuario.component.html',
   styleUrl: './navbar-usuario.component.css',

@@ -6,7 +6,6 @@ import { ImageLoaderComponent } from '../../image-loader/image-loader.component'
 @Component({
   selector: 'app-empresas-usuario-card',
   imports: [RouterLink, ImageLoaderComponent],
-  standalone: true,
   templateUrl: './empresas-usuario-card.component.html',
   styleUrl: './empresas-usuario-card.component.css',
 })

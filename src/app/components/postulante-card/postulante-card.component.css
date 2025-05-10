@@ -1,0 +1,117 @@
+.action-buttons {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: flex-end;
+  padding-top: 0.5rem;
+}
+
+/* Botones superiores (mensaje y descarga) */
+.utility-actions {
+  position: absolute;
+  top: -120px; /* Ajusta este valor según necesites */
+  right: 0;
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Botones de decisión (aceptar/rechazar) */
+.decision-actions {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #eee;
+}
+
+/* Estilos base para todos los botones */
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  transition: all 0.2s ease;
+  padding: 0;
+}
+
+/* Botones utilidad (superiores) */
+.utility-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+/* Botones decisión (inferiores) */
+.decision-btn {
+  width: 120px;
+  height: 36px;
+  border-radius: 18px;
+  gap: 0.5rem;
+}
+
+.decision-btn.accept {
+  background-color: #f0f7ff;
+  color: #535AA6;
+}
+
+.decision-btn.reject {
+  background-color: #fff1f0;
+  color: #f44336;
+}
+
+/* Iconos */
+.action-btn mat-icon {
+  font-size: 18px;
+  color: #666;
+}
+
+.decision-btn mat-icon {
+  font-size: 20px;
+}
+
+/* Efectos hover */
+.utility-btn:hover {
+  background-color: #f5f5f5;
+}
+
+.utility-btn:hover mat-icon {
+  color: #535AA6;
+}
+
+.decision-btn.accept:hover {
+  background-color: #535AA6;
+  color: white;
+}
+
+.decision-btn.reject:hover {
+  background-color: #f44336;
+  color: white;
+}
+
+.decision-btn:hover mat-icon {
+  color: inherit;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .decision-actions {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .decision-btn {
+    width: 100%;
+    max-width: 200px;
+  }
+}
+
+/* Soporte para preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .action-btn {
+    transition: none;
+  }
+}

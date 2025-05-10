@@ -7,7 +7,6 @@ import { Proyecto } from '../../../interfaces/proyecto';
 @Component({
   selector: 'app-mis-proyectos',
   imports: [ProyectosUsuarioCardComponent, RouterModule],
-  standalone: true,
   templateUrl: './mis-proyectos.component.html',
   styleUrl: './mis-proyectos.component.css',
 })

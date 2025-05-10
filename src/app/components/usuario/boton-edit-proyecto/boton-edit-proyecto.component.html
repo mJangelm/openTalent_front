@@ -1,18 +1,22 @@
+<div class="actions-container">
+  <!-- Botón Editar -->
+  <button mat-mini-fab
+          [routerLink]="['/usuario/misproyectos/edit/', proyectoId]"
+          class="action-button edit-button">
+    <mat-icon>edit</mat-icon>
+  </button>
 
-<div class="botonera">
-  <div class="d-flex gap-2">
-    <a (click)="editarProyecto()" class="btn btn-secondary">
-        Editar
-      </a>
-</div>
-<div class="d-flex gap-2">
-  <a [routerLink]="['/usuario','misproyectos','edit', _id]" class="btn btn-secondary">
-    Eliminar
-  </a>
-</div>
-<div class="d-flex gap-2">
-  <a [routerLink]="['/usuario','misproyectos','edit', _id]" class="btn btn-secondary">
-    Ver postulantes
-  </a>
-</div>
+  <!-- Botón Ver Postulantes -->
+  <button mat-mini-fab
+          [routerLink]="['/usuario/misproyectos/postulantes/', proyectoId]"
+          class="action-button applicants-button">
+    <mat-icon>group</mat-icon>
+  </button>
+
+  <!-- Botón Eliminar -->
+  <button mat-mini-fab
+          (click)="handleDelete()"
+          class="action-button delete-button">
+    <mat-icon>delete</mat-icon>
+  </button>
 </div>

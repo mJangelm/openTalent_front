@@ -14,7 +14,6 @@ import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-menu-usuario',
-  standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './menu-usuario.component.html',
   styleUrl: './menu-usuario.component.css',

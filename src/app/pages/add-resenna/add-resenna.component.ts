@@ -11,7 +11,6 @@ import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-add-resenna',
-  standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './add-resenna.component.html',
   styleUrl: './add-resenna.component.css',

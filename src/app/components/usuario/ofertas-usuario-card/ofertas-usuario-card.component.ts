@@ -11,7 +11,6 @@ import { ImageLoaderComponent } from '../../image-loader/image-loader.component'
 @Component({
   selector: 'app-ofertas-usuario-card',
   imports: [RouterLink, CommonModule, ImageLoaderComponent],
-  standalone: true,
   templateUrl: './ofertas-usuario-card.component.html',
   styleUrl: './ofertas-usuario-card.component.css',
 })

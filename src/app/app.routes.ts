@@ -19,6 +19,8 @@ import { MisProyectosComponent } from './pages/estudiante/mis-proyectos/mis-proy
 import { EditOfertaComponent } from './pages/empresa/edit-oferta/edit-oferta.component';
 import { MiOfertaPostulantesComponent } from './pages/empresa/mi-oferta-postulantes/mi-oferta-postulantes.component';
 import { AddResennaComponent } from './pages/add-resenna/add-resenna.component';
+import { PostulanteCardComponent } from './components/postulante-card/postulante-card.component';
+import { SolicitudesComponent } from './pages/estudiante/solicitudes/solicitudes.component';
 
 export const routes: Routes = [
   {
@@ -109,17 +111,29 @@ export const routes: Routes = [
       },
       {
         path: 'misproyectos',
-        component: MisProyectosComponent,
         data: { roles: ['USUARIO'] },
         canActivate: [loginGuard],
+        children: [
+          {
+            path: '',
+            component: MisProyectosComponent,
+            data: { roles: ['USUARIO'] },
+            canActivate: [loginGuard],
+          },
+          {
+            path: 'edit/:_id',
+            component: AnadirProyectoComponent,
+            data: { roles: ['USUARIO'] },
+            canActivate: [loginGuard],
+          },
+          {
+            path: 'postulantes/:_id',
+            data: { roles: ['USUARIO'] },
+            canActivate: [loginGuard],
+            component: SolicitudesComponent,
+          },
+        ],
       },
-      {
-        path: 'misproyectos/edit/:_id',
-        component: AnadirProyectoComponent,
-        data: { roles: ['USUARIO'] },
-        canActivate: [loginGuard],
-      },
-
       {
         path: 'empresas',
         data: { roles: ['USUARIO'] },

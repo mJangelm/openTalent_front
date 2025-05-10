@@ -10,7 +10,6 @@ import { Estudiante } from '../../../interfaces/estudiante';
 @Component({
   selector: 'app-editar-perfil',
   imports: [ReactiveFormsModule, RouterLink,CommonModule],
-  standalone:true,
   templateUrl: './editar-perfil.component.html',
   styleUrl: './editar-perfil.component.css'
 })
@@ -19,7 +18,7 @@ export class EditarPerfilComponent {
   rol: string = localStorage.getItem('rol') || '';
   router = inject(Router);
   loading = false;
-  editPerfilService = inject(EditUserService); 
+  editPerfilService = inject(EditUserService);
 
 
 
@@ -131,7 +130,7 @@ if (stored) {
         cv:              user.cv,
         experiencia:  user.experiencia,
         estudios: user.estudios,
-    
+
         // campos de direccion
         calle:           user.direccion?.calle        ?? '',
         pais:            user.direccion?.pais         ?? '',
@@ -151,7 +150,7 @@ passwordsMatchValidator(group: AbstractControl): ValidationErrors | null {
   const password = group.get('password')?.value;
   const confirmar = group.get('confirmarPassword')?.value;
   return password === confirmar ? null : { passwordsMismatch: true };
-} 
+}
 onSubmit() {
   if (this.registroForm.invalid) {
     this.registroForm.markAllAsTouched();
@@ -180,8 +179,8 @@ onSubmit() {
     email:             email           ?? '',
     password:          password        ?? '',
     // si no hay fecha, asigna hoy o lanza error según tu lógica
-    fechaNacimiento:   fechaNacimiento 
-                          ? new Date(fechaNacimiento) 
+    fechaNacimiento:   fechaNacimiento
+                          ? new Date(fechaNacimiento)
                           : new Date(),
     telefono:          telefono        ?? '',
     username:          username        ?? '',
