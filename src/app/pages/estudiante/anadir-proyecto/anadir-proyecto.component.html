@@ -2,7 +2,7 @@
   <div class="w-100" style="max-width: 900px;">
     <div class="d-flex justify-content-center align-items-center mb-4 gap-4">
       <img src="assets/logo/openTalent_logo_sinletras.png" alt="Logo" style="max-width: 140px; height: 90px; object-fit: contain;">
-      <h1 class="fw-bold m-0 align-middle">OpenTalent</h1>
+      <h1 class="fw-bold m-0 align-middle">{{ tituloFormulario }}</h1>
     </div>
     <form [formGroup]="modelForm" (ngSubmit)="onSubmit()" class="card p-4 shadow border-0 rounded-4">
       <div class="row">
@@ -104,7 +104,6 @@
                 {{ getErrorMessage('foto') }}
               </div>
             }
-            <small class="text-muted">Debe comenzar con http:// o https://</small>
           </div>
 
           <div class="mb-3">
@@ -120,14 +119,13 @@
                 {{ getErrorMessage('fotoContenido') }}
               </div>
             }
-            <small class="text-muted">Debe comenzar con http:// o https://</small>
           </div>
         </div>
       </div>
 
       <div class="row mt-3">
         <div class="col-md-6 d-flex justify-content-center mb-3 mb-md-0">
-          <button type="submit" class="btn btn-primary btn-lg w-75">Confirmar</button>
+          <button type="submit" class="btn btn-primary btn-lg w-75">{{ modoEdicion ? 'Guardar cambios' : 'Confirmar' }}</button>
         </div>
         <div class="col-md-6 d-flex justify-content-center">
           <button type="button" class="btn btn-secondary btn-lg w-75" (click)="volver()">Volver</button>

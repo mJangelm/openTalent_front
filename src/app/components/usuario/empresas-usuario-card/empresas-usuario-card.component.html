@@ -1,4 +1,4 @@
-<div data-tipo="Empresas" class="bg-light p-2 rounded shadow-sm border mt-5 d-flex flex-column justify-content-between hover-card"
+<div class="bg-light p-2 rounded shadow-sm border mt-5 d-flex flex-column justify-content-between hover-card"
   style="width: 381px; height: 285px;">
 
   <!-- Encabezado + descripción -->
@@ -17,7 +17,12 @@
   <!-- Imagen inferior siempre abajo -->
   <a [routerLink]="['/usuario/empresas/'+ empresaUnica.cif]" class="text-decoration-none text-dark card-trigger">
   <div class="text-center mt-2">
-    <img [src]="empresaUnica.fotoContenido" class="img-fluid" style="max-width: 259px; height: 113px;">
+
+     <app-image-loader
+      [src]="empresaUnica.fotoContenido"
+      [alt]="empresaUnica.nombreEmpresa"
+      width="100%"
+      height="113px"></app-image-loader>
   </div>
   </a>
 </div>

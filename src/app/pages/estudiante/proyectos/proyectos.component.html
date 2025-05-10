@@ -1,19 +1,26 @@
-
 <div class="container">
-    <div class="row">
-      @for (proyecto of arrProyectos; track proyecto.idProyecto) {
-        <div class="col-md-4 mb-3">
-          <app-proyectos-usuario-card [proyectoUnico]="proyecto"></app-proyectos-usuario-card>
-          </div>
-      }
-      @empty {
-        <div class="col-12 text-muted text-center fs-5 mt-4">
-          No hay empresas disponibles. Quizás sea problema del servidor o de su conexión a Internet.
-          <br><br>
-          Inténtelo más tarde.
-        </div>
-      }
+  @if (isLoading) {
+    <div class="loader-container">
+      <div class="loader">
+        <div class="loader-circle"></div>
+        <div class="loader-text">Cargando proyectos...</div>
+      </div>
     </div>
-  </div>
-  
+  } @else {
+    @if (arrProyectos.length) {
+      <div class="row">
+        @for (proyecto of arrProyectos; track proyecto.idProyecto) {
+          <div class="col-md-4 mb-3">
+            <app-proyectos-usuario-card [proyectoUnico]="proyecto"></app-proyectos-usuario-card>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="no-results">
+        <p>No hay proyectos disponibles en este momento</p>
+      </div>
+    }
+  }
+</div>
+
 

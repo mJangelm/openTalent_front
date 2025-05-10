@@ -1,19 +1,26 @@
-
 <div class="container">
-    <div class="row">
-      @for (oferta of arrOfertas; track oferta.idOferta) {
-        <div class="col-md-4 mb-3">
-          <app-ofertas-usuario-card [OfertaUnica]="oferta"></app-ofertas-usuario-card>
-        </div>
-      }
-      @empty {
-        <div class="col-12 text-muted text-center fs-5 mt-4">
-          No hay empresas disponibles. Quizás sea problema del servidor o de su conexión a Internet.
-          <br><br>
-          Inténtelo más tarde.
-        </div>
-      }
+  @if (isLoading) {
+    <div class="loader-container">
+      <div class="loader">
+        <div class="loader-circle"></div>
+        <div class="loader-text">Cargando ofertas...</div>
+      </div>
     </div>
-  </div>
+  } @else {
+    @if (arrOfertas.length) {
+      <div class="row">
+        @for (oferta of arrOfertas; track oferta.idOferta) {
+          <div class="col-md-4 mb-3">
+            <app-ofertas-usuario-card [OfertaUnica]="oferta"></app-ofertas-usuario-card>
+          </div>
+        }
+      </div>
+    } @else {
+      <div class="no-results">
+        <p>No hay ofertas disponibles en este momento</p>
+      </div>
+    }
+  }
+</div>
 
 

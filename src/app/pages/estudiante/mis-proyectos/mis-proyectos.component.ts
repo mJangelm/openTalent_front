@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { ProyectosUsuarioCardComponent } from "../../../components/usuario/proyectos-usuario-card/proyectos-usuario-card.component";
+import { ProyectosUsuarioCardComponent } from '../../../components/usuario/proyectos-usuario-card/proyectos-usuario-card.component';
 import { ProyectosService } from '../../../services/proyectos.service';
 import { Router, RouterModule } from '@angular/router';
 import { Proyecto } from '../../../interfaces/proyecto';
@@ -7,22 +7,29 @@ import { Proyecto } from '../../../interfaces/proyecto';
 @Component({
   selector: 'app-mis-proyectos',
   imports: [ProyectosUsuarioCardComponent, RouterModule],
-  standalone:true,
+  standalone: true,
   templateUrl: './mis-proyectos.component.html',
-  styleUrl: './mis-proyectos.component.css'
+  styleUrl: './mis-proyectos.component.css',
 })
 export class MisProyectosComponent {
-  
   servicioProyectos = inject(ProyectosService);
   router = inject(Router);
   arrProyectos!: Proyecto[];
   isMenuOpenHome: boolean = false;
   editable: boolean = true;
 
-  ngOnInit() {
-    this.servicioProyectos.getMisProyectos().subscribe((response: any) => {
-      this.arrProyectos = response;
-      console.log(response);
+  constructor() {
+    this.loadProyectos();
+  }
+
+  private loadProyectos() {
+    this.servicioProyectos.getMisProyectos().subscribe({
+      next: (response: Proyecto[]) => {
+        this.arrProyectos = response;
+      },
+      error: (error) => {
+        console.error('Error al cargar proyectos:', error);
+      },
     });
   }
 }

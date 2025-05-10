@@ -1,21 +1,15 @@
-import {
-  Component,
-  EventEmitter,
-  inject,
-  Input,
-  input,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Proyecto } from '../../../interfaces/proyecto';
-import { BotoneraComponent } from '../oferta/botonera/botonera.component';
-import { Router, RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { IFavoritosCambiar } from '../../../interfaces/ifavoritos-cambiar';
 import { ProyectosService } from '../../../services/proyectos.service';
-import { BotonEditProyectoComponent } from "../boton-edit-proyecto/boton-edit-proyecto.component";
+import { BotonEditProyectoComponent } from '../boton-edit-proyecto/boton-edit-proyecto.component';
+import { CommonModule } from '@angular/common';
+import { ImageLoaderComponent } from '../../image-loader/image-loader.component';
 
 @Component({
   selector: 'app-proyectos-usuario-card',
-  imports: [RouterLink, BotonEditProyectoComponent, BotonEditProyectoComponent],
+  imports: [BotonEditProyectoComponent, CommonModule, ImageLoaderComponent],
   standalone: true,
   templateUrl: './proyectos-usuario-card.component.html',
   styleUrl: './proyectos-usuario-card.component.css',
@@ -26,7 +20,7 @@ export class ProyectosUsuarioCardComponent {
   @Output() quitarFavoritoProyecto = new EventEmitter<Proyecto>();
 
   proyectoService = inject(ProyectosService);
-
+  router = inject(Router);
   favorita: IFavoritosCambiar;
 
   constructor() {
@@ -47,5 +41,13 @@ export class ProyectosUsuarioCardComponent {
         this.quitarFavoritoProyecto.emit(this.proyectoUnico);
       }
     });
+  }
+
+  verProyecto() {
+    if (!this.esEditable) {
+      this.router.navigate([
+        '/usuario/proyectos/' + this.proyectoUnico.idProyecto,
+      ]);
+    }
   }
 }

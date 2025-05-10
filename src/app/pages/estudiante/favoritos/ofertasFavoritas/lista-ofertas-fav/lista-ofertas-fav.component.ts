@@ -33,6 +33,12 @@ export class ListaOfertasFavComponent {
 
   isMenuOpenHome: boolean = false;
 
+  constructor() {
+    this.arrOfertasFavoritas = [];
+    this.arrProyectosFavortitos = [];
+    this.loadOfertasFavoritas();
+    this.loadProyectosFavoritos();
+  }
   toggleMenuHome() {
     this.isMenuOpenHome = !this.isMenuOpenHome;
   }

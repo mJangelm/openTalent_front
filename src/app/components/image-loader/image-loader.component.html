@@ -1,0 +1,15 @@
+<div class="image-container" [style.width]="width" [style.height]="height">
+  @if (isLoading) {
+  <div class="image-loader">
+    <div class="spinner"></div>
+  </div>
+  }
+  <img [src]="src" [alt]="alt" [style.display]="isLoading ? 'none' : 'block'" (load)="onImageLoad()"
+    (error)="onImageError()" />
+  @if (hasError) {
+  <div class="image-error">
+    <span class="error-icon">⚠️</span>
+    <span>Error al cargar la imagen</span>
+  </div>
+  }
+</div>

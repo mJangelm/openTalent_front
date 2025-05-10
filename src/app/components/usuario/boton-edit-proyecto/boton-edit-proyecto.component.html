@@ -1,5 +1,18 @@
-<div class="d-flex gap-2">
-    <a [routerLink]="['/usuario','misproyectos','edit', _id]" class="btn btn-secondary">
+
+<div class="botonera">
+  <div class="d-flex gap-2">
+    <a (click)="editarProyecto()" class="btn btn-secondary">
         Editar
       </a>
+</div>
+<div class="d-flex gap-2">
+  <a [routerLink]="['/usuario','misproyectos','edit', _id]" class="btn btn-secondary">
+    Eliminar
+  </a>
+</div>
+<div class="d-flex gap-2">
+  <a [routerLink]="['/usuario','misproyectos','edit', _id]" class="btn btn-secondary">
+    Ver postulantes
+  </a>
+</div>
 </div>

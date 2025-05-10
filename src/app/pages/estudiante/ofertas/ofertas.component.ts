@@ -3,10 +3,11 @@ import { OfertaService } from '../../../services/oferta.service';
 import { Router } from '@angular/router';
 import { Oferta } from '../../../interfaces/oferta';
 import { OfertasUsuarioCardComponent } from '../../../components/usuario/ofertas-usuario-card/ofertas-usuario-card.component';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-ofertas',
-  imports: [OfertasUsuarioCardComponent],
+  imports: [OfertasUsuarioCardComponent, CommonModule],
   standalone: true,
   templateUrl: './ofertas.component.html',
   styleUrl: './ofertas.component.css',
@@ -14,16 +15,29 @@ import { OfertasUsuarioCardComponent } from '../../../components/usuario/ofertas
 export class OfertasComponent {
   servicioOfertas = inject(OfertaService);
   router = inject(Router);
-  arrOfertas!: Oferta[];
+  arrOfertas: Oferta[] = [];
+  isLoading = true;
   isMenuOpenHome: boolean = false;
 
   toggleMenuHome() {
     this.isMenuOpenHome = !this.isMenuOpenHome;
   }
 
-  ngOnInit() {
-    this.servicioOfertas.getAllOfertas().subscribe((response: any) => {
-      this.arrOfertas = response;
+  constructor() {
+    this.loadOfertas();
+  }
+
+  private loadOfertas() {
+    this.isLoading = true;
+    this.servicioOfertas.getAllOfertas().subscribe({
+      next: (response: Oferta[]) => {
+        this.arrOfertas = response;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error al cargar ofertas:', error);
+        this.isLoading = false;
+      },
     });
   }
 }

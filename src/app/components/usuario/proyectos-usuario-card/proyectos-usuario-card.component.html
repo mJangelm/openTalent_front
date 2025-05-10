@@ -1,9 +1,9 @@
-<div class="card shadow-sm mb-3 mt-5 hover-card" style="border-radius: 12px;">
+<div class="bg-light card shadow-sm mb-3 mt-5 hover-card" style="border-radius: 12px;">
   <div class="card-body">
 
     <!-- Encabezado: imagen + título + estrella -->
     <div class="d-flex align-items-center mb-2">
-      <a [routerLink]="[ '/usuario/proyectos/' + proyectoUnico.idProyecto]" class="text-decoration-none text-dark card-trigger">
+      <a (click)="verProyecto()" class="text-decoration-none text-dark card-trigger" [ngClass]="{'sinCursor': esEditable}">
         <img [src]="proyectoUnico.foto" alt="logo" class="rounded-circle border me-3"
           style="width: 50px; height: 50px; object-fit: cover;">
       </a>
@@ -31,18 +31,21 @@
 
       <i class="fa-regular fa-face-smile"></i>
     </div>
-    <a [routerLink]="[ '/usuario/proyectos/' + proyectoUnico.idProyecto]" class="text-decoration-none text-dark card-trigger">
+    <a (click)="verProyecto()" class="text-decoration-none text-dark card-trigger" [ngClass]="{'sinCursor': esEditable}">
       <!-- Descripción -->
       <p class="mb-3 text-wrap" style="font-size: 0.9rem;">
         {{ proyectoUnico.descripcion }}
       </p>
 
       <!-- Imagen inferior -->
-      <img [src]="proyectoUnico.fotoContenido" alt="contenido" class="img-fluid rounded mb-2"
-        style="max-height: 150px; object-fit: cover; width: 100%;">
+      <app-image-loader
+        [src]="proyectoUnico.fotoContenido"
+        [alt]="proyectoUnico.nombre"
+        width="100%"
+        height="200px"></app-image-loader>
     </a>
     @if (esEditable) {
-      <div class="justify-content-center">
+      <div class="mt-2 justify-content-center">
         <app-boton-edit-proyecto [_id]="proyectoUnico.idProyecto"></app-boton-edit-proyecto>
       </div>
     }

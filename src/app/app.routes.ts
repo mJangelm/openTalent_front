@@ -16,7 +16,6 @@ import { MisOfertasComponent } from './pages/empresa/mis-ofertas/mis-ofertas.com
 import { EditarPerfilComponent } from './components/usuario/editar-perfil/editar-perfil.component';
 import { AnadirProyectoComponent } from './pages/estudiante/anadir-proyecto/anadir-proyecto.component';
 import { MisProyectosComponent } from './pages/estudiante/mis-proyectos/mis-proyectos.component';
-import { EditarProyectoComponent } from './pages/estudiante/editar-proyecto/editar-proyecto.component';
 import { EditOfertaComponent } from './pages/empresa/edit-oferta/edit-oferta.component';
 import { MiOfertaPostulantesComponent } from './pages/empresa/mi-oferta-postulantes/mi-oferta-postulantes.component';
 import { AddResennaComponent } from './pages/add-resenna/add-resenna.component';
@@ -116,7 +115,7 @@ export const routes: Routes = [
       },
       {
         path: 'misproyectos/edit/:_id',
-        component: EditarProyectoComponent,
+        component: AnadirProyectoComponent,
         data: { roles: ['USUARIO'] },
         canActivate: [loginGuard],
       },

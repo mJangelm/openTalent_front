@@ -5,10 +5,12 @@ import { BotoneraComponent } from '../oferta/botonera/botonera.component';
 import { RouterLink } from '@angular/router';
 import { OfertaService } from '../../../services/oferta.service';
 import { IFavoritosCambiar } from '../../../interfaces/ifavoritos-cambiar';
+import { CommonModule } from '@angular/common';
+import { ImageLoaderComponent } from '../../image-loader/image-loader.component';
 
 @Component({
   selector: 'app-ofertas-usuario-card',
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule, ImageLoaderComponent],
   standalone: true,
   templateUrl: './ofertas-usuario-card.component.html',
   styleUrl: './ofertas-usuario-card.component.css',

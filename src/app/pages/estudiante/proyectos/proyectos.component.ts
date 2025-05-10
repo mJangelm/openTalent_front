@@ -1,26 +1,38 @@
 import { Component, inject } from '@angular/core';
-import { ProyectosService } from '../../../services/proyectos.service';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { Proyecto } from '../../../interfaces/proyecto';
 import { ProyectosUsuarioCardComponent } from '../../../components/usuario/proyectos-usuario-card/proyectos-usuario-card.component';
+import { ProyectosService } from '../../../services/proyectos.service';
+import { Proyecto } from '../../../interfaces/proyecto';
 
 @Component({
   selector: 'app-proyectos',
-  imports: [ProyectosUsuarioCardComponent],
   standalone: true,
+  imports: [CommonModule, ProyectosUsuarioCardComponent],
   templateUrl: './proyectos.component.html',
   styleUrl: './proyectos.component.css',
 })
 export class ProyectosComponent {
   servicioProyectos = inject(ProyectosService);
   router = inject(Router);
-  arrProyectos!: Proyecto[];
-  isMenuOpenHome: boolean = false;
+  arrProyectos: Proyecto[] = [];
+  isLoading = true;
 
-  ngOnInit() {
-    this.servicioProyectos.getAllProyectos().subscribe((response: any) => {
-      this.arrProyectos = response;
-      console.log(response);
+  constructor() {
+    this.loadProyectos();
+  }
+
+  private loadProyectos() {
+    this.isLoading = true;
+    this.servicioProyectos.getAllProyectos().subscribe({
+      next: (response: Proyecto[]) => {
+        this.arrProyectos = response;
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error al cargar proyectos:', error);
+        this.isLoading = false;
+      },
     });
   }
 }
