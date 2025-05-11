@@ -1,24 +1,430 @@
-  /* Estilos para pantallas medianas y grandes */
-  @media (min-width: 768px) {
-    .header-col {
-      max-width: 400px;
-      margin-left: 300px;
-      /* Desplaza el header a la derecha en escritorio */
-    }
-
-    .login-form {
-      max-width: 400px;
-      margin-left: 20px;
-      /* Desplaza el formulario un poco hacia la izquierda */
-    }
+/* Estilos para pantallas medianas y grandes */
+@media (min-width: 768px) {
+  .header-col {
+    max-width: 400px;
+    margin-left: 300px;
+    /* Desplaza el header a la derecha en escritorio */
   }
 
-  /* Estilos para móviles: se eliminan los márgenes y se usan anchos completos */
-  @media (max-width: 767.98px) {
-
-    .header-col,
-    .login-form {
-      max-width: 100%;
-      margin-left: 0;
-    }
+  .login-form {
+    max-width: 400px;
+    margin-left: 20px;
+    /* Desplaza el formulario un poco hacia la izquierda */
   }
+}
+
+/* Estilos para móviles: se eliminan los márgenes y se usan anchos completos */
+@media (max-width: 767.98px) {
+  .header-col,
+  .login-form {
+    max-width: 100%;
+    margin-left: 0;
+  }
+}
+
+.main-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Patrón de fondo mejorado */
+.background-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background:
+    linear-gradient(90deg, transparent 95%, rgba(83, 90, 166, 0.05) 95%),
+    linear-gradient(transparent 95%, rgba(83, 90, 166, 0.05) 95%);
+  background-size: 20px 20px;
+  animation: patternMove 30s linear infinite;
+}
+
+/* Esferas flotantes */
+.floating-spheres {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.sphere {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(83, 90, 166, 0.08), rgba(83, 90, 166, 0.03));
+  backdrop-filter: blur(2px);
+}
+
+.sphere:nth-child(1) {
+  width: 300px;
+  height: 300px;
+  top: -50px;
+  left: -50px;
+  animation: floatSphere1 25s infinite ease-in-out;
+}
+
+.sphere:nth-child(2) {
+  width: 400px;
+  height: 400px;
+  bottom: -100px;
+  right: -100px;
+  animation: floatSphere2 30s infinite ease-in-out;
+}
+
+@keyframes floatSphere1 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(60vw, 20vh); }
+  50% { transform: translate(20vw, 60vh); }
+  75% { transform: translate(70vw, 40vh); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes floatSphere2 {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-30vw, -30vh); }
+  50% { transform: translate(-60vw, -10vh); }
+  75% { transform: translate(-20vw, -50vh); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Burbujas decorativas en el fondo */
+.background-pattern::before,
+.background-pattern::after {
+  content: '';
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(83, 90, 166, 0.1) 0%, rgba(83, 90, 166, 0.05) 50%, transparent 70%);
+  z-index: 0;
+}
+
+.background-pattern::before {
+  top: -100px;
+  left: -100px;
+  animation: floatBubble1 20s infinite ease-in-out;
+}
+
+.background-pattern::after {
+  bottom: -100px;
+  right: -100px;
+  animation: floatBubble2 15s infinite ease-in-out;
+}
+
+/* Contenedor del logo y título */
+.brand-container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+
+}
+
+/* Logo y sus estilos */
+.logo {
+  width: 500px;
+  height: auto;
+  position: relative;
+  z-index: 10; /* Asegúrate de que esté por encima de otros elementos */
+  opacity: 1; /* Asegúrate de que sea visible */
+  animation: logoEntrance 1s ease-out forwards;
+  transition: transform 0.5s ease, filter 0.5s ease;
+  will-change: transform, filter;
+  transition: filter 0.3s ease, box-shadow 0.3s ease;
+  pointer-events: auto; /* Asegúrate de que reciba eventos del mouse */
+}
+
+/* Hover del logo */
+.logo:hover {
+  filter: drop-shadow(0 15px 30px rgba(83, 90, 166, 0.5));
+  cursor: pointer;
+}
+
+/* Título */
+.title {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 3.5rem;
+  font-weight: 800;
+}
+
+.word {
+  display: flex;
+  gap: 0.1em;
+}
+
+.word .animate-text {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: letterAnimation 0.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.word:not(.accent) .animate-text {
+  color: #2a2d3e;
+}
+
+.word:not(.accent) .animate-text:hover {
+  color: #535AA6;
+  transform: translateY(-5px) scale(1.2);
+  text-shadow: 0 5px 15px rgba(83, 90, 166, 0.3);
+}
+
+.word.accent .animate-text {
+  color: #535AA6;
+  font-weight: 900;
+}
+
+.word.accent .animate-text:hover {
+  transform: translateY(-5px) scale(1.2) rotate(10deg);
+  filter: brightness(1.2);
+  text-shadow: 0 5px 15px rgba(83, 90, 166, 0.3);
+}
+
+/* Efecto de brillo al pasar el ratón */
+.animate-text::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  left: -100%;
+  transition: 0.5s;
+  pointer-events: none;
+}
+
+.animate-text:hover::after {
+  left: 100%;
+}
+
+/* Formulario */
+.login-form {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 450px;
+  opacity: 0;
+  animation: slideInRight 1s ease-out forwards;
+}
+
+.form-title {
+  color: #2a2d3e;
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+/* Campos del formulario */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-container i {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #535AA6;
+}
+
+.form-control {
+  padding: 1rem 1rem 1rem 3rem;
+  border-radius: 10px;
+  border: 2px solid #eee;
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: #535AA6;
+  box-shadow: 0 0 0 3px rgba(83, 90, 166, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Botón de login */
+.btn-login {
+  width: 100%;
+  padding: 1rem;
+  background: #535AA6;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.btn-login:hover {
+  background: #434789;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(83, 90, 166, 0.2);
+}
+
+/* Links de registro */
+.register-links {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.links-container {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.register-link {
+  flex: 1;
+  padding: 0.8rem;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #535AA6;
+  background: #f8f9fa;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.register-link:hover {
+  background: #535AA6;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Animaciones */
+@keyframes fadeInRotate {
+  0% {
+    opacity: 0;
+    transform: scale(0.7) rotate(-10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes slideInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(500px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Keyframes para las animaciones */
+@keyframes logoEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.5) rotate(-20deg);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2) rotate(10deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes letterAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.8);
+    filter: blur(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+/* Animaciones del fondo */
+@keyframes patternMove {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+@keyframes floatBubble1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(30px, 30px) scale(1.1); }
+}
+
+@keyframes floatBubble2 {
+  0%, 100% { transform: translate(0, 0) scale(1.1); }
+  50% { transform: translate(-30px, -30px) scale(1); }
+}
+
+/* Retrasos en las animaciones de las letras */
+.animate-text:nth-child(1) { animation-delay: 0.1s; }
+.animate-text:nth-child(2) { animation-delay: 0.2s; }
+.animate-text:nth-child(3) { animation-delay: 0.3s; }
+.animate-text:nth-child(4) { animation-delay: 0.4s; }
+.animate-text:nth-child(5) { animation-delay: 0.5s; }
+.animate-text:nth-child(6) { animation-delay: 0.6s; }
+
+.word:first-child .animate-text:nth-child(1) { animation-delay: 0.1s; }
+.word:first-child .animate-text:nth-child(2) { animation-delay: 0.2s; }
+.word:first-child .animate-text:nth-child(3) { animation-delay: 0.3s; }
+.word:first-child .animate-text:nth-child(4) { animation-delay: 0.4s; }
+.word.accent .animate-text:nth-child(1) { animation-delay: 0.5s; }
+.word.accent .animate-text:nth-child(2) { animation-delay: 0.6s; }
+.word.accent .animate-text:nth-child(3) { animation-delay: 0.7s; }
+.word.accent .animate-text:nth-child(4) { animation-delay: 0.8s; }
+.word.accent .animate-text:nth-child(5) { animation-delay: 0.9s; }
+.word.accent .animate-text:nth-child(6) { animation-delay: 1s; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .login-form {
+    padding: 2rem;
+    margin: 1rem;
+  }
+
+  .links-container {
+    flex-direction: column;
+  }
+}
