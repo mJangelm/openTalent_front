@@ -110,3 +110,14 @@ button.btn-secondary:hover {
   height: 1rem;
   border-width: 0.15em;
 }
+/* Ajuste para el contenedor principal cuando no está cargando */
+.container {
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}

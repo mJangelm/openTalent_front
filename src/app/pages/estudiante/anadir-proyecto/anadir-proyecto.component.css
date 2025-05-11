@@ -1,5 +1,5 @@
-.btn-save{
-border-radius: 9px;
+.btn-save {
+  border-radius: 9px;
   background: var(--Primary-blue-700, #353D8D);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   color: var(--Black-25, #F7F8FA);
@@ -8,7 +8,6 @@ border-radius: 9px;
 /* Fondo y centrado general */
 .container {
   min-height: 100vh;
-  background: var(--Black-25, #F7F8FA);
 }
 
 .card {
@@ -48,7 +47,6 @@ border-radius: 9px;
   background-size: 20px 20px;
 }
 
-/* Añadir tick verde para inputs válidos */
 .custom-input.is-valid {
   border-color: #28a745;
   background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
@@ -58,10 +56,7 @@ border-radius: 9px;
 }
 
 /* Corrige la superposición en inputs de fecha */
-input[type="date"].custom-input.is-invalid {
-  background-position: right 40px top 10px;
-}
-
+input[type="date"].custom-input.is-invalid,
 input[type="date"].custom-input.is-valid {
   background-position: right 40px top 10px;
 }
@@ -74,7 +69,7 @@ input[type="date"].custom-input.is-valid {
   font-weight: 400;
 }
 
-.btn-primary {
+.btn-primary, .btn-secondary {
   background-color: #535AA6;
   border: none;
   border-radius: 10px;
@@ -86,7 +81,7 @@ input[type="date"].custom-input.is-valid {
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
 }
 
-.btn-primary:hover {
+.btn-primary:hover, .btn-secondary:hover {
   background-color: #373D8C;
   transform: translateY(-2px);
   box-shadow: 0px 6px 12px rgba(0,0,0,0.15);
@@ -96,24 +91,6 @@ input[type="date"].custom-input.is-valid {
   background-color: #9ba0d0;
   cursor: not-allowed;
   opacity: 0.7;
-}
-
-.btn-secondary {
-  background-color: #535AA6;
-  border: none;
-  border-radius: 10px;
-  color: #fff;
-  font-weight: 500;
-  padding: 10px 20px;
-  transition: all 0.3s ease;
-  font-size: 0.95rem;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-}
-
-.btn-secondary:hover {
-  background-color: #373D8C;
-  transform: translateY(-2px);
-  box-shadow: 0px 6px 12px rgba(0,0,0,0.15);
 }
 
 .form-label {
@@ -193,5 +170,151 @@ h1.fw-bold {
 textarea.custom-input {
   min-height: 100px;
   resize: vertical;
+}
+
+/* Estilos para la sección del título */
+.title-section {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-top: 1rem;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.title-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1rem;
+}
+
+.main-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #535AA6;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.title-icon {
+  color: #535AA6;
+  font-size: 2rem;
+}
+
+.title-text {
+  position: relative;
+  z-index: 1;
+}
+
+.title-underline {
+  position: absolute;
+  width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -8px;
+  height: 4px;
+  background: linear-gradient(90deg, #010103 0%, #535AA6 70%, #9BA0D0 100%);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+/* Sección */
+.section-wrapper {
+  margin-bottom: 3rem;
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Título de sección */
+.section-title {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.section-title h2 {
+  color: #2d315b;
+  font-weight: 600;
+  font-size: 1.8rem;
+  margin-bottom: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  position: relative;
+  margin-top: 1rem;
+}
+
+.title-icon {
+  color: #2d315b;
+
+  font-size: 1.5rem;
+}
+
+.title-underline {
+  position: absolute;
+  width: 80%;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: -8px;
+  height: 4px;
+  background: linear-gradient(90deg, #010103 0%, #535AA6 70%, #9BA0D0 100%);
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .main-title {
+    font-size: 2rem;
+  }
+
+  .title-icon {
+    font-size: 1.3rem;
+  }
+
+  .section-title h2 {
+    font-size: 1.5rem;
+  }
+}
+
+/* Soporte para preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .section-wrapper {
+    animation: none;
+  }
 }
 

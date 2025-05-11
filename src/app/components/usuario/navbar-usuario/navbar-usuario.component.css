@@ -24,11 +24,30 @@
 
 /* Texto de navegación */
 .nav-text {
+  position: relative;
   font-weight: 600;
   color: #010103;
   font-size: 1.1rem;
   display: flex;
   align-items: center;
+}
+
+/* Subrayado animado para activo */
+.nav-text::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  left: 50%;
+  bottom: -4px;
+  background-color: #F5F5FA;
+  transition: all 0.3s ease;
+}
+
+.nav-text.active::after,
+.nav-text:hover::after {
+  width: 100%;
+  left: 0;
 }
 
 /* Íconos de navegación */
@@ -67,32 +86,98 @@
   height: 80px;
   object-fit: contain;
 }
-.nav-text {
-  position: relative;
-  font-weight: 600;
-  color: #010103;
-  font-size: 1.1rem;
-  display: flex;
-  align-items: center;
-}
 
-/* Subrayado animado para activo */
-.nav-text::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  left: 50%;
-  bottom: -4px;
-  background-color: #F5F5FA;
-  transition: all 0.3s ease;
-}
-
-.nav-text.active::after,
-.nav-text:hover::after {
-  width: 100%;
-  left: 0;
-}
 .custom-gap {
   gap: 120px;
+}
+
+/* Media Queries para Responsividad */
+@media (max-width: 1200px) {
+  .custom-gap {
+    gap: 60px;
+  }
+
+  .search-form {
+    width: 180px;
+  }
+}
+
+@media (max-width: 992px) {
+  .custom-gap {
+    gap: 30px;
+  }
+
+  .nav-text {
+    font-size: 1rem;
+  }
+
+  .search-form {
+    width: 150px;
+  }
+
+  .logo-img {
+    width: 90px;
+    height: 65px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-usuario {
+    padding: 0.5rem;
+  }
+
+  .user-img {
+    width: 50px;
+    height: 50px;
+  }
+
+  .nav-text {
+    font-size: 0.9rem;
+  }
+
+  .nav-icon {
+    font-size: 1rem;
+  }
+
+  .search-form {
+    width: 120px;
+  }
+
+  .logo-img {
+    width: 80px;
+    height: 55px;
+  }
+}
+
+@media (max-width: 576px) {
+  .navbar-usuario {
+    min-height: 60px;
+  }
+
+  .custom-gap {
+    gap: 15px;
+  }
+
+  .user-img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .search-form {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+
+  .logo-img {
+    width: 70px;
+    height: 50px;
+  }
+
+  .nav-text span {
+    display: none; /* Oculta el texto y deja solo los iconos en móvil */
+  }
+
+  .nav-icon {
+    font-size: 1.2rem; /* Aumenta ligeramente el tamaño de los iconos */
+  }
 }

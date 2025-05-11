@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { HeaderComponent } from '../../layout/header/header.component';
 import { Iuser } from '../../interfaces/iuser';
 import { LoginServiceService } from '../../services/login-service.service';
 import { Router, RouterLink } from '@angular/router';
@@ -35,7 +34,6 @@ export class LoginComponent {
 
     try {
       let response = await this.loginService.login(loginUser);
-      console.log(response);
       if (response.accessToken) {
         localStorage.setItem('accessToken', response.accessToken);
         localStorage.setItem('refreshToken', response.refreshToken);

@@ -232,31 +232,50 @@
 /* Campos del formulario */
 .form-group {
   margin-bottom: 1.5rem;
+  width: 100%; /* Asegura que el grupo ocupe todo el ancho */
 }
 
+/* Estilos del contenedor de input */
 .input-container {
   position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%; /* Asegura que el contenedor ocupe todo el ancho disponible */
 }
 
+/* Estilos del icono */
 .input-container i {
   position: absolute;
-  left: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
+  left: 12px;
   color: #535AA6;
-}
-
-.form-control {
-  padding: 1rem 1rem 1rem 3rem;
-  border-radius: 10px;
-  border: 2px solid #eee;
   transition: all 0.3s ease;
+  pointer-events: none;
+  font-size: 1.2rem; /* Tamaño del icono proporcionado */
 }
 
-.form-control:focus {
+/* Estilos del input */
+.input-container .form-control {
+  width: 100%;
+  height: 50px; /* Altura específica para los inputs */
+  padding-left: 40px; /* Espacio para el icono */
+  border: 2px solid transparent;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  font-size: 1rem; /* Tamaño de fuente adecuado */
+}
+
+/* Estilos cuando el input tiene focus */
+.input-container .form-control:focus {
   border-color: #535AA6;
-  box-shadow: 0 0 0 3px rgba(83, 90, 166, 0.1);
-  transform: translateY(-2px);
+  box-shadow: 0 0 0 0.2rem rgba(83, 90, 166, 0.25);
+  background-color: white;
+}
+
+/* Animación del icono cuando el input tiene focus */
+.input-container .form-control:focus + i {
+  color: #535AA6;
+  transform: scale(1.1);
 }
 
 /* Botón de login */

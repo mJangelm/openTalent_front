@@ -15,7 +15,6 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-anadir-proyecto',
-  standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './anadir-proyecto.component.html',
   styleUrl: './anadir-proyecto.component.css',

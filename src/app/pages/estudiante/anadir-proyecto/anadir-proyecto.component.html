@@ -1,137 +1,143 @@
-<div class="mt-2 d-flex flex-column justify-content-center align-items-center">
-  <div class="w-100" style="max-width: 900px;">
-    <div class="d-flex justify-content-center align-items-center mb-4 gap-4">
-      <img src="assets/logo/openTalent_logo_sinletras.png" alt="Logo" style="max-width: 140px; height: 90px; object-fit: contain;">
-      <h1 class="fw-bold m-0 align-middle">{{ tituloFormulario }}</h1>
+<div class="container">
+  <!-- Título con diseño mejorado -->
+  <div class="section-wrapper">
+    <div class="section-title">
+      <h2 class="mb-3">
+        <i class="fas fa-folder-plus title-icon"></i>
+        <span class="title-text">{{ tituloFormulario }}</span>
+      </h2>
+      <div class="title-underline"></div>
     </div>
-    <form [formGroup]="modelForm" (ngSubmit)="onSubmit()" class="card p-4 shadow border-0 rounded-4">
-      <div class="row">
-        <!-- Columna 1 -->
-        <div class="col-md-6 mb-3">
-          <div class="mb-3">
-            <label class="form-label">Nombre del proyecto</label>
-            <input
-              type="text"
-              formControlName="nombre"
-              class="form-control custom-input"
-              [ngClass]="{'is-invalid': isInvalid('nombre'), 'is-valid': isValid('nombre')}"
-              placeholder="Nombre del proyecto" />
-            @if (isInvalid('nombre')) {
-              <div class="invalid-feedback">
-                {{ getErrorMessage('nombre') }}
-              </div>
-            }
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Descripción</label>
-            <textarea
-              formControlName="descripcion"
-              class="form-control custom-input"
-              [ngClass]="{'is-invalid': isInvalid('descripcion'), 'is-valid': isValid('descripcion')}"
-              rows="5"
-              placeholder="Describe el proyecto con detalle"></textarea>
-            @if (isInvalid('descripcion')) {
-              <div class="invalid-feedback">
-                {{ getErrorMessage('descripcion') }}
-              </div>
-            }
-          </div>
-        </div>
-
-        <!-- Columna 2 -->
-        <div class="col-md-6 mb-3">
-          <div class="mb-3">
-            <label class="form-label">Plazas máximas</label>
-            <input
-              type="number"
-              formControlName="plazas"
-              class="form-control custom-input"
-              [ngClass]="{'is-invalid': isInvalid('plazas'), 'is-valid': isValid('plazas')}"
-              placeholder="Número de plazas disponibles" />
-            @if (isInvalid('plazas')) {
-              <div class="invalid-feedback">
-                {{ getErrorMessage('plazas') }}
-              </div>
-            }
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Fecha de Inicio</label>
-            <input
-              type="date"
-              formControlName="fechaInicio"
-              class="form-control custom-input"
-              [ngClass]="{'is-invalid': isInvalid('fechaInicio'), 'is-valid': isValid('fechaInicio')}"
-              placeholder="Fecha" />
-            @if (isInvalid('fechaInicio')) {
-              <div class="invalid-feedback">
-                {{ getErrorMessage('fechaInicio') }}
-              </div>
-            }
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">Fecha de Fin</label>
-            <input
-              type="date"
-              formControlName="fechaFin"
-              class="form-control custom-input"
-              [ngClass]="{'is-invalid': isInvalid('fechaFin') || hasFechaFinError(), 'is-valid': isValid('fechaFin') && !hasFechaFinError()}"
-              placeholder="Fecha" />
-            @if (isInvalid('fechaFin')) {
-              <div class="invalid-feedback">
-                {{ getErrorMessage('fechaFin') }}
-              </div>
-            }
-            @if (hasFechaFinError()) {
-              <div class="invalid-feedback">
-                La fecha de fin debe ser posterior a la fecha de inicio
-              </div>
-            }
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">URL de la imagen del proyecto</label>
-            <input
-              type="text"
-              formControlName="foto"
-              class="form-control custom-input"
-              [ngClass]="{'is-invalid': isInvalid('foto'), 'is-valid': isValid('foto')}"
-              placeholder="https://ejemplo.com/imagen.jpg" />
-            @if (isInvalid('foto')) {
-              <div class="invalid-feedback">
-                {{ getErrorMessage('foto') }}
-              </div>
-            }
-          </div>
-
-          <div class="mb-3">
-            <label class="form-label">URL de la imagen de contenido</label>
-            <input
-              type="text"
-              formControlName="fotoContenido"
-              class="form-control custom-input"
-              [ngClass]="{'is-invalid': isInvalid('fotoContenido'), 'is-valid': isValid('fotoContenido')}"
-              placeholder="https://ejemplo.com/imagen-contenido.jpg" />
-            @if (isInvalid('fotoContenido')) {
-              <div class="invalid-feedback">
-                {{ getErrorMessage('fotoContenido') }}
-              </div>
-            }
-          </div>
-        </div>
-      </div>
-
-      <div class="row mt-3">
-        <div class="col-md-6 d-flex justify-content-center mb-3 mb-md-0">
-          <button type="submit" class="btn btn-primary btn-lg w-75">{{ modoEdicion ? 'Guardar cambios' : 'Confirmar' }}</button>
-        </div>
-        <div class="col-md-6 d-flex justify-content-center">
-          <button type="button" class="btn btn-secondary btn-lg w-75" (click)="volver()">Volver</button>
-        </div>
-      </div>
-    </form>
   </div>
+
+  <!-- Resto del formulario... -->
+  <form [formGroup]="modelForm" (ngSubmit)="onSubmit()" class="card p-4 shadow border-0 rounded-4">
+    <div class="row">
+      <!-- Columna 1 -->
+      <div class="col-md-6 mb-3">
+        <div class="mb-3">
+          <label class="form-label">Nombre del proyecto</label>
+          <input
+            type="text"
+            formControlName="nombre"
+            class="form-control custom-input"
+            [ngClass]="{'is-invalid': isInvalid('nombre'), 'is-valid': isValid('nombre')}"
+            placeholder="Nombre del proyecto" />
+          @if (isInvalid('nombre')) {
+            <div class="invalid-feedback">
+              {{ getErrorMessage('nombre') }}
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Descripción</label>
+          <textarea
+            formControlName="descripcion"
+            class="form-control custom-input"
+            [ngClass]="{'is-invalid': isInvalid('descripcion'), 'is-valid': isValid('descripcion')}"
+            rows="5"
+            placeholder="Describe el proyecto con detalle"></textarea>
+          @if (isInvalid('descripcion')) {
+            <div class="invalid-feedback">
+              {{ getErrorMessage('descripcion') }}
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Columna 2 -->
+      <div class="col-md-6 mb-3">
+        <div class="mb-3">
+          <label class="form-label">Plazas máximas</label>
+          <input
+            type="number"
+            formControlName="plazas"
+            class="form-control custom-input"
+            [ngClass]="{'is-invalid': isInvalid('plazas'), 'is-valid': isValid('plazas')}"
+            placeholder="Número de plazas disponibles" />
+          @if (isInvalid('plazas')) {
+            <div class="invalid-feedback">
+              {{ getErrorMessage('plazas') }}
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Fecha de Inicio</label>
+          <input
+            type="date"
+            formControlName="fechaInicio"
+            class="form-control custom-input"
+            [ngClass]="{'is-invalid': isInvalid('fechaInicio'), 'is-valid': isValid('fechaInicio')}"
+            placeholder="Fecha" />
+          @if (isInvalid('fechaInicio')) {
+            <div class="invalid-feedback">
+              {{ getErrorMessage('fechaInicio') }}
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Fecha de Fin</label>
+          <input
+            type="date"
+            formControlName="fechaFin"
+            class="form-control custom-input"
+            [ngClass]="{'is-invalid': isInvalid('fechaFin') || hasFechaFinError(), 'is-valid': isValid('fechaFin') && !hasFechaFinError()}"
+            placeholder="Fecha" />
+          @if (isInvalid('fechaFin')) {
+            <div class="invalid-feedback">
+              {{ getErrorMessage('fechaFin') }}
+            </div>
+          }
+          @if (hasFechaFinError()) {
+            <div class="invalid-feedback">
+              La fecha de fin debe ser posterior a la fecha de inicio
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">URL de la imagen del proyecto</label>
+          <input
+            type="text"
+            formControlName="foto"
+            class="form-control custom-input"
+            [ngClass]="{'is-invalid': isInvalid('foto'), 'is-valid': isValid('foto')}"
+            placeholder="https://ejemplo.com/imagen.jpg" />
+          @if (isInvalid('foto')) {
+            <div class="invalid-feedback">
+              {{ getErrorMessage('foto') }}
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">URL de la imagen de contenido</label>
+          <input
+            type="text"
+            formControlName="fotoContenido"
+            class="form-control custom-input"
+            [ngClass]="{'is-invalid': isInvalid('fotoContenido'), 'is-valid': isValid('fotoContenido')}"
+            placeholder="https://ejemplo.com/imagen-contenido.jpg" />
+          @if (isInvalid('fotoContenido')) {
+            <div class="invalid-feedback">
+              {{ getErrorMessage('fotoContenido') }}
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-3">
+      <div class="col-md-6 d-flex justify-content-center mb-3 mb-md-0">
+        <button type="submit" class="btn btn-primary btn-lg w-75">{{ modoEdicion ? 'Guardar cambios' : 'Confirmar' }}</button>
+      </div>
+      <div class="col-md-6 d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary btn-lg w-75" (click)="volver()">Volver</button>
+      </div>
+    </div>
+  </form>
 </div>
 

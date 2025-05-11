@@ -1,7 +1,5 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { Oferta } from '../../../interfaces/oferta';
-import { OfertaViewComponent } from '../../../pages/estudiante/oferta-view/oferta-view.component';
-import { BotoneraComponent } from '../oferta/botonera/botonera.component';
 import { RouterLink } from '@angular/router';
 import { OfertaService } from '../../../services/oferta.service';
 import { IFavoritosCambiar } from '../../../interfaces/ifavoritos-cambiar';

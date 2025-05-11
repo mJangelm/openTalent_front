@@ -17,51 +17,65 @@ export class OfertaService {
 
   constructor() {}
 
-  aceptarPostulante(idOferta:number,idUsuario: number): Observable<PostulanteI> {
-    return   this.httpClient.put<PostulanteI>(this.baseUrl + '/empresa/ofertas/'+idOferta+'/postulantes/'+idUsuario+'/aceptar', {})
+  aceptarPostulante(
+    idOferta: number,
+    idUsuario: number
+  ): Observable<PostulanteI> {
+    return this.httpClient.put<PostulanteI>(
+      this.baseUrl +
+        '/empresa/ofertas/' +
+        idOferta +
+        '/postulantes/' +
+        idUsuario +
+        '/aceptar',
+      {}
+    );
   }
 
-  rechazarPostulante(idOferta:number,idUsuario: number): Observable<PostulanteI> {
-    return   this.httpClient.put<PostulanteI>(this.baseUrl + '/empresa/ofertas/'+idOferta+'/postulantes/'+idUsuario+'/rechazar', {})
+  rechazarPostulante(
+    idOferta: number,
+    idUsuario: number
+  ): Observable<PostulanteI> {
+    return this.httpClient.put<PostulanteI>(
+      this.baseUrl +
+        '/empresa/ofertas/' +
+        idOferta +
+        '/postulantes/' +
+        idUsuario +
+        '/rechazar',
+      {}
+    );
   }
 
   anadirOferta(oferta: IanadirOferta): Observable<IanadirOferta> {
-    return this.httpClient.post<IanadirOferta>(this.baseUrl + '/empresa/ofertas/', oferta)
+    return this.httpClient.post<IanadirOferta>(
+      this.baseUrl + '/empresa/ofertas/',
+      oferta
+    );
   }
 
   cerrarOferta(id: number): Observable<Oferta> {
     const url = `${this.baseUrl}/empresa/ofertas/${id}/cerrar`;
-    console.log('>> cerrarOferta() llamando a:', url);
     return this.httpClient.put<Oferta>(url, {}).pipe(
       tap({
-        next: oferta => console.log('<< cerrarOferta() respuesta:', oferta),
-        error: err => console.error('¡¡ cerrarOferta() error:', err)
+        next: (oferta) => console.log('<< cerrarOferta() respuesta:', oferta),
+        error: (err) => console.error('¡¡ cerrarOferta() error:', err),
       })
     );
   }
-  editarOferta(
-    id: number,
-    oferta: IanadirOferta
-  ): Observable<string> {
+  editarOferta(id: number, oferta: IanadirOferta): Observable<string> {
     const url = `${this.baseUrl}/empresa/ofertas/${id}`;
-    return this.httpClient.put(
-      url,
-      oferta,
-      { responseType: 'text' }
-    );
+    return this.httpClient.put(url, oferta, { responseType: 'text' });
   }
 
   getOfertaParaEditar(id: number): Observable<any> {
     // ← también corregido
-    return this.httpClient.get<any>(
-      `${this.baseUrl}/empresa/ofertas/${id}`
-    );
+    return this.httpClient.get<any>(`${this.baseUrl}/empresa/ofertas/${id}`);
   }
 
   getMisOfertas(): Observable<Oferta[]> {
     return this.httpClient.get<Oferta[]>(this.baseUrl + '/empresa/ofertas/');
   }
-
 
   getAllOfertas(): Observable<Oferta[]> {
     return this.httpClient.get<Oferta[]>(this.baseUrl + '/usuario/ofertas/');
@@ -79,20 +93,14 @@ export class OfertaService {
     );
   }
 
-  getPostulantes(_id:number) : Observable<PostulanteI[]> {
+  getPostulantes(_id: number): Observable<PostulanteI[]> {
     return this.httpClient.get<PostulanteI[]>(
-      this.baseUrl + '/empresa/ofertas/'+_id+'/postulantes'
-    )
+      this.baseUrl + '/empresa/ofertas/' + _id + '/postulantes'
+    );
   }
 
-
-
-  
-
   getMiofertas(): Observable<Oferta[]> {
-    return this.httpClient.get<Oferta[]>(
-      this.baseUrl + '/empresa/ofertas/'
-    );
+    return this.httpClient.get<Oferta[]>(this.baseUrl + '/empresa/ofertas/');
   }
 
   getAllOfertasFavoritas(): Observable<Oferta[]> {
