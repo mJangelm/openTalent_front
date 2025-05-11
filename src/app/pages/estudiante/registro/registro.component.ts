@@ -23,78 +23,86 @@ import { RegistroEstudianteDto } from '../../../interfaces/registro-estudiante-d
 export class RegistroComponent {
   private router = inject(Router);
   private registroEstudiante = inject(RegistroEstudianteService);
-
+  modelForm: FormGroup;
   loading = false;
   maxDate = new Date().toISOString().split('T')[0]; // Para el input de fecha
-  modelForm = new FormGroup({
-    nombre: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/),
-    ]),
-    apellidos: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/),
-    ]),
-    email: new FormControl('', [
-      Validators.required,
-      Validators.email,
-      Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
-    ]),
-    username: new FormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-      Validators.pattern(/^[a-zA-Z0-9_]+$/),
-    ]),
-    password: new FormControl('', [
-      Validators.required,
-      Validators.minLength(6),
-    ]),
-    fechaNacimiento: new FormControl<string>('', {
-      validators: [Validators.required, this.fechaNacimientoValidator()],
-    }),
-    telefono: new FormControl<string>('', [
-      Validators.required,
-      Validators.pattern(/^\d{6,}$/), // Solo números, mínimo 6 dígitos
-    ]),
-    pais: new FormControl<string>('', [
-      Validators.required,
-      Validators.minLength(2),
-      Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/),
-    ]),
-    calle: new FormControl<string>('', [
-      Validators.minLength(3),
-      Validators.maxLength(30),
-    ]),
-    poblacion: new FormControl<string>('', [
-      Validators.minLength(2),
-      Validators.maxLength(30),
-    ]),
-    codigoPostal: new FormControl<string>('', [
-      Validators.required,
-      Validators.minLength(5),
-    ]),
-    provincia: new FormControl<string>('', [
-      Validators.minLength(3),
-      Validators.maxLength(30),
-    ]),
-    estudios: new FormControl<string>('', [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(200),
-    ]),
-    experiencia: new FormControl<string>('', [
-      Validators.required,
-      Validators.minLength(10),
-      Validators.maxLength(500),
-    ]),
-    cv: new FormControl(''),
-    fotoPerfil: new FormControl<string>('', [
-      Validators.required,
-      Validators.pattern(/^https?:\/\/.+/), // Valida que empiece con http:// o https://
-    ]),
-  });
+  constructor() {
+    this.modelForm = new FormGroup(
+      {
+        nombre: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/),
+        ]),
+        apellidos: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/),
+        ]),
+        email: new FormControl('', [
+          Validators.required,
+          Validators.email,
+          Validators.pattern(
+            /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+          ),
+        ]),
+        username: new FormControl('', [
+          Validators.required,
+          Validators.minLength(3),
+          Validators.pattern(/^[a-zA-Z0-9_]+$/),
+        ]),
+        password: new FormControl('', [
+          Validators.required,
+          Validators.minLength(6),
+        ]),
+        confirmarPassword: new FormControl('', [Validators.required]),
+        fechaNacimiento: new FormControl<string>('', {
+          validators: [Validators.required, this.fechaNacimientoValidator()],
+        }),
+        telefono: new FormControl<string>('', [
+          Validators.required,
+          Validators.pattern(/^\d{6,}$/), // Solo números, mínimo 6 dígitos
+        ]),
+        pais: new FormControl<string>('', [
+          Validators.required,
+          Validators.minLength(2),
+          Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/),
+        ]),
+        calle: new FormControl<string>('', [
+          Validators.minLength(3),
+          Validators.maxLength(30),
+        ]),
+        poblacion: new FormControl<string>('', [
+          Validators.minLength(2),
+          Validators.maxLength(30),
+        ]),
+        codigoPostal: new FormControl<string>('', [
+          Validators.required,
+          Validators.minLength(5),
+        ]),
+        provincia: new FormControl<string>('', [
+          Validators.minLength(3),
+          Validators.maxLength(30),
+        ]),
+        estudios: new FormControl<string>('', [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(200),
+        ]),
+        experiencia: new FormControl<string>('', [
+          Validators.required,
+          Validators.minLength(10),
+          Validators.maxLength(500),
+        ]),
+        cv: new FormControl({ value: '', disabled: true }),
+        fotoPerfil: new FormControl<string>('', [
+          Validators.required,
+          Validators.pattern(/^https?:\/\/.+/), // Valida que empiece con http:// o https://
+        ]),
+      },
+      { validators: [this.passwordsMatchValidator()] }
+    );
+  }
 
   registro(): void {
     if (this.modelForm.invalid) {
@@ -142,6 +150,32 @@ export class RegistroComponent {
         return { menorDeEdad: true };
       }
       return null;
+    };
+  }
+  // Modificar el validador de contraseñas
+  private passwordsMatchValidator() {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      const passwordControl = formGroup.get('password');
+      const confirmPasswordControl = formGroup.get('confirmarPassword');
+
+      if (!passwordControl || !confirmPasswordControl) {
+        return null;
+      }
+
+      if (
+        confirmPasswordControl.errors &&
+        !confirmPasswordControl.errors['passwordMismatch']
+      ) {
+        return null;
+      }
+
+      if (passwordControl.value !== confirmPasswordControl.value) {
+        confirmPasswordControl.setErrors({ passwordMismatch: true });
+        return { passwordMismatch: true };
+      } else {
+        confirmPasswordControl.setErrors(null);
+        return null;
+      }
     };
   }
 

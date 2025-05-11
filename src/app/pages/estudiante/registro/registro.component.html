@@ -1,30 +1,49 @@
-<div class="bg-light form-container">
-
-  <form [formGroup]="modelForm" (ngSubmit)="registro()" class="needs-validation">
-    <div class="row g-4">
-      <!-- Columna 1: Datos personales -->
-      <div class="col-md-4">
-        <div class="section-title">
-          <h4 class="mb-3">
-            <i class="fas fa-user-circle me-2"></i>
-            Datos Personales
-          </h4>
-          <div class="title-underline"></div>
+<section>
+  <div>
+    <div class="container">
+      <!-- Header section -->
+      <div class="header-section">
+        <div class="logo-container">
+          <img src="assets/logo/openTalent_logo_sinletras.png" alt="Logo OpenTalent" class="logo animate-logo">
+          <h1 class="title">
+            <span class="animate-text">O</span>
+            <span class="animate-text">p</span>
+            <span class="animate-text">e</span>
+            <span class="animate-text">n</span>
+            <span class="animate-text accent">T</span>
+            <span class="animate-text accent">a</span>
+            <span class="animate-text accent">l</span>
+            <span class="animate-text accent">e</span>
+            <span class="animate-text accent">n</span>
+            <span class="animate-text accent">t</span>
+          </h1>
         </div>
-        <!-- nombre -->
-        <div class="form-group">
-          <label for="nombre" class="form-label">Nombre</label>
-          <input
-            type="text"
-            id="nombre"
-            formControlName="nombre"
-            class="form-control"
-            [class.is-invalid]="modelForm.get('nombre')?.invalid && modelForm.get('nombre')?.touched"
-            [class.is-valid]="modelForm.get('nombre')?.valid && modelForm.get('nombre')?.touched"
-            placeholder="Tu nombre">
+      </div>
+    </div>
+  </div>
 
-          <!-- Icono de validación -->
-          @if (modelForm.get('nombre')?.touched) {
+  <div class="bg-light form-container">
+
+    <form [formGroup]="modelForm" (ngSubmit)="registro()" class="needs-validation">
+      <div class="row g-4">
+        <!-- Columna 1: Datos personales -->
+        <div class="col-md-4">
+          <div class="section-title">
+            <h4 class="mb-3">
+              <i class="fas fa-user-circle me-2"></i>
+              Datos Personales
+            </h4>
+            <div class="title-underline"></div>
+          </div>
+          <!-- nombre -->
+          <div class="form-group">
+            <label for="nombre" class="form-label">Nombre</label>
+            <input type="text" id="nombre" formControlName="nombre" class="form-control"
+              [class.is-invalid]="modelForm.get('nombre')?.invalid && modelForm.get('nombre')?.touched"
+              [class.is-valid]="modelForm.get('nombre')?.valid && modelForm.get('nombre')?.touched"
+              placeholder="Tu nombre">
+
+            @if (modelForm.get('nombre')?.touched) {
             <div class="validation-messages">
               @if (modelForm.get('nombre')?.hasError('required')) {
               <div class="message invalid">
@@ -45,21 +64,16 @@
               </div>
               }
             </div>
-          }
-        </div>
+            }
+          </div>
+          <!-- apellidos -->
+          <div class="form-group">
+            <label for="apellidos" class="form-label">Apellidos</label>
+            <input type="text" id="apellidos" formControlName="apellidos" class="form-control"
+              [class.is-invalid]="modelForm.get('apellidos')?.invalid && modelForm.get('apellidos')?.touched"
+              [class.is-valid]="modelForm.get('apellidos')?.valid && modelForm.get('apellidos')?.touched"
+              placeholder="Tus apellidos">
 
-        <div class="form-group">
-          <label for="apellidos" class="form-label">Apellidos</label>
-          <input
-            type="text"
-            id="apellidos"
-            formControlName="apellidos"
-            class="form-control"
-            [class.is-invalid]="modelForm.get('apellidos')?.invalid && modelForm.get('apellidos')?.touched"
-            [class.is-valid]="modelForm.get('apellidos')?.valid && modelForm.get('apellidos')?.touched"
-            placeholder="Tus apellidos">
-
-            <!-- Icono de validación -->
             @if (modelForm.get('apellidos')?.touched) {
             <div class="validation-messages">
               @if (modelForm.get('apellidos')?.hasError('required')) {
@@ -82,20 +96,15 @@
               }
             </div>
             }
-        </div>
+          </div>
+          <!-- nombre -->
+          <div class="form-group">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" id="email"
+            autocomplete="username"  formControlName="email" class="form-control"
+              [class.is-invalid]="modelForm.get('email')?.invalid && modelForm.get('email')?.touched"
+              [class.is-valid]="modelForm.get('email')?.valid && modelForm.get('email')?.touched" placeholder="Tu email">
 
-        <div class="form-group">
-          <label for="email" class="form-label">Email</label>
-          <input
-            type="email"
-            id="email"
-            formControlName="email"
-            class="form-control"
-            [class.is-invalid]="modelForm.get('email')?.invalid && modelForm.get('email')?.touched"
-            [class.is-valid]="modelForm.get('email')?.valid && modelForm.get('email')?.touched"
-            placeholder="Tu email">
-
-            <!-- Icono de validación -->
             @if (modelForm.get('email')?.touched) {
             <div class="validation-messages">
               @if (modelForm.get('email')?.hasError('required')) {
@@ -118,20 +127,17 @@
               }
             </div>
             }
-        </div>
-
-        <div class="form-group">
-          <label for="username" class="form-label">Nombre de usuario</label>
-          <input
-            type="text"
-            id="username"
-            formControlName="username"
+          </div>
+          <!-- username -->
+          <div class="form-group">
+            <label for="username" class="form-label">Nombre de usuario</label>
+            <input type="text" id="username" formControlName="username"
+            autocomplete="username"
             class="form-control"
-            [class.is-invalid]="modelForm.get('username')?.invalid && modelForm.get('username')?.touched"
-            [class.is-valid]="modelForm.get('username')?.valid && modelForm.get('username')?.touched"
-            placeholder="Tu nombre de usuario">
+              [class.is-invalid]="modelForm.get('username')?.invalid && modelForm.get('username')?.touched"
+              [class.is-valid]="modelForm.get('username')?.valid && modelForm.get('username')?.touched"
+              placeholder="Tu nombre de usuario">
 
-            <!-- Icono de validación -->
             @if (modelForm.get('username')?.touched) {
             <div class="validation-messages">
               @if (modelForm.get('username')?.hasError('required')) {
@@ -153,155 +159,160 @@
               </div>
               }
             </div>
-          }
-        </div>
-
-        <div class="form-group">
-          <label for="password" class="form-label">Contraseña</label>
-          <input
-            type="password"
-            id="password"
-            formControlName="password"
-            class="form-control"
-            [class.is-invalid]="modelForm.get('password')?.invalid && modelForm.get('password')?.touched"
-            [class.is-valid]="modelForm.get('password')?.valid && modelForm.get('password')?.touched"
-            placeholder="Tu contraseña">
-            <!-- Icono de validación -->
-        @if (modelForm.get('password')?.touched) {
-        <div class="validation-messages">
-          @if (modelForm.get('password')?.hasError('required')) {
-          <div class="message invalid">
-            <i class="fas fa-times-circle"></i>
-            Este campo es obligatorio
-          </div>
-          }
-          @if (modelForm.get('password')?.hasError('minlength')) {
-          <div class="message invalid">
-            <i class="fas fa-times-circle"></i>
-            Contraseña demasiado corta, mínimo 6 caracteres
-          </div>
-          }
-        </div>
-        }
-
-        <div class="form-group">
-          <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
-          <input
-            type="date"
-            id="fechaNacimiento"
-            formControlName="fechaNacimiento"
-            class="form-control"
-            [class.is-invalid]="modelForm.get('fechaNacimiento')?.invalid && modelForm.get('fechaNacimiento')?.touched"
-            [class.is-valid]="modelForm.get('fechaNacimiento')?.valid && modelForm.get('fechaNacimiento')?.touched"
-            >
-          <!-- Icono de validación -->
-          @if (modelForm.get('fechaNacimiento')?.touched) {
-          <div class="validation-messages">
-            @if (modelForm.get('fechaNacimiento')?.hasError('required')) {
-            <div class="message invalid">
-              <i class="fas fa-times-circle"></i>
-              Este campo es obligatorio
-            </div>
             }
-            @if (modelForm.get('fechaNacimiento')?.hasError('menorDeEdad')) {
-            <div class="message invalid">
-              <i class="fas fa-times-circle"></i>
-              Debes ser mayor de 16 años para registrarte
+          </div>
+          <!-- passwd -->
+          <div class="form-group">
+            <label for="password" class="form-label">Contraseña</label>
+            <input type="password" id="password" formControlName="password"
+            autocomplete="new-password"
+            class="form-control"
+              [class.is-invalid]="modelForm.get('password')?.invalid && modelForm.get('password')?.touched"
+              [class.is-valid]="modelForm.get('password')?.valid && modelForm.get('password')?.touched"
+              placeholder="Tu contraseña">
+
+            @if (modelForm.get('password')?.touched) {
+            <div class="validation-messages">
+              @if (modelForm.get('password')?.hasError('required')) {
+              <div class="message invalid">
+                <i class="fas fa-times-circle"></i>
+                Este campo es obligatorio
+              </div>
+              }
+              @if (modelForm.get('password')?.hasError('minlength')) {
+              <div class="message invalid">
+                <i class="fas fa-times-circle"></i>
+                Contraseña demasiado corta, mínimo 6 caracteres
+              </div>
+              }
             </div>
             }
           </div>
-        }
-        </div>
-      </div>
-      </div>
+            <!-- Campo confirmar password -->
+            <div class="form-group">
+              <label for="confirmarPassword" class="form-label">Confirmar Contraseña</label>
+              <input type="password" id="confirmarPassword" formControlName="confirmarPassword"
+              autocomplete="new-password"
+              class="form-control"
+                [class.is-invalid]="(modelForm.get('confirmarPassword')?.invalid && modelForm.get('confirmarPassword')?.touched) || (modelForm.get('password')?.invalid && modelForm.get('confirmarPassword')?.touched)"
+                [class.is-valid]="modelForm.get('confirmarPassword')?.valid && modelForm.get('confirmarPassword')?.touched  && modelForm.get('password')?.valid"
+                placeholder="Confirma tu contraseña">
 
-      <!-- Columna 2: Datos de contacto -->
-      <div class="col-md-4">
-        <div class="section-title">
-          <h4 class="mb-3">
-            <i class="fas fa-address-card me-2"></i>
-            Datos de Contacto
-          </h4>
-          <div class="title-underline"></div>
-        </div>
-
-        <div class="form-group">
-          <label for="telefono" class="form-label">Teléfono</label>
-          <input
-            type="tel"
-            id="telefono"
-            formControlName="telefono"
-            class="form-control"
-            [class.is-invalid]="modelForm.get('telefono')?.invalid && modelForm.get('telefono')?.touched"
-            placeholder="Tu teléfono"
-            [class.is-valid]="modelForm.get('telefono')?.valid && modelForm.get('telefono')?.touched"
-            >
-          <!-- Icono de validación -->
-          @if (modelForm.get('telefono')?.touched) {
-          <div class="validation-messages">
-            @if (modelForm.get('telefono')?.hasError('required')) {
-            <div class="message invalid">
-              <i class="fas fa-times-circle"></i>
-              Este campo es obligatorio
+              @if (modelForm.get('confirmarPassword')?.touched) {
+              <div class="validation-messages">
+                @if (modelForm.get('confirmarPassword')?.hasError('required')) {
+                <div class="message invalid">
+                  <i class="fas fa-times-circle"></i>
+                  Este campo es obligatorio
+                </div>
+                }
+                @if (modelForm.get('confirmarPassword')?.hasError('passwordMismatch')) {
+                <div class="message invalid">
+                  <i class="fas fa-times-circle"></i>
+                  Las contraseñas no coinciden
+                </div>
+                }
+              </div>
+              }
             </div>
-            }
-            @if (modelForm.get('telefono')?.hasError('pattern')) {
-            <div class="message invalid">
-              <i class="fas fa-times-circle"></i>
-              Número de teléfono no válido
+          <!-- fecha -->
+            <div class="form-group">
+              <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+              <input type="date" id="fechaNacimiento" formControlName="fechaNacimiento"
+              class="form-control"
+                [class.is-invalid]="modelForm.get('fechaNacimiento')?.invalid && modelForm.get('fechaNacimiento')?.touched"
+                [class.is-valid]="modelForm.get('fechaNacimiento')?.valid && modelForm.get('fechaNacimiento')?.touched">
+              <!-- Icono de validación -->
+              @if (modelForm.get('fechaNacimiento')?.touched) {
+              <div class="validation-messages">
+                @if (modelForm.get('fechaNacimiento')?.hasError('required')) {
+                <div class="message invalid">
+                  <i class="fas fa-times-circle"></i>
+                  Este campo es obligatorio
+                </div>
+                }
+                @if (modelForm.get('fechaNacimiento')?.hasError('menorDeEdad')) {
+                <div class="message invalid">
+                  <i class="fas fa-times-circle"></i>
+                  Debes ser mayor de 16 años para registrarte
+                </div>
+                }
+              </div>
+              }
+            </div>
+          </div>
+
+        <!-- Columna 2: Datos de contacto -->
+        <div class="col-md-4">
+          <div class="section-title">
+            <h4 class="mb-3">
+              <i class="fas fa-address-card me-2"></i>
+              Datos de Contacto
+            </h4>
+            <div class="title-underline"></div>
+          </div>
+          <!-- tlf -->
+          <div class="form-group">
+            <label for="telefono" class="form-label">Teléfono</label>
+            <input type="tel" id="telefono" formControlName="telefono" class="form-control"
+              [class.is-invalid]="modelForm.get('telefono')?.invalid && modelForm.get('telefono')?.touched"
+              placeholder="Tu teléfono"
+              [class.is-valid]="modelForm.get('telefono')?.valid && modelForm.get('telefono')?.touched">
+
+            @if (modelForm.get('telefono')?.touched) {
+            <div class="validation-messages">
+              @if (modelForm.get('telefono')?.hasError('required')) {
+              <div class="message invalid">
+                <i class="fas fa-times-circle"></i>
+                Este campo es obligatorio
+              </div>
+              }
+              @if (modelForm.get('telefono')?.hasError('pattern')) {
+              <div class="message invalid">
+                <i class="fas fa-times-circle"></i>
+                Número de teléfono no válido
+              </div>
+              }
             </div>
             }
           </div>
-        }
-        </div>
+          <!-- pais -->
+          <div class="form-group">
+            <label for="pais" class="form-label">País</label>
+            <input type="text" id="pais" formControlName="pais" class="form-control"
+              [class.is-invalid]="modelForm.get('pais')?.invalid && modelForm.get('pais')?.touched" placeholder="Tu país"
+              [class.is-valid]="modelForm.get('pais')?.valid && modelForm.get('pais')?.touched">
 
-        <div class="form-group">
-          <label for="pais" class="form-label">País</label>
-          <input
-            type="text"
-            id="pais"
-            formControlName="pais"
-            class="form-control"
-            [class.is-invalid]="modelForm.get('pais')?.invalid && modelForm.get('pais')?.touched"
-            placeholder="Tu país"
-            [class.is-valid]="modelForm.get('pais')?.valid && modelForm.get('pais')?.touched"
-            >
-          <!-- Icono de validación -->
-          @if (modelForm.get('pais')?.touched) {
-          <div class="validation-messages">
-            @if (modelForm.get('pais')?.hasError('required')) {
-            <div class="message invalid">
-              <i class="fas fa-times-circle"></i>
-              Este campo es obligatorio
-            </div>
-            }
-            @if (modelForm.get('pais')?.hasError('minlength')) {
-            <div class="message invalid">
-              <i class="fas fa-times-circle"></i>
-              Debe tener al menos 3 caracteres
-            </div>
-          }
-            @if (modelForm.get('pais')?.hasError('pattern')) {
-            <div class="message invalid">
-              <i class="fas fa-times-circle"></i>
-              Formato no válido
+            @if (modelForm.get('pais')?.touched) {
+            <div class="validation-messages">
+              @if (modelForm.get('pais')?.hasError('required')) {
+              <div class="message invalid">
+                <i class="fas fa-times-circle"></i>
+                Este campo es obligatorio
+              </div>
+              }
+              @if (modelForm.get('pais')?.hasError('minlength')) {
+              <div class="message invalid">
+                <i class="fas fa-times-circle"></i>
+                Debe tener al menos 3 caracteres
+              </div>
+              }
+              @if (modelForm.get('pais')?.hasError('pattern')) {
+              <div class="message invalid">
+                <i class="fas fa-times-circle"></i>
+                Formato no válido
+              </div>
+              }
             </div>
             }
           </div>
-        }
-        </div>
-
-        <div class="form-group">
-          <label for="calle" class="form-label">Calle</label>
-          <input
-            type="text"
-            id="calle"
-            formControlName="calle"
-            class="form-control"
-            [class.is-invalid]="modelForm.get('calle')?.invalid && modelForm.get('calle')?.touched"
-            placeholder="Tu calle"
-            [class.is-valid]="modelForm.get('calle')?.valid && modelForm.get('calle')?.dirty && modelForm.get('calle')?.value"
-            >
+          <!-- calle -->
+          <div class="form-group">
+            <label for="calle" class="form-label">Calle</label>
+            <input type="text" id="calle" formControlName="calle" class="form-control"
+              [class.is-invalid]="modelForm.get('calle')?.invalid && modelForm.get('calle')?.touched"
+              placeholder="Tu calle"
+              [class.is-valid]="modelForm.get('calle')?.valid && modelForm.get('calle')?.dirty && modelForm.get('calle')?.value">
 
             @if (modelForm.get('calle')?.touched) {
             <div class="validation-messages">
@@ -318,20 +329,15 @@
               </div>
               }
             </div>
-          }
-        </div>
-
-        <div class="form-group">
-          <label for="poblacion" class="form-label">Población</label>
-          <input
-            type="text"
-            id="poblacion"
-            formControlName="poblacion"
-            class="form-control"
-            [class.is-invalid]="modelForm.get('poblacion')?.invalid && modelForm.get('poblacion')?.touched"
-            placeholder="Tu población"
-            [class.is-valid]="modelForm.get('poblacion')?.valid && modelForm.get('poblacion')?.dirty && modelForm.get('poblacion')?.value"
-            >
+            }
+          </div>
+          <!-- poblacion -->
+          <div class="form-group">
+            <label for="poblacion" class="form-label">Población</label>
+            <input type="text" id="poblacion" formControlName="poblacion" class="form-control"
+              [class.is-invalid]="modelForm.get('poblacion')?.invalid && modelForm.get('poblacion')?.touched"
+              placeholder="Tu población"
+              [class.is-valid]="modelForm.get('poblacion')?.valid && modelForm.get('poblacion')?.dirty && modelForm.get('poblacion')?.value">
 
             @if (modelForm.get('poblacion')?.touched) {
             <div class="validation-messages">
@@ -348,20 +354,15 @@
               </div>
               }
             </div>
-          }
-        </div>
-
-        <div class="form-group">
-          <label for="codigoPostal" class="form-label">Código Postal</label>
-          <input
-            type="text"
-            id="codigoPostal"
-            formControlName="codigoPostal"
-            class="form-control"
-            [class.is-invalid]="modelForm.get('codigoPostal')?.invalid && modelForm.get('codigoPostal')?.touched"
-            placeholder="Tu código postal"
-            [class.is-valid]="modelForm.get('codigoPostal')?.valid && modelForm.get('codigoPostal')?.touched"
-            >
+            }
+          </div>
+          <!-- cp -->
+          <div class="form-group">
+            <label for="codigoPostal" class="form-label">Código Postal</label>
+            <input type="text" id="codigoPostal" formControlName="codigoPostal" class="form-control"
+              [class.is-invalid]="modelForm.get('codigoPostal')?.invalid && modelForm.get('codigoPostal')?.touched"
+              placeholder="Tu código postal"
+              [class.is-valid]="modelForm.get('codigoPostal')?.valid && modelForm.get('codigoPostal')?.touched">
 
             @if (modelForm.get('codigoPostal')?.touched) {
             <div class="validation-messages">
@@ -378,20 +379,15 @@
               </div>
               }
             </div>
-           }
-        </div>
-
-        <div class="form-group">
-          <label for="provincia" class="form-label">Provincia</label>
-          <input
-            type="text"
-            id="provincia"
-            formControlName="provincia"
-            class="form-control"
-            [class.is-invalid]="modelForm.get('provincia')?.invalid && modelForm.get('provincia')?.touched"
-            placeholder="Tu provincia"
-            [class.is-valid]="modelForm.get('provincia')?.valid && modelForm.get('provincia')?.dirty && modelForm.get('provincia')?.value"
-            >
+            }
+          </div>
+          <!-- provincia -->
+          <div class="form-group">
+            <label for="provincia" class="form-label">Provincia</label>
+            <input type="text" id="provincia" formControlName="provincia" class="form-control"
+              [class.is-invalid]="modelForm.get('provincia')?.invalid && modelForm.get('provincia')?.touched"
+              placeholder="Tu provincia"
+              [class.is-valid]="modelForm.get('provincia')?.valid && modelForm.get('provincia')?.dirty && modelForm.get('provincia')?.value">
 
             @if (modelForm.get('provincia')?.touched) {
             <div class="validation-messages">
@@ -407,30 +403,26 @@
                 Nombre de provincia demasiado largo
               </div> }
             </div>
-          }
-        </div>
-      </div>
-
-      <!-- Columna 3: Otros datos -->
-      <div class="col-md-4">
-        <div class="section-title">
-          <h4 class="mb-3">
-            <i class="fas fa-info-circle me-2"></i>
-            Otros Datos
-          </h4>
-          <div class="title-underline"></div>
+            }
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="estudios" class="form-label">Estudios</label>
-          <textarea
-            id="estudios"
-            formControlName="estudios"
-            class="form-control"
-            [class.is-invalid]="modelForm.get('estudios')?.invalid && modelForm.get('estudios')?.touched"
-            placeholder="Tus estudios"
-            [class.is-valid]="modelForm.get('estudios')?.valid && modelForm.get('estudios')?.touched"
-            ></textarea>
+        <!-- Columna 3: Otros datos -->
+        <div class="col-md-4">
+          <div class="section-title">
+            <h4 class="mb-3">
+              <i class="fas fa-info-circle me-2"></i>
+              Otros Datos
+            </h4>
+            <div class="title-underline"></div>
+          </div>
+          <!-- estudios -->
+          <div class="form-group">
+            <label for="estudios" class="form-label">Estudios</label>
+            <textarea id="estudios" formControlName="estudios" class="form-control"
+              [class.is-invalid]="modelForm.get('estudios')?.invalid && modelForm.get('estudios')?.touched"
+              placeholder="Tus estudios"
+              [class.is-valid]="modelForm.get('estudios')?.valid && modelForm.get('estudios')?.touched"></textarea>
 
             @if (modelForm.get('estudios')?.touched) {
             <div class="validation-messages">
@@ -445,27 +437,23 @@
                 <i class="fas fa-times-circle"></i>
                 Descripcion demasiado corta
               </div>
-            }
+              }
               @if (modelForm.get('estudios')?.hasError('maxlength')) {
               <div class="message invalid">
                 <i class="fas fa-times-circle"></i>
                 La descripcion es demasiado larga...
               </div>
-            }
+              }
             </div>
-          }
-        </div>
-
-        <div class="form-group">
-          <label for="experiencia" class="form-label">Experiencia</label>
-          <textarea
-            id="experiencia"
-            formControlName="experiencia"
-            class="form-control"
-            [class.is-invalid]="modelForm.get('experiencia')?.invalid && modelForm.get('experiencia')?.touched"
-            placeholder="Tu experiencia"
-            [class.is-valid]="modelForm.get('experiencia')?.valid && modelForm.get('experiencia')?.touched"
-            ></textarea>
+            }
+          </div>
+          <!-- experiencia -->
+          <div class="form-group">
+            <label for="experiencia" class="form-label">Experiencia</label>
+            <textarea id="experiencia" formControlName="experiencia" class="form-control"
+              [class.is-invalid]="modelForm.get('experiencia')?.invalid && modelForm.get('experiencia')?.touched"
+              placeholder="Tu experiencia"
+              [class.is-valid]="modelForm.get('experiencia')?.valid && modelForm.get('experiencia')?.touched"></textarea>
 
             @if (modelForm.get('experiencia')?.touched) {
             <div class="validation-messages">
@@ -485,34 +473,31 @@
                 <i class="fas fa-times-circle"></i>
                 La descripcion es demasiado larga...
               </div>
-             }
+              }
             </div>
-          }
-        </div>
-
-        <div class="form-group">
-          <label for="cv" class="form-label disabled">CV (Próximamente)</label>
-          <div class="input-group">
-            <input type="file" id="cv" formControlName="cv" class="form-control disabled" accept=".pdf,.doc,.docx" [disabled]="true" placeholder="Subir CV">
-            <label class="input-group-text text-muted" >
-              <i class="fas fa-upload"></i>
-            </label>
+            }
           </div>
-          <small class="text-muted">
-            Esta función estará disponible próximamente
-          </small>  </div>
-
-        <div class="form-group">
-          <label for="fotoPerfil" class="form-label">Foto de perfil</label>
-          <input
-            type="text"
-            id="fotoPerfil"
-            formControlName="fotoPerfil"
-            class="form-control"
-            [class.is-invalid]="modelForm.get('fotoPerfil')?.invalid && modelForm.get('fotoPerfil')?.touched"
-            placeholder="URL de tu foto de perfil"
-            [class.is-valid]="modelForm.get('fotoPerfil')?.valid && modelForm.get('fotoPerfil')?.touched"
-            >
+          <!-- cv -->
+          <div class="form-group">
+            <label for="cv" class="form-label disabled">CV (Próximamente)</label>
+            <div class="input-group">
+              <input type="file" id="cv" formControlName="cv" class="form-control disabled" accept=".pdf,.doc,.docx"
+                placeholder="Subir CV">
+              <label class="input-group-text text-muted">
+                <i class="fas fa-upload"></i>
+              </label>
+            </div>
+            <small class="text-muted">
+              Esta función estará disponible próximamente
+            </small>
+          </div>
+          <!-- foto -->
+          <div class="form-group">
+            <label for="fotoPerfil" class="form-label">Foto de perfil</label>
+            <input type="text" id="fotoPerfil" formControlName="fotoPerfil" class="form-control"
+              [class.is-invalid]="modelForm.get('fotoPerfil')?.invalid && modelForm.get('fotoPerfil')?.touched"
+              placeholder="URL de tu foto de perfil"
+              [class.is-valid]="modelForm.get('fotoPerfil')?.valid && modelForm.get('fotoPerfil')?.touched">
 
             @if (modelForm.get('fotoPerfil')?.touched) {
             <div class="validation-messages">
@@ -521,7 +506,7 @@
                 <i class="fas fa-times-circle"></i>
                 Este campo es obligatorio
               </div>
-            }
+              }
               @if (modelForm.get('fotoPerfil')?.hasError('pattern')) {
               <div class="message invalid">
                 <i class="fas fa-times-circle"></i>
@@ -529,25 +514,24 @@
               </div>
               }
             </div>
-          }
+            }
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="d-flex justify-content-center gap-3 mt-4">
-      <button
-        type="submit"
-        class="btn btn-primary"
-        [disabled]="loading || modelForm.invalid">
-        @if (loading) {
+      <div class="d-flex justify-content-center gap-3 mt-4">
+        <button type="submit" class="btn btn-primary" [disabled]="loading || modelForm.invalid">
+          @if (loading) {
           <span class="spinner-border spinner-border-sm me-2"></span>
-        }
-        {{ loading ? 'Registrando...' : 'Completar registro' }}
-      </button>
+          }
+          {{ loading ? 'Registrando...' : 'Completar registro' }}
+        </button>
 
-      <a [routerLink]="['/login']" class="btn btn-outline-secondary">
-        Volver
-      </a>
-    </div>
-  </form>
-</div>
+        <a [routerLink]="['/login']" class="btn btn-outline-secondary">
+          Volver
+        </a>
+      </div>
+    </form>
+  </div>
+
+</section>
