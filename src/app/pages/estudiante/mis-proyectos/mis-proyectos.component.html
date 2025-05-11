@@ -1,22 +1,20 @@
-<br>
-<div class="text-center">
-    <h2>Mis proyectos</h2>
-  </div>
-
 <div class="container">
-    <div class="row">
-      @for (proyecto of arrProyectos; track proyecto.idProyecto) {
-        <div class="col-md-4 mb-3">
-          <app-proyectos-usuario-card [esEditable]="editable" [proyectoUnico]="proyecto"></app-proyectos-usuario-card>
-          </div>
-      }
-      @empty {
-        <div class="col-12 text-muted text-center fs-5 mt-4">
-          No hay empresas disponibles. Quizás sea problema del servidor o de su conexión a Internet.
-          <br><br>
-          Inténtelo más tarde.
+  <div class="row">
+    @for (proyecto of arrProyectos; track proyecto.idProyecto) {
+      <div class="col-md-4 mb-3">
+        <div class="proyecto-wrapper" [attr.data-id]="proyecto.idProyecto">
+          <app-proyectos-usuario-card
+            [esEditable]="editable"
+            [proyectoUnico]="proyecto"
+            (projectDeleted)="handleProjectDeleted($event)">
+          </app-proyectos-usuario-card>
         </div>
-      }
-    </div>
+      </div>
+    }
+    @empty {
+      <div class="col-12 text-center text-muted">
+        <p class="fs-5">No hay proyectos disponibles.</p>
+      </div>
+    }
   </div>
-  
+</div>

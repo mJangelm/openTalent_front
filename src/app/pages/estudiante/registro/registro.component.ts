@@ -5,6 +5,8 @@ import {
   FormGroup,
   ReactiveFormsModule,
   Validators,
+  AbstractControl,
+  ValidationErrors,
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
@@ -14,7 +16,6 @@ import { RegistroEstudianteDto } from '../../../interfaces/registro-estudiante-d
 
 @Component({
   selector: 'app-registro',
-  standalone: true,
   imports: [ReactiveFormsModule, RouterLink],
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css'],
@@ -24,31 +25,81 @@ export class RegistroComponent {
   private registroEstudiante = inject(RegistroEstudianteService);
 
   loading = false;
-
+  maxDate = new Date().toISOString().split('T')[0]; // Para el input de fecha
   modelForm = new FormGroup({
-    nombre:            new FormControl<string>('', [Validators.required, Validators.minLength(3)]),
-    apellidos:         new FormControl<string>('', [Validators.required, Validators.minLength(3)]),
-    email:             new FormControl<string>('', [Validators.required, Validators.email]),
-    username:          new FormControl<string>('', [Validators.required, Validators.minLength(3)]),
-    password:          new FormControl<string>('', [Validators.required, Validators.minLength(6)]),
-    fechaNacimiento:   new FormControl<string>('', [Validators.required]),
-    telefono:          new FormControl<string>('', [Validators.required]),
-    pais:              new FormControl<string>('', [Validators.required]),
-    calle:             new FormControl<string>('', [Validators.required]),
-    poblacion:         new FormControl<string>('', [Validators.required]),
-    codigoPostal:      new FormControl<string>('', [Validators.required]),
-    provincia:         new FormControl<string>('', [Validators.required]),
-    estudios:          new FormControl<string>('', [Validators.required]),
-    experiencia:       new FormControl<string>('', [Validators.required]),
-    cv:                new FormControl<string>(''),
-    fotoPerfil:        new FormControl<string>(''),
-    pdfFile:           new FormControl<File|null>(null),
-    jpgFile:           new FormControl<File|null>(null),
+    nombre: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/),
+    ]),
+    apellidos: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/),
+    ]),
+    email: new FormControl('', [
+      Validators.required,
+      Validators.email,
+      Validators.pattern(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/),
+    ]),
+    username: new FormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+      Validators.pattern(/^[a-zA-Z0-9_]+$/),
+    ]),
+    password: new FormControl('', [
+      Validators.required,
+      Validators.minLength(6),
+    ]),
+    fechaNacimiento: new FormControl<string>('', {
+      validators: [Validators.required, this.fechaNacimientoValidator()],
+    }),
+    telefono: new FormControl<string>('', [
+      Validators.required,
+      Validators.pattern(/^\d{6,}$/), // Solo números, mínimo 6 dígitos
+    ]),
+    pais: new FormControl<string>('', [
+      Validators.required,
+      Validators.minLength(2),
+      Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/),
+    ]),
+    calle: new FormControl<string>('', [
+      Validators.minLength(3),
+      Validators.maxLength(30),
+    ]),
+    poblacion: new FormControl<string>('', [
+      Validators.minLength(2),
+      Validators.maxLength(30),
+    ]),
+    codigoPostal: new FormControl<string>('', [
+      Validators.required,
+      Validators.minLength(5),
+    ]),
+    provincia: new FormControl<string>('', [
+      Validators.minLength(3),
+      Validators.maxLength(30),
+    ]),
+    estudios: new FormControl<string>('', [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(200),
+    ]),
+    experiencia: new FormControl<string>('', [
+      Validators.required,
+      Validators.minLength(10),
+      Validators.maxLength(500),
+    ]),
+    cv: new FormControl(''),
+    fotoPerfil: new FormControl<string>('', [
+      Validators.required,
+      Validators.pattern(/^https?:\/\/.+/), // Valida que empiece con http:// o https://
+    ]),
   });
 
   registro(): void {
     if (this.modelForm.invalid) {
       this.modelForm.markAllAsTouched();
+      this.mostrarErrorFormulario();
       return;
     }
 
@@ -59,43 +110,49 @@ export class RegistroComponent {
       next: () => {
         this.loading = false;
         this.mostrarExito(
-          'Te has registrado correctamente.',
+          'Te has registrado correctamente. Ya puedes iniciar sesión.',
           () => this.router.navigate(['/login'])
         );
       },
-      error: err => {
+      error: (err) => {
         this.loading = false;
-        let mensaje = 'Error en el registro.';
-        if (err.status === 400) {
-          mensaje = 'Datos inválidos. Por favor verifica los campos.';
-        } else if (err.status === 409) {
-          mensaje = 'Este correo o nombre de usuario ya está en uso.';
+        if (err.status === 409) {
+          const mensaje =
+            err.error.mensaje || 'Este usuario o email ya existe.';
+          this.mostrarError(mensaje);
+        } else {
+          this.mostrarError(
+            'Error en el registro. Por favor, inténtalo de nuevo.'
+          );
         }
-        this.mostrarError(mensaje);
-      }
+      },
     });
   }
+  private fechaNacimientoValidator() {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) {
+        return null;
+      }
 
-  onFileChangePdf(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (!input.files?.length) return;
-    const file = input.files[0];
-    if (file.type !== 'application/pdf') {
-      this.modelForm.get('pdfFile')?.setErrors({ invalidFileType: true });
-      return;
-    }
-    this.modelForm.patchValue({ pdfFile: file });
+      const fecha = new Date(control.value);
+      const hoy = new Date();
+      const edad = hoy.getFullYear() - fecha.getFullYear();
+
+      if (edad < 16) {
+        return { menorDeEdad: true };
+      }
+      return null;
+    };
   }
 
-  onFileChangeJpg(event: Event) {
-    const input = event.target as HTMLInputElement;
-    if (!input.files?.length) return;
-    const file = input.files[0];
-    if (file.type !== 'image/jpeg' && file.type !== 'image/png') {
-      this.modelForm.get('jpgFile')?.setErrors({ invalidFileType: true });
-      return;
-    }
-    this.modelForm.patchValue({ jpgFile: file });
+  private mostrarErrorFormulario(): void {
+    Swal.fire({
+      icon: 'error',
+      title: 'Campos inválidos',
+      text: 'Por favor, revisa los campos marcados en rojo.',
+      confirmButtonText: 'Entendido',
+      confirmButtonColor: '#535AA6',
+    });
   }
 
   private mostrarError(msg: string): void {
@@ -105,7 +162,7 @@ export class RegistroComponent {
       text: msg,
       confirmButtonText: 'Aceptar',
       customClass: { confirmButton: 'btn btn-secondary' },
-      buttonsStyling: false
+      buttonsStyling: false,
     });
   }
 
@@ -116,8 +173,8 @@ export class RegistroComponent {
       text: msg,
       confirmButtonText: 'Ir al login',
       customClass: { confirmButton: 'btn btn-secondary' },
-      buttonsStyling: false
-    }).then(res => {
+      buttonsStyling: false,
+    }).then((res) => {
       if (res.isConfirmed && cb) cb();
     });
   }

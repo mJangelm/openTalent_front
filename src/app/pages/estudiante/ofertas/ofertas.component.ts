@@ -16,11 +16,7 @@ export class OfertasComponent {
   router = inject(Router);
   arrOfertas: Oferta[] = [];
   isLoading = true;
-  isMenuOpenHome: boolean = false;
 
-  toggleMenuHome() {
-    this.isMenuOpenHome = !this.isMenuOpenHome;
-  }
   ngOnInit() {
     this.loadOfertas();
   }
