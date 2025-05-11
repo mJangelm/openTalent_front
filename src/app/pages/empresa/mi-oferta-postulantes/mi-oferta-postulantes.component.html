@@ -1,22 +1,43 @@
-<br>
-<div class="text-center">
-    <h2>Postulantes</h2>
+<div class="container">
+  <!-- Título con diseño mejorado -->
+  <div class="title-section">
+    <div class="title-container">
+      <h2 class="main-title">
+        <i class="fas fa-users title-icon"></i>
+        <span class="title-text animate-title">Postulantes</span>
+      </h2>
+      <div class="title-underline"></div>
+    </div>
   </div>
 
-<div class="container">
+  <!-- Spinner de carga -->
+  @if (isLoading) {
+    <div class="loader-container">
+      <div class="loader">
+        <mat-spinner diameter="50" color="primary"></mat-spinner>
+        <p class="loader-text">Cargando postulantes...</p>
+      </div>
+    </div>
+  } @else {
     <div class="row">
-      @for (postulante of arrPostulantes; track postulante.idUsuario) {
-        <div class="col-md-4 mb-3">
-          <app-postulante-card [idOferta]="idOferta" [postulanteUnico]="postulante" [tipo]="'oferta'"></app-postulante-card>
+      @if (arrPostulantes.length) {
+        @for (postulante of arrPostulantes; track postulante.idUsuario) {
+          <div class="col-md-4 mb-3" [attr.data-id]="postulante.idUsuario">
+            <app-postulante-card
+              [postulanteUnico]="postulante"
+              [idOferta]="idOferta"
+              [tipo]="'oferta'"
+              (onAccept)="handleAcceptPostulante($event)"
+              (onReject)="handleRejectPostulante($event)">
+            </app-postulante-card>
           </div>
-      }
-      @empty {
-        <div class="col-12 text-muted text-center fs-5 mt-4">
-          No hay empresas disponibles. Quizás sea problema del servidor o de su conexión a Internet.
-          <br><br>
-          Inténtelo más tarde.
+        }
+      } @else {
+        <div class="col-12 text-center">
+          <p class="text-muted">No hay postulantes disponibles.</p>
         </div>
       }
     </div>
-  </div>
+  }
+</div>
 

@@ -1,14 +1,9 @@
-
-
 <div class="card shadow-sm mb-3 mt-5 hover-card" style="border-radius: 12px;">
   <div class="card-body">
 
     <!-- Encabezado: imagen + título + acción favorita -->
     <div class="d-flex align-items-center mb-2">
-      <a
-        [routerLink]="['/usuario/ofertas/' + OfertaUnica.idOferta]"
-        class="text-decoration-none text-dark card-trigger"
-      >
+      <a class="text-decoration-none text-dark card-trigger">
         <img
           [src]="OfertaUnica.foto"
           alt="logo"
@@ -24,17 +19,14 @@
         class="p-0 m-0 border-0 bg-transparent"
         style="outline: none; box-shadow: none; cursor: pointer;"
       >
- 
+
       </button>
     </div>
 
- 
+
 
     <!-- Enlace con descripción e imagen -->
-    <a
-      [routerLink]="['/usuario/ofertas/' + OfertaUnica.idOferta]"
-      class="text-decoration-none text-dark card-trigger"
-    >
+    <a class="text-decoration-none text-dark card-trigger">
       <p class="mb-3 text-wrap" style="font-size: 0.9rem;">
         {{ OfertaUnica.descripcion }}
       </p>
@@ -47,31 +39,28 @@
     </a>
 
     <!-- Botones de acción -->
-    <div class="d-flex justify-content-end mt-3">
-      <button
-      type="button"
-      class="btn btn-outline-danger me-2"
-      (click)="eliminarOferta(OfertaUnica.idOferta)"
-    >
-      <i class="fa-solid fa-trash me-1"></i>
-      Eliminar
-    </button>
-      <a
-        type="button"
-        class="btn btn-outline-primary me-2"
-        [routerLink]="['/empresa', 'ofertas', OfertaUnica.idOferta]"
-      >
-        <i class="fa-solid fa-pen me-1"></i>
-        Editar
-      </a>
-      <a
-        type="button"
-        class="btn btn-outline-secondary"
-        [routerLink]="['/empresa', 'ofertas', 'verpostulantes' , OfertaUnica.idOferta]"
-      >
-        <i class="fa-solid fa-user me-1"></i>
-        Postulantes
-      </a>
+    <div class="actions-container">
+      <!-- Botón Editar -->
+      <button mat-mini-fab
+              [routerLink]="['/empresa', 'ofertas', OfertaUnica.idOferta]"
+              class="action-button edit-button"
+              matTooltip="Editar oferta">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <!-- Botón Ver Postulantes -->
+      <button mat-mini-fab
+              [routerLink]="['/empresa', 'ofertas', 'verpostulantes' , OfertaUnica.idOferta]"
+              class="action-button applicants-button"
+              matTooltip="Ver postulantes">
+        <mat-icon>group</mat-icon>
+      </button>
+
+            <!-- Botón Eliminar -->
+            <button mat-mini-fab (click)="eliminarOferta(OfertaUnica.idOferta)" class="action-button delete-button"
+              matTooltip="Eliminar oferta">
+              <mat-icon>delete</mat-icon>
+            </button>
     </div>
 
   </div>

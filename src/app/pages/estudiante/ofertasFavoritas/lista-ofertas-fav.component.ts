@@ -1,22 +1,23 @@
 import { Component, inject } from '@angular/core';
-import { OfertaService } from '../../../../../services/oferta.service';
-import { Router } from '@angular/router';
-import { Oferta } from '../../../../../interfaces/oferta';
-import { OfertasUsuarioCardComponent } from '../../../../../components/usuario/ofertas-usuario-card/ofertas-usuario-card.component';
-import { Proyecto } from '../../../../../interfaces/proyecto';
-import { ProyectosService } from '../../../../../services/proyectos.service';
-import { ProyectosUsuarioCardComponent } from '../../../../../components/usuario/proyectos-usuario-card/proyectos-usuario-card.component';
 import { CommonModule } from '@angular/common';
+import { OfertaService } from '../../../services/oferta.service';
+import { Router } from '@angular/router';
+import { Oferta } from '../../../interfaces/oferta';
+import { OfertasUsuarioCardComponent } from '../../../components/usuario/ofertas-usuario-card/ofertas-usuario-card.component';
+import { Proyecto } from '../../../interfaces/proyecto';
+import { ProyectosService } from '../../../services/proyectos.service';
+import { ProyectosUsuarioCardComponent } from '../../../components/usuario/proyectos-usuario-card/proyectos-usuario-card.component';
 
 @Component({
   selector: 'app-lista-ofertas-fav',
+  standalone: true,
   imports: [
+    CommonModule,
     OfertasUsuarioCardComponent,
     ProyectosUsuarioCardComponent,
-    CommonModule,
   ],
   templateUrl: './lista-ofertas-fav.component.html',
-  styleUrl: './lista-ofertas-fav.component.css',
+  styleUrls: ['./lista-ofertas-fav.component.css'],
 })
 export class ListaOfertasFavComponent {
   servicioOfertas = inject(OfertaService);

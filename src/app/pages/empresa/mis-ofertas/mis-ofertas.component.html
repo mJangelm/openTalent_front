@@ -1,38 +1,29 @@
-<div class="text-center mb-4">
-  <h2>Mis ofertas</h2>
-</div>
-
 <div class="container">
-  <!-- 1) Spinner mientras isLoading===true -->
-  <div *ngIf="isLoading" class="loader-container">
-    <div class="loader">
-      <div class="loader-circle"></div>
-      <div class="loader-text">Cargando mis ofertas...</div>
+  <!-- Loader -->
+  @if (isLoading) {
+    <div class="loader-container">
+      <div class="loader">
+        <div class="loader-circle"></div>
+        <div class="loader-text">Cargando mis ofertas...</div>
+      </div>
     </div>
-  </div>
-
-  <!-- 2) Cuando ya no carga -->
-  <ng-container *ngIf="!isLoading">
-    <!-- 2a) Si hay ofertas, mostrar grid -->
-    <div *ngIf="arrOfertas.length > 0; else noResults" class="row">
-      <div
-        class="col-md-4 mb-3"
-        *ngFor="let oferta of arrOfertas; trackBy: trackByOferta">
-        <div         class="col-m6-4 mb-3 hover-card" >
-                  <app-mis-ofertas-card
-          [OfertaUnica]="oferta"
-          (deleted)="onOfferDeleted($event)">
-        </app-mis-ofertas-card>
+  } @else {
+    <!-- Grid de ofertas -->
+    <div class="row">
+      @for (oferta of arrOfertas; track oferta.idOferta) {
+        <div class="col-md-4 mb-3">
+          <div class="oferta-wrapper" [attr.data-id]="oferta.idOferta">
+            <app-mis-ofertas-card
+              [OfertaUnica]="oferta"
+              (deleted)="onOfferDeleted($event)">
+            </app-mis-ofertas-card>
+          </div>
         </div>
-
-      </div>
+      } @empty {
+        <div class="col-12 text-center text-muted">
+          <p class="fs-5">No hay ofertas disponibles.</p>
+        </div>
+      }
     </div>
-
-    <!-- 2b) Plantilla para “no hay resultados” -->
-    <ng-template #noResults>
-      <div class="no-results">
-        <p>No hay ofertas disponibles en este momento.</p>
-      </div>
-    </ng-template>
-  </ng-container>
+  }
 </div>

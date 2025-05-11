@@ -1,0 +1,55 @@
+.actions-container {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  border-radius: 12px;
+  align-items: center;
+  justify-content: center;
+  gap: 10%;
+}
+
+.action-button {
+  transition: all 0.3s ease;
+  border-radius: 15px !important;
+  width: 45px;
+  height: 45px;
+  background: #535AA6 !important;
+  color: white !important;
+}
+
+.action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(83, 90, 166, 0.25);
+  opacity: 0.9;
+}
+
+/* Colores específicos para cada acción */
+.edit-button {
+  background: #535AA6 !important;
+}
+
+.applicants-button {
+  background: #535AA6 !important;
+}
+
+.delete-button {
+  background: #f44336 !important;
+}
+
+/* Soporte para preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .action-button {
+    transition: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .actions-container {
+    gap: 0.25rem;
+  }
+
+  .action-button {
+    width: 40px;
+    height: 40px;
+  }
+}

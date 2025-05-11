@@ -8,7 +8,7 @@ import { OfertasComponent } from './pages/estudiante/ofertas/ofertas.component';
 import { OfertaViewComponent } from './pages/estudiante/oferta-view/oferta-view.component';
 import { ProyectosComponent } from './pages/estudiante/proyectos/proyectos.component';
 import { ProyectoViewComponent } from './pages/estudiante/proyecto-view/proyecto-view.component';
-import { ListaOfertasFavComponent } from './pages/estudiante/favoritos/ofertasFavoritas/lista-ofertas-fav/lista-ofertas-fav.component';
+import { ListaOfertasFavComponent } from './pages/estudiante/ofertasFavoritas/lista-ofertas-fav.component';
 import { EmpresaViewComponent } from './pages/estudiante/empresa-view/empresa-view.component';
 import { EmpresaVistaPrincipalComponent } from './pages/empresa/empresa-vista-principal/empresa-vista-principal.component';
 import { AnadirOfertaComponent } from './pages/empresa/anadir-oferta/anadir-oferta.component';

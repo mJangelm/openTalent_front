@@ -2,21 +2,23 @@
   <!-- Botón Editar -->
   <button mat-mini-fab
           [routerLink]="['/usuario/misproyectos/edit/', proyectoId]"
-          class="action-button edit-button">
+          class="action-button edit-button"
+          matTooltip="Editar oferta">
+
     <mat-icon>edit</mat-icon>
   </button>
 
   <!-- Botón Ver Postulantes -->
   <button mat-mini-fab
           [routerLink]="['/usuario/misproyectos/postulantes/', proyectoId]"
-          class="action-button applicants-button">
+          class="action-button applicants-button" matTooltip="Ver postulantes">
     <mat-icon>group</mat-icon>
   </button>
 
   <!-- Botón Eliminar -->
   <button mat-mini-fab
           (click)="handleDelete()"
-          class="action-button delete-button">
+          class="action-button delete-button" matTooltip="Eliminar oferta">
     <mat-icon>delete</mat-icon>
   </button>
 </div>

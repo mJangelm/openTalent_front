@@ -8,20 +8,16 @@ import { MisOfertasCardComponent } from '../mis-ofertas-card/mis-ofertas-card.co
 
 @Component({
   selector: 'app-mis-ofertas',
-  standalone: true,
-  imports: [
-    CommonModule,
-    MisOfertasCardComponent
-  ],
+  imports: [CommonModule, MisOfertasCardComponent],
   templateUrl: './mis-ofertas.component.html',
-  styleUrls: ['./mis-ofertas.component.css']
+  styleUrls: ['./mis-ofertas.component.css'],
 })
 export class MisOfertasComponent {
   private servicioOfertas = inject(OfertaService);
   private router = inject(Router);
 
   arrOfertas: Oferta[] = [];
-  isLoading = true;     // arranca en true
+  isLoading = true; // arranca en true
   editable = true;
 
   ngOnInit() {
@@ -33,18 +29,28 @@ export class MisOfertasComponent {
     this.servicioOfertas.getMiofertas().subscribe({
       next: (response: Oferta[]) => {
         this.arrOfertas = response;
-        this.isLoading = false;    // ocultar spinner
+        this.isLoading = false; // ocultar spinner
       },
-      error: err => {
+      error: (err) => {
         console.error('Error al cargar mis ofertas:', err);
         this.arrOfertas = [];
-        this.isLoading = false;    // ocultar spinner aun en error
-      }
+        this.isLoading = false; // ocultar spinner aun en error
+      },
     });
   }
 
   onOfferDeleted(id: number) {
-    this.arrOfertas = this.arrOfertas.filter(o => o.idOferta !== id);
+    const elementToRemove = document.querySelector(`[data-id="${id}"]`);
+
+    if (elementToRemove) {
+      // Añadir clase para iniciar la animación
+      elementToRemove.classList.add('fade-out');
+
+      // Esperar a que termine la animación antes de eliminar
+      setTimeout(() => {
+        this.arrOfertas = this.arrOfertas.filter((o) => o.idOferta !== id);
+      }, 400); // Mismo tiempo que la transición CSS
+    }
   }
 
   trackByOferta(_idx: number, oferta: Oferta) {

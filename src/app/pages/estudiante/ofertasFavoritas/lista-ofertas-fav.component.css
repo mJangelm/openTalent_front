@@ -1,0 +1,137 @@
+h4 {
+  color: #333;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 0.5rem;
+}
+
+.container {
+  max-width: 1400px;
+  padding: 2rem;
+}
+
+.fade-out {
+  animation: fadeOut 0.5s forwards;
+  opacity: 0;
+  transform: scale(0.95);
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.row {
+  transition: all 0.3s ease-in-out;
+}
+
+.card-transition {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Sección */
+.section-wrapper {
+  margin-bottom: 3rem;
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+/* Título de sección */
+.section-title {
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.section-title h4 {
+  color: #535AA6;
+  font-weight: 600;
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.section-title i {
+  color: #535AA6;
+  margin-right: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.title-underline {
+  height: 4px;
+  width: 50px;
+  background: linear-gradient(90deg, #535AA6 0%, #9BA0D0 100%);
+  border-radius: 2px;
+  margin-top: 0.5rem;
+}
+
+/* Contenedor de contenido */
+.content-container {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  min-height: 200px;
+  transition: all 0.3s ease;
+}
+
+/* Estado vacío */
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: #6c757d;
+}
+
+.empty-state i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #9BA0D0;
+}
+
+.empty-state p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .section-title h4 {
+    font-size: 1.25rem;
+  }
+
+  .content-container {
+    padding: 1rem;
+  }
+}
+
+/* Soporte para preferencias de movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .section-wrapper {
+    animation: none;
+  }
+
+  .card-transition {
+    transition: none;
+  }
+}

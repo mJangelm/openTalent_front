@@ -5,7 +5,7 @@
   border-radius: 12px;
   align-items: center;
   justify-content: center;
-  gap: 10%;
+  gap: 20%;
 }
 
 .action-button {
@@ -14,16 +14,17 @@
   width: 45px;
   height: 45px;
   background: #535AA6 !important;
-  color: #010103;
+  color: white !important;
+  box-shadow: 0 2px 8px rgba(83, 90, 166, 0.2) !important;
 }
 
 .action-button:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(63, 81, 181, 0.25);
+  box-shadow: 0 4px 12px rgba(83, 90, 166, 0.25);
   opacity: 0.9;
 }
 
-/* Colores específicos para cada acción con opacidad */
+/* Colores específicos para cada botón */
 .edit-button {
   background: #535AA6 !important;
 }
@@ -37,14 +38,15 @@
 }
 
 /* Animación de ripple personalizada */
-::ng-deep .mat-mdc-mini-fab .mat-ripple {
-  border-radius: 15px;
-}
-
 ::ng-deep .mat-mdc-mini-fab {
-  box-shadow: 0 2px 8px rgba(63, 81, 181, 0.2) !important;
+  border-radius: 15px !important;
 }
 
+::ng-deep .mat-mdc-mini-fab .mdc-fab__ripple {
+  border-radius: 15px !important;
+}
+
+/* Responsive */
 @media (max-width: 768px) {
   .actions-container {
     gap: 0.25rem;
