@@ -193,7 +193,7 @@ export const routes: Routes = [
         path: 'configuracion',
         data: { roles: ['EMPRESA'] },
         canActivate: [loginGuard],
-        component: EditarPerfilComponent,
+        component: RegistroEmpresaComponent,
       },
     ],
   },

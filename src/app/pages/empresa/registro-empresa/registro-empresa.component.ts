@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { LoginServiceService } from '../../../services/login-service.service';
+import { EditUserService } from '../../../services/edit-user.service';
 
 @Component({
   selector: 'app-registro-empresa',
@@ -19,12 +20,21 @@ import { LoginServiceService } from '../../../services/login-service.service';
   styleUrls: ['./registro-empresa.component.css'],
 })
 export class RegistroEmpresaComponent {
-  modelForm: FormGroup;
-  loginService = inject(LoginServiceService);
-  router = inject(Router);
+  modelForm!: FormGroup;
+  private loginService = inject(LoginServiceService);
+  private editUserService = inject(EditUserService);
+  private router = inject(Router);
+
   loading = false;
-  maxDate = new Date().toISOString().split('T')[0]; // Para el input de fecha
+  maxDate = new Date().toISOString().split('T')[0];
+  isEditMode = false;
+
   constructor() {
+    this.initForm();
+    this.checkEditMode();
+  }
+
+  private initForm() {
     this.modelForm = new FormGroup(
       {
         nombre: new FormControl('', [
@@ -50,125 +60,180 @@ export class RegistroEmpresaComponent {
           Validators.pattern(/^[a-zA-Z0-9_]+$/),
         ]),
         password: new FormControl('', [
-          Validators.required,
-          Validators.minLength(6),
+          ...(!this.isEditMode
+            ? [Validators.required, Validators.minLength(6)]
+            : []),
         ]),
-        confirmarPassword: new FormControl('', [Validators.required]),
+        confirmarPassword: new FormControl('', [
+          ...(!this.isEditMode ? [Validators.required] : []),
+        ]),
         fechaNacimiento: new FormControl('', {
           validators: [Validators.required, this.fechaNacimientoValidator()],
         }),
         telefono: new FormControl('', [
           Validators.required,
-          Validators.pattern(/^\d{6,}$/),
+          Validators.pattern(/^\d{9}$/),
+        ]),
+        cif: new FormControl({ value: '', disabled: this.isEditMode }, [
+          ...(!this.isEditMode
+            ? [Validators.required, Validators.minLength(5)]
+            : []),
         ]),
         pais: new FormControl('', [
           Validators.required,
           Validators.minLength(2),
-          Validators.pattern(/^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/),
         ]),
-        provincia: new FormControl('', [
-          Validators.minLength(3),
-          Validators.maxLength(30),
-        ]),
-        poblacion: new FormControl('', [
-          Validators.minLength(2),
-          Validators.maxLength(30),
-        ]),
+        provincia: new FormControl('', [Validators.minLength(3)]),
+        poblacion: new FormControl('', [Validators.minLength(2)]),
         codigoPostal: new FormControl('', [
           Validators.required,
-          Validators.minLength(5),
+          Validators.pattern(/^\d{5}$/),
         ]),
-        calle: new FormControl('', [
-          Validators.minLength(3),
-          Validators.maxLength(30),
-        ]),
+        calle: new FormControl('', [Validators.minLength(3)]),
         fotoPerfil: new FormControl('', [
           Validators.required,
           Validators.pattern(/^https?:\/\/.+/),
         ]),
-        cif: new FormControl('', [
-          Validators.required,
-          Validators.minLength(3),
-        ]),
       },
-      { validators: [this.passwordsMatchValidator()] }
+      { validators: this.passwordsMatchValidator() }
     );
   }
 
-  // Modificar el validador de contraseñas
-  private passwordsMatchValidator() {
-    return (formGroup: AbstractControl): ValidationErrors | null => {
-      const passwordControl = formGroup.get('password');
-      const confirmPasswordControl = formGroup.get('confirmarPassword');
+  private checkEditMode() {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      this.isEditMode = true;
+      const user = JSON.parse(userData);
+      const fechaIso = user.fechaNacimiento
+        ? new Date(user.fechaNacimiento).toISOString().split('T')[0]
+        : '';
 
-      if (!passwordControl || !confirmPasswordControl) {
-        return null;
-      }
-
-      if (
-        confirmPasswordControl.errors &&
-        !confirmPasswordControl.errors['passwordMismatch']
-      ) {
-        return null;
-      }
-
-      if (passwordControl.value !== confirmPasswordControl.value) {
-        confirmPasswordControl.setErrors({ passwordMismatch: true });
-        return { passwordMismatch: true };
-      } else {
-        confirmPasswordControl.setErrors(null);
-        return null;
-      }
-    };
+      this.modelForm.patchValue({
+        nombre: user.nombre,
+        apellidos: user.apellidos,
+        email: user.email,
+        username: user.username,
+        fotoPerfil: user.fotoPerfil,
+        telefono: user.telefono,
+        fechaNacimiento: fechaIso,
+        calle: user.direccion?.calle,
+        pais: user.direccion?.pais,
+        provincia: user.direccion?.provincia,
+        poblacion: user.direccion?.poblacion,
+        codigoPostal: user.direccion?.codigoPostal,
+      });
+    }
   }
 
-  private fechaNacimientoValidator() {
-    return (control: AbstractControl): ValidationErrors | null => {
-      if (!control.value) {
-        return null;
-      }
-      const fecha = new Date(control.value);
-      const hoy = new Date();
-      const edad = hoy.getFullYear() - fecha.getFullYear();
-
-      if (edad < 18) {
-        return { menorDeEdad: true };
-      }
-      return null;
-    };
-  }
-
-  onSubmit(): void {
-    if (this.modelForm.invalid) {
+  onSubmit() {
+    if (!this.isFormValid()) {
       this.modelForm.markAllAsTouched();
+      this.mostrarErrorFormulario();
       return;
     }
 
     this.loading = true;
-    const { confirmarPassword, ...empresaData } = this.modelForm.value;
-    console.log(empresaData);
-    this.loginService.registroEmpresa(empresaData).subscribe({
+    const formData = { ...this.modelForm.value };
+
+    if (this.isEditMode && !formData.password?.trim()) {
+      delete formData.password;
+      delete formData.confirmarPassword;
+    }
+
+    const empresaData = {
+      ...formData,
+      fechaNacimiento: new Date(formData.fechaNacimiento),
+    };
+
+    const action$ = this.isEditMode
+      ? this.editUserService.editarPerfilEmpresaUser(empresaData)
+      : this.loginService.registroEmpresa(empresaData);
+
+    action$.subscribe({
       next: () => {
         this.loading = false;
-        this.mostrarExito('Empresa registrada correctamente.', () => {
-          this.router.navigate(['/login']);
+
+        if (this.isEditMode) {
+          const currentUser = JSON.parse(localStorage.getItem('user') || '{}');
+          const updatedUser = {
+            ...currentUser,
+            ...empresaData,
+            rol: currentUser.rol,
+            activo: currentUser.activo,
+            fechaAlta: currentUser.fechaAlta,
+            direccion: {
+              calle: empresaData.calle,
+              pais: empresaData.pais,
+              provincia: empresaData.provincia,
+              poblacion: empresaData.poblacion,
+              codigoPostal: empresaData.codigoPostal,
+            },
+          };
+          localStorage.setItem('user', JSON.stringify(updatedUser));
+        }
+
+        Swal.fire({
+          icon: 'success',
+          title: this.isEditMode ? 'Perfil actualizado' : '¡Registro exitoso!',
+          text: this.isEditMode
+            ? 'Los datos se han actualizado correctamente'
+            : 'Empresa registrada correctamente.',
+          confirmButtonText: this.isEditMode ? 'Aceptar' : 'Ir al login',
+        }).then(() => {
+          this.router.navigate([this.isEditMode ? '/empresa/home' : '/login']);
         });
       },
       error: (err) => {
         this.loading = false;
-
-        let mensaje = 'Error al registrar empresa.';
+        let mensaje = 'Error en el proceso. Por favor, inténtalo de nuevo.';
 
         if (err.status === 404) {
           mensaje = 'Empresa con el CIF indicado no fue encontrada.';
         } else if (err.status === 409) {
           mensaje =
+            err.error.mensaje ||
             'Ya existe un usuario con ese correo o la empresa ya está asignada.';
         }
 
         this.mostrarError(mensaje);
       },
     });
+  }
+
+  private isFormValid(): boolean {
+    if (this.isEditMode) {
+      const formValues = this.modelForm.value;
+      const requiredFields = [
+        'nombre',
+        'apellidos',
+        'email',
+        'username',
+        'fechaNacimiento',
+        'telefono',
+        'pais',
+        'provincia',
+        'poblacion',
+        'codigoPostal',
+        'calle',
+        'fotoPerfil',
+      ];
+
+      const allRequiredFieldsValid = requiredFields.every(
+        (field) => this.modelForm.get(field)?.valid
+      );
+
+      if (formValues.password?.trim() || formValues.confirmarPassword?.trim()) {
+        return (
+          allRequiredFieldsValid &&
+          formValues.password === formValues.confirmarPassword &&
+          formValues.password.length >= 6
+        );
+      }
+
+      return allRequiredFieldsValid;
+    }
+
+    return this.modelForm.valid;
   }
 
   mostrarError(mensaje: string): void {
@@ -196,6 +261,60 @@ export class RegistroEmpresaComponent {
       buttonsStyling: false,
     }).then((res: any) => {
       if (res.isConfirmed && callback) callback();
+    });
+  }
+
+  private passwordsMatchValidator() {
+    return (formGroup: AbstractControl): ValidationErrors | null => {
+      const password = formGroup.get('password');
+      const confirmPassword = formGroup.get('confirmarPassword');
+
+      if (
+        this.isEditMode &&
+        !password?.value?.trim() &&
+        !confirmPassword?.value?.trim()
+      ) {
+        return null;
+      }
+
+      if (password?.value?.trim() || confirmPassword?.value?.trim()) {
+        if (password?.value !== confirmPassword?.value) {
+          confirmPassword?.setErrors({ passwordMismatch: true });
+          return { passwordMismatch: true };
+        }
+      }
+
+      confirmPassword?.setErrors(null);
+      return null;
+    };
+  }
+
+  private fechaNacimientoValidator() {
+    return (control: AbstractControl): ValidationErrors | null => {
+      if (!control.value) {
+        return null;
+      }
+      const fecha = new Date(control.value);
+      const hoy = new Date();
+      const edad = hoy.getFullYear() - fecha.getFullYear();
+
+      if (edad < 18) {
+        return { menorDeEdad: true };
+      }
+      return null;
+    };
+  }
+
+  private mostrarErrorFormulario(): void {
+    Swal.fire({
+      icon: 'error',
+      title: 'Formulario inválido',
+      text: 'Por favor, revisa los campos y corrige los errores.',
+      confirmButtonText: 'Aceptar',
+      customClass: {
+        confirmButton: 'btn btn-secondary',
+      },
+      buttonsStyling: false,
     });
   }
 }

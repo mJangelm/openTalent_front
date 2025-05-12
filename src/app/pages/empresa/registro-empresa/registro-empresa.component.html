@@ -33,30 +33,34 @@
               <div class="title-underline"></div>
             </div>
 
-            <!-- CIF -->
-            <div class="form-group">
-              <label for="cif" class="form-label">CIF</label>
-              <input type="text" id="cif" formControlName="cif" class="form-control"
-                [class.is-invalid]="modelForm.get('cif')?.invalid && modelForm.get('cif')?.touched"
-                [class.is-valid]="modelForm.get('cif')?.valid && modelForm.get('cif')?.touched" placeholder="B12345678">
+            <!-- CIF - Solo mostrar en registro -->
+            @if (!isEditMode) {
+              <div class="form-group">
+                <label for="cif" class="form-label">CIF</label>
+                <input type="text" id="cif" formControlName="cif" class="form-control"
+                  [class.is-invalid]="modelForm.get('cif')?.invalid && modelForm.get('cif')?.touched"
+                  [class.is-valid]="modelForm.get('cif')?.valid && modelForm.get('cif')?.touched"
+                  placeholder="B12345678">
 
-              @if (modelForm.get('cif')?.touched) {
-              <div class="validation-messages">
-                @if (modelForm.get('cif')?.hasError('required')) {
-                <div class="message invalid">
-                  <i class="fas fa-times-circle"></i>
-                  Este campo es obligatorio
-                </div>
-                }
-                @if (modelForm.get('cif')?.hasError('minlength')) {
-                <div class="message invalid">
-                  <i class="fas fa-times-circle"></i>
-                  CIF no válido (ejemplo: B12345678)
-                </div>
+                @if (modelForm.get('cif')?.touched) {
+                  <div class="validation-messages">
+                    @if (modelForm.get('cif')?.hasError('required')) {
+                      <div class="message invalid">
+                        <i class="fas fa-times-circle"></i>
+                        Este campo es obligatorio
+                      </div>
+                    }
+                    @if (modelForm.get('cif')?.hasError('pattern')) {
+                      <div class="message invalid">
+                        <i class="fas fa-times-circle"></i>
+                        CIF no válido (ejemplo: B12345678)
+                      </div>
+                    }
+                  </div>
                 }
               </div>
-              }
-            </div>
+            }
+
             <!-- email -->
             <div class="form-group">
               <label for="email" class="form-label">Email</label>
@@ -121,59 +125,73 @@
               </div>
               }
             </div>
-            <!-- pasw -->
+            <!-- Campo password -->
             <div class="form-group">
-              <label for="password" class="form-label">Contraseña</label>
-              <input type="password" id="password"
-              autocomplete="new-password"
-              formControlName="password"  class="form-control"
-                [class.is-invalid]="modelForm.get('password')?.invalid && modelForm.get('password')?.touched"
-                [class.is-valid]="modelForm.get('password')?.valid && modelForm.get('password')?.touched"
-                placeholder="Tu contraseña">
+              <label for="password" class="form-label">
+                Contraseña
+                @if (isEditMode) {
+                  <small class="text-muted">(Dejar en blanco para mantener la actual)</small>
+                }
+              </label>
+              @if(isEditMode) {
+                <input type="password" id="password" formControlName="password"
+                  autocomplete="new-password" class="form-control"
+                  [class.is-valid]="modelForm.get('password')?.valid && modelForm.get('password')?.touched"
+                  placeholder="Tu contraseña">
+              } @else {
+                <input type="password" id="password" formControlName="password"
+                  autocomplete="new-password" class="form-control"
+                  [class.is-invalid]="modelForm.get('password')?.invalid && modelForm.get('password')?.dirty"
+                  [class.is-valid]="modelForm.get('password')?.valid && modelForm.get('password')?.touched"
+                  placeholder="Tu contraseña">
+              }
 
               @if (modelForm.get('password')?.touched) {
-              <div class="validation-messages">
-                @if (modelForm.get('password')?.hasError('required')) {
-                <div class="message invalid">
-                  <i class="fas fa-times-circle"></i>
-                  Este campo es obligatorio
-                </div>
-                }
-                @if (modelForm.get('password')?.hasError('minlength')) {
-                <div class="message invalid">
-                  <i class="fas fa-times-circle"></i>
-                  Contraseña demasiado corta, mínimo 6 caracteres
-                </div>
-                }
-              </div>
+                <div class="validation-messages">
+                  @if (!isEditMode && modelForm.get('password')?.hasError('required')) {
+                  <div class="message invalid">
+                    <i class="fas fa-times-circle"></i>
+                    Este campo es obligatorio
+                  </div>
+                  }
+                  @if (modelForm.get('password')?.hasError('minlength')) {
+                  <div class="message invalid">
+                    <i class="fas fa-times-circle"></i>
+                    Contraseña demasiado corta, mínimo 6 caracteres
+                  </div>
+                  }
+                  </div>
               }
             </div>
             <!-- Campo confirmar password -->
             <div class="form-group">
               <label for="confirmarPassword" class="form-label">Confirmar Contraseña</label>
-              <input type="password" id="confirmarPassword" formControlName="confirmarPassword"
-              autocomplete="new-password"
-              class="form-control"
-              [class.is-invalid]="(modelForm.get('confirmarPassword')?.invalid && modelForm.get('confirmarPassword')?.touched) || (modelForm.get('password')?.invalid && modelForm.get('confirmarPassword')?.touched)"
-              [class.is-valid]="modelForm.get('confirmarPassword')?.valid && modelForm.get('confirmarPassword')?.touched  && modelForm.get('password')?.valid"
-              placeholder="Confirma tu contraseña">
-
-              @if (modelForm.get('confirmarPassword')?.touched) {
-              <div class="validation-messages">
-                @if (modelForm.get('confirmarPassword')?.hasError('required')) {
-                <div class="message invalid">
-                  <i class="fas fa-times-circle"></i>
-                  Este campo es obligatorio
-                </div>
-                }
-                @if (modelForm.get('confirmarPassword')?.hasError('passwordMismatch')) {
-                <div class="message invalid">
-                  <i class="fas fa-times-circle"></i>
-                  Las contraseñas no coinciden
-                </div>
-                }
-              </div>
-              }
+              @if(isEditMode){
+              <input type="password" id="confirmarPassword" formControlName="confirmarPassword" autocomplete="new-password"
+                class="form-control"
+                [class.is-valid]="modelForm.get('confirmarPassword')?.valid && modelForm.get('confirmarPassword')?.touched  && modelForm.get('password')?.valid"
+                placeholder="Confirma tu contraseña">
+              }@else {
+              <input type="password" id="confirmarPassword" formControlName="confirmarPassword" autocomplete="new-password"
+                class="form-control"
+                [class.is-invalid]="(modelForm.get('confirmarPassword')?.invalid && modelForm.get('confirmarPassword')?.touched) || (modelForm.get('password')?.invalid && modelForm.get('confirmarPassword')?.touched)"
+                [class.is-valid]="modelForm.get('confirmarPassword')?.valid && modelForm.get('confirmarPassword')?.touched  && modelForm.get('password')?.valid"
+                placeholder="Confirma tu contraseña"> }
+                @if (modelForm.get('confirmarPassword')?.touched) {
+                <div class="validation-messages">
+                  @if (!isEditMode && modelForm.get('confirmarPassword')?.hasError('required')) {
+                  <div class="message invalid">
+                    <i class="fas fa-times-circle"></i>
+                    Este campo es obligatorio
+                  </div>
+                  }
+                  @if (modelForm.get('confirmarPassword')?.hasError('passwordMismatch')) {
+                  <div class="message invalid">
+                    <i class="fas fa-times-circle"></i>
+                    Las contraseñas no coinciden
+                  </div>
+                  }
+                </div>   }
             </div>
           </div>
 
@@ -467,16 +485,21 @@
         </div>
 
         <div class="d-flex justify-content-center gap-3 mt-4">
-          <button type="submit" class="btn btn-primary" [disabled]="loading || modelForm.invalid">
+          <button type="submit" class="btn btn-primary" [disabled]="loading || (!isEditMode && modelForm.invalid)">
             @if (loading) {
             <span class="spinner-border spinner-border-sm me-2"></span>
             }
             {{ loading ? 'Registrando...' : 'Completar registro' }}
           </button>
-
+          @if(isEditMode){
+          <a [routerLink]="['/empresa/home']" class="btn btn-outline-secondary">
+            Volver
+          </a>
+          }@else{
           <a [routerLink]="['/login']" class="btn btn-outline-secondary">
             Volver
           </a>
+        }
         </div>
       </form>
     </div>
