@@ -6,21 +6,16 @@ import { Estudiante } from '../interfaces/estudiante';
 import { RegistroEstudianteDto } from '../interfaces/registro-estudiante-dto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class RegistroEstudianteService {
-
   httpClient = inject(HttpClient);
 
-  private baseUrl : string = 'http://localhost:9009/auth/signup';
+  private baseUrl: string = 'http://localhost:9009/auth/signup';
 
-  constructor() { }
+  constructor() {}
 
-  registro(user: RegistroEstudianteDto) : Observable<any> {
-
+  registro(user: RegistroEstudianteDto): Observable<any> {
     return this.httpClient.post<any>(this.baseUrl, user);
-      }
-
-
   }
-
+}

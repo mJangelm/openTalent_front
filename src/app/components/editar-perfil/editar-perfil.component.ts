@@ -13,6 +13,7 @@ import { EditUserService } from '../../services/edit-user.service';
 import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 import { Estudiante } from '../../interfaces/estudiante';
+import { RegistroEstudianteDto } from '../../interfaces/registro-estudiante-dto';
 
 @Component({
   selector: 'app-editar-perfil',
@@ -232,8 +233,8 @@ export class EditarPerfilComponent {
       return;
     }
 
-    const registroDeEstudiante: Estudiante = this.modelForm
-      .value as unknown as Estudiante;
+    const registroDeEstudiante: RegistroEstudianteDto = this.modelForm
+      .value as unknown as RegistroEstudianteDto;
 
     this.editPerfilService
       .editarPerfilEstudiante(registroDeEstudiante)

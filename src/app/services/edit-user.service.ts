@@ -3,23 +3,34 @@ import { inject, Injectable } from '@angular/core';
 import { EmpresaRegistroDto } from '../interfaces/empresa-registro-dto';
 import { Observable } from 'rxjs';
 import { Estudiante } from '../interfaces/estudiante';
+import { RegistroEstudianteDto } from '../interfaces/registro-estudiante-dto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EditUserService {
   httpClient = inject(HttpClient);
 
   private baseUrl: string = 'http://localhost:9009';
-  constructor() { }
+  constructor() {}
 
   //editar este de abajo!!
 
-  editarPerfilEstudiante(user : Estudiante): Observable<Estudiante> {
-    return this.httpClient.put<Estudiante>(this.baseUrl + '/user', user)
+  editarPerfilEstudiante(
+    user: RegistroEstudianteDto
+  ): Observable<RegistroEstudianteDto> {
+    return this.httpClient.put<RegistroEstudianteDto>(
+      this.baseUrl + '/usuario/editar',
+      user
+    );
   }
 
-  editarPerfilEmpresaUser(user: EmpresaRegistroDto): Observable<EmpresaRegistroDto> {
-    return this.httpClient.put<EmpresaRegistroDto>(this.baseUrl + '/empresa/', user)
+  editarPerfilEmpresaUser(
+    user: EmpresaRegistroDto
+  ): Observable<EmpresaRegistroDto> {
+    return this.httpClient.put<EmpresaRegistroDto>(
+      this.baseUrl + '/empresa/',
+      user
+    );
   }
 }

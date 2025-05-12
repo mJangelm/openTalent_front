@@ -142,7 +142,7 @@ export const routes: Routes = [
         path: 'configuracion',
         data: { roles: ['USUARIO'] },
         canActivate: [loginGuard],
-        component: EditarPerfilComponent,
+        component: RegistroComponent,
       },
     ],
   },
