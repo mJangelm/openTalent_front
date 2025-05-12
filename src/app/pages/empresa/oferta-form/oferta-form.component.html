@@ -3,8 +3,8 @@
   <div class="section-wrapper">
     <div class="section-title">
       <h2 class="main-title">
-        <i class="fas fa-edit title-icon"></i>
-        <span class="title-text">Editar Oferta</span>
+        <i class="fas {{ isEditMode ? 'fa-edit' : 'fa-plus-circle' }} title-icon"></i>
+        <span class="title-text">{{ isEditMode ? 'Editar Oferta' : 'Nueva Oferta' }}</span>
       </h2>
       <div class="title-underline"></div>
     </div>
@@ -23,9 +23,15 @@
               type="text"
               formControlName="titulo"
               class="form-control custom-input"
+              [ngClass]="{'is-invalid': isInvalid('titulo'), 'is-valid': isValid('titulo')}"
               placeholder="Introduce el título"
             />
           </div>
+          @if (isInvalid('titulo')) {
+          <div class="invalid-feedback">
+            {{ getErrorMessage('titulo') }}
+          </div>
+          }
         </div>
 
         <div class="mb-4">
@@ -35,10 +41,16 @@
             <textarea
               formControlName="descripcion"
               class="form-control custom-input"
+              [ngClass]="{'is-invalid': isInvalid('descripcion'), 'is-valid': isValid('descripcion')}"
               rows="5"
               placeholder="Describe la oferta detalladamente"
             ></textarea>
           </div>
+          @if (isInvalid('descripcion')) {
+          <div class="invalid-feedback">
+            {{ getErrorMessage('descripcion') }}
+          </div>
+          }
         </div>
       </div>
 
@@ -49,12 +61,18 @@
           <div class="input-container select-container">
             <i class="fas fa-industry"></i>
             <i class="fas fa-chevron-down select-icon"></i>
-            <select formControlName="nombreSector" class="form-control custom-input">
+            <select formControlName="nombreSector" class="form-control custom-input" [ngClass]="{'is-invalid': isInvalid('nombreSector'), 'is-valid': isValid('nombreSector')}">
+              <option value="" disabled selected>Selecciona un sector</option>
               @for(sector of arrSectores; track sector.nombre) {
                 <option [value]="sector.nombre">{{ sector.nombre }}</option>
               }
             </select>
           </div>
+          @if (isInvalid('nombreSector')) {
+          <div class="invalid-feedback">
+            {{ getErrorMessage('nombreSector') }}
+          </div>
+          }
         </div>
 
         <div class="row g-3">
@@ -63,11 +81,17 @@
             <div class="input-container select-container">
               <i class="fas fa-tag"></i>
               <i class="fas fa-chevron-down select-icon"></i>
-              <select formControlName="tipoOferta" class="form-control custom-input">
+              <select formControlName="tipoOferta" class="form-control custom-input"  [ngClass]="{'is-invalid': isInvalid('tipoOferta'), 'is-valid': isValid('tipoOferta')}">
+                <option value="" disabled selected>Selecciona tipo</option>
                 <option value="PRACTICAS">Prácticas</option>
                 <option value="EMPLEO">Empleo</option>
               </select>
             </div>
+            @if (isInvalid('tipoOferta')) {
+            <div class="invalid-feedback">
+              {{ getErrorMessage('tipoOferta') }}
+            </div>
+            }
           </div>
 
           <div class="col-md-6">
@@ -75,12 +99,18 @@
             <div class="input-container select-container">
               <i class="fas fa-building"></i>
               <i class="fas fa-chevron-down select-icon"></i>
-              <select formControlName="modalidad" class="form-control custom-input">
+              <select formControlName="modalidad" class="form-control custom-input"  [ngClass]="{'is-invalid': isInvalid('modalidad'), 'is-valid': isValid('modalidad')}">
+                <option value="" disabled selected>Selecciona modalidad</option>
                 <option value="PRESENCIAL">Presencial</option>
                 <option value="REMOTO">Remoto</option>
                 <option value="HIBRIDO">Híbrido</option>
               </select>
             </div>
+            @if (isInvalid('modalidad')) {
+            <div class="invalid-feedback">
+              {{ getErrorMessage('modalidad') }}
+            </div>
+            }
           </div>
 
           <div class="col-md-6">
@@ -92,21 +122,32 @@
                 formControlName="numeroPlazas"
                 class="form-control custom-input"
                 placeholder="Nº de plazas"
-                min="1"
+                [ngClass]="{'is-invalid': isInvalid('numeroPlazas'), 'is-valid': isValid('numeroPlazas')}"
               />
             </div>
+            @if (isInvalid('numerpPlazas')) {
+            <div class="invalid-feedback">
+              {{ getErrorMessage('numerpPlazas') }}
+            </div>
+            }
           </div>
 
           <div class="col-md-6">
-            <label class="form-label">Fecha límite</label>
+            <label class="form-label"  >Fecha límite</label>
             <div class="input-container">
               <i class="fas fa-calendar"></i>
               <input
                 type="date"
                 formControlName="fechaFin"
                 class="form-control custom-input"
+                [ngClass]="{'is-invalid': isInvalid('fechaFin'), 'is-valid': isValid('fechaFin')}"
               />
             </div>
+            @if (isInvalid('fechaFin')) {
+            <div class="invalid-feedback">
+              {{ getErrorMessage('fechaFin') }}
+            </div>
+            }
           </div>
         </div>
 
@@ -119,8 +160,14 @@
               formControlName="fotoContenido"
               class="form-control custom-input"
               placeholder="https://ejemplo.com/imagen.jpg"
+              [ngClass]="{'is-invalid': isInvalid('fotoContenido'), 'is-valid': isValid('fotoContenido')}"
             />
           </div>
+          @if (isInvalid('fotoContenido')) {
+          <div class="invalid-feedback">
+            {{ getErrorMessage('fotoContenido') }}
+          </div>
+          }
         </div>
       </div>
     </div>
@@ -131,7 +178,7 @@
         <i class="fas fa-arrow-left me-2"></i>Volver
       </button>
       <button type="submit" class="btn btn-primary" [disabled]="modelForm.invalid">
-        <i class="fas fa-save me-2"></i>Guardar cambios
+        <i class="fas fa-save me-2"></i>{{ isEditMode ? 'Guardar cambios' : 'Crear oferta' }}
       </button>
     </div>
   </form>

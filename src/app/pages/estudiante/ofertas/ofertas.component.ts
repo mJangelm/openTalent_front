@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { OfertaService } from '../../../services/oferta.service';
 import { Router } from '@angular/router';
 import { Oferta } from '../../../interfaces/oferta';
-import { OfertasUsuarioCardComponent } from '../../../components/usuario/ofertas-usuario-card/ofertas-usuario-card.component';
+import { OfertasUsuarioCardComponent } from '../../../components/ofertas-usuario-card/ofertas-usuario-card.component';
 import { CommonModule } from '@angular/common';
 
 @Component({

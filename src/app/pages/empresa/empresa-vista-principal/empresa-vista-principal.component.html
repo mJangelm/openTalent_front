@@ -1,10 +1,43 @@
-<div class="welcome-card">
-    <img src="assets/logo/openTalent_logo_sinletras.png" alt="OpenTalent logo" class="welcome-card__logo" />
-    <h1 class="welcome-card__title">
-      ¡Bienvenido, {{ userEmpresa.username }}!
-    </h1>
-    <p class="welcome-card__subtitle">
-      Disfruta de las ventajas de OpenTalent
-    </p>
+<div class="dashboard-container">
+  <!-- Header de bienvenida -->
+  <div class="welcome-section">
+    <div class="welcome-card">
+      <div class="welcome-content">
+        <img src="assets/logo/openTalent_logo_sinletras.png" alt="OpenTalent logo" class="welcome-logo animate-fade-in" />
+        <div class="welcome-text">
+          <h1 class="welcome-title">
+            <span class="animate-text">¡Bienvenido,</span>
+            <span class="animate-text highlight">{{ userEmpresa.username }}!</span>
+          </h1>
+          <p class="welcome-subtitle animate-text-delay">
+            <i class="fas fa-star me-2"></i>
+            Disfruta de las ventajas de OpenTalent
+          </p>
+        </div>
+      </div>
+    </div>
   </div>
-  
+
+  <!-- Dashboard de acciones rápidas -->
+  <div class="quick-actions">
+    <div class="action-grid">
+      <!-- Tarjeta de Ofertas -->
+      <div class="action-card" [routerLink]='["/empresa/ofertas/"]'>
+        <div class="card-icon">
+          <i class="fas fa-briefcase"></i>
+        </div>
+        <h3>Mis Ofertas</h3>
+        <p>Gestiona tus ofertas publicadas</p>
+      </div>
+
+      <!-- Tarjeta de Nueva Oferta -->
+      <div class="action-card" [routerLink]='["/empresa/add"]'>
+        <div class="card-icon">
+          <i class="fas fa-plus-circle"></i>
+        </div>
+        <h3>Nueva Oferta</h3>
+        <p>Publica una nueva oferta</p>
+      </div>
+    </div>
+  </div>
+</div>

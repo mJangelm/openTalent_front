@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 
 import { OfertaService } from '../../../services/oferta.service';
 import { Oferta } from '../../../interfaces/oferta';
-import { MisOfertasCardComponent } from '../mis-ofertas-card/mis-ofertas-card.component';
+import { MisOfertasCardComponent } from '../../../components/mis-ofertas-card/mis-ofertas-card.component';
 
 @Component({
   selector: 'app-mis-ofertas',

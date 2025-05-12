@@ -7,8 +7,8 @@ import {
   Router,
   RouterLink,
 } from '@angular/router';
-import { Iuser } from '../../../interfaces/iuser';
-import { Estudiante } from '../../../interfaces/estudiante';
+import { Iuser } from '../../interfaces/iuser';
+import { Estudiante } from '../../interfaces/estudiante';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { ProyectosService } from '../../../services/proyectos.service';
+import { ProyectosService } from '../../services/proyectos.service';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({

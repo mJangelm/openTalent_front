@@ -1,10 +1,10 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { Oferta } from '../../../interfaces/oferta';
+import { Oferta } from '../../interfaces/oferta';
 import { RouterLink } from '@angular/router';
-import { OfertaService } from '../../../services/oferta.service';
-import { IFavoritosCambiar } from '../../../interfaces/ifavoritos-cambiar';
+import { OfertaService } from '../../services/oferta.service';
+import { IFavoritosCambiar } from '../../interfaces/ifavoritos-cambiar';
 import { CommonModule } from '@angular/common';
-import { ImageLoaderComponent } from '../../image-loader/image-loader.component';
+import { ImageLoaderComponent } from '../image-loader/image-loader.component';
 
 @Component({
   selector: 'app-ofertas-usuario-card',

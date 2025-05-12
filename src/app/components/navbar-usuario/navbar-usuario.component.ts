@@ -12,7 +12,7 @@ import {
   templateUrl: './navbar-usuario.component.html',
   styleUrl: './navbar-usuario.component.css',
 })
-export class NavbarUsuarioComponent implements OnInit {
+export class NavbarUsuarioComponent {
   @Output() toggleMenuEvent = new EventEmitter<void>();
   rol: string = localStorage.getItem('rol') || '';
   enProyectos: boolean = false;

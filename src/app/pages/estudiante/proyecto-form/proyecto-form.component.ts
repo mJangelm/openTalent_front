@@ -16,10 +16,10 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-anadir-proyecto',
   imports: [ReactiveFormsModule, CommonModule],
-  templateUrl: './anadir-proyecto.component.html',
-  styleUrl: './anadir-proyecto.component.css',
+  templateUrl: './proyecto-form.component.html',
+  styleUrl: './proyecto-form.component.css',
 })
-export class AnadirProyectoComponent implements OnInit {
+export class ProyectoFormComponent {
   private router = inject(Router);
   private servicioProyectos = inject(ProyectosService);
   private activatedRoute = inject(ActivatedRoute);

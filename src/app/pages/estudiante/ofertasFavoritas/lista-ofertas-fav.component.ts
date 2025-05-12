@@ -3,14 +3,13 @@ import { CommonModule } from '@angular/common';
 import { OfertaService } from '../../../services/oferta.service';
 import { Router } from '@angular/router';
 import { Oferta } from '../../../interfaces/oferta';
-import { OfertasUsuarioCardComponent } from '../../../components/usuario/ofertas-usuario-card/ofertas-usuario-card.component';
+import { OfertasUsuarioCardComponent } from '../../../components/ofertas-usuario-card/ofertas-usuario-card.component';
 import { Proyecto } from '../../../interfaces/proyecto';
 import { ProyectosService } from '../../../services/proyectos.service';
-import { ProyectosUsuarioCardComponent } from '../../../components/usuario/proyectos-usuario-card/proyectos-usuario-card.component';
+import { ProyectosUsuarioCardComponent } from '../../../components/proyectos-usuario-card/proyectos-usuario-card.component';
 
 @Component({
   selector: 'app-lista-ofertas-fav',
-  standalone: true,
   imports: [
     CommonModule,
     OfertasUsuarioCardComponent,

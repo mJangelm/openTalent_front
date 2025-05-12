@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { ProyectosUsuarioCardComponent } from '../../../components/usuario/proyectos-usuario-card/proyectos-usuario-card.component';
+import { ProyectosUsuarioCardComponent } from '../../../components/proyectos-usuario-card/proyectos-usuario-card.component';
 import { ProyectosService } from '../../../services/proyectos.service';
 import { Proyecto } from '../../../interfaces/proyecto';
 

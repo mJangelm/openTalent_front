@@ -11,16 +11,14 @@ import { ProyectoViewComponent } from './pages/estudiante/proyecto-view/proyecto
 import { ListaOfertasFavComponent } from './pages/estudiante/ofertasFavoritas/lista-ofertas-fav.component';
 import { EmpresaViewComponent } from './pages/estudiante/empresa-view/empresa-view.component';
 import { EmpresaVistaPrincipalComponent } from './pages/empresa/empresa-vista-principal/empresa-vista-principal.component';
-import { AnadirOfertaComponent } from './pages/empresa/anadir-oferta/anadir-oferta.component';
 import { MisOfertasComponent } from './pages/empresa/mis-ofertas/mis-ofertas.component';
-import { EditarPerfilComponent } from './components/usuario/editar-perfil/editar-perfil.component';
-import { AnadirProyectoComponent } from './pages/estudiante/anadir-proyecto/anadir-proyecto.component';
+import { EditarPerfilComponent } from './components/editar-perfil/editar-perfil.component';
 import { MisProyectosComponent } from './pages/estudiante/mis-proyectos/mis-proyectos.component';
-import { EditOfertaComponent } from './pages/empresa/edit-oferta/edit-oferta.component';
 import { MiOfertaPostulantesComponent } from './pages/empresa/mi-oferta-postulantes/mi-oferta-postulantes.component';
 import { AddResennaComponent } from './pages/add-resenna/add-resenna.component';
-import { PostulanteCardComponent } from './components/postulante-card/postulante-card.component';
 import { SolicitudesComponent } from './pages/estudiante/solicitudes/solicitudes.component';
+import { OfertaFormComponent } from './pages/empresa/oferta-form/oferta-form.component';
+import { ProyectoFormComponent } from './pages/estudiante/proyecto-form/proyecto-form.component';
 
 export const routes: Routes = [
   {
@@ -99,7 +97,7 @@ export const routes: Routes = [
             path: 'add',
             data: { roles: ['USUARIO'] },
             canActivate: [loginGuard],
-            component: AnadirProyectoComponent,
+            component: ProyectoFormComponent,
           },
           {
             path: ':_id',
@@ -122,7 +120,7 @@ export const routes: Routes = [
           },
           {
             path: 'edit/:_id',
-            component: AnadirProyectoComponent,
+            component: ProyectoFormComponent,
             data: { roles: ['USUARIO'] },
             canActivate: [loginGuard],
           },
@@ -161,7 +159,7 @@ export const routes: Routes = [
       },
       {
         path: 'add',
-        component: AnadirOfertaComponent,
+        component: OfertaFormComponent,
         data: { roles: ['EMPRESA'] },
         canActivate: [loginGuard],
       },
@@ -169,20 +167,28 @@ export const routes: Routes = [
         path: 'ofertas',
         data: { roles: ['EMPRESA'] },
         canActivate: [loginGuard],
-        component: MisOfertasComponent,
+        children: [
+          {
+            path: '',
+            data: { roles: ['EMPRESA'] },
+            canActivate: [loginGuard],
+            component: MisOfertasComponent,
+          },
+          {
+            path: 'verpostulantes/:idOferta',
+            data: { roles: ['EMPRESA'] },
+            canActivate: [loginGuard],
+            component: MiOfertaPostulantesComponent,
+          },
+          {
+            path: 'edit/:idOferta',
+            data: { roles: ['EMPRESA'] },
+            canActivate: [loginGuard],
+            component: OfertaFormComponent,
+          },
+        ],
       },
-      {
-        path: 'ofertas/:idOferta',
-        data: { roles: ['EMPRESA'] },
-        canActivate: [loginGuard],
-        component: EditOfertaComponent,
-      },
-      {
-        path: 'ofertas/verpostulantes/:idOferta',
-        data: { roles: ['EMPRESA'] },
-        canActivate: [loginGuard],
-        component: MiOfertaPostulantesComponent,
-      },
+
       {
         path: 'configuracion',
         data: { roles: ['EMPRESA'] },

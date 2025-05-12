@@ -34,7 +34,6 @@ export class MiOfertaPostulantesComponent {
       this.isLoading = false; // Desactivar loader en caso de error
       return;
     }
-    console.log('ID de oferta a cargar:', id);
     this.idOferta = id;
 
     this.servicioOferta.getPostulantes(id).subscribe({

@@ -4,9 +4,10 @@ import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
-import { Oferta } from '../../../interfaces/iempresa-detalle';
+
 import Swal from 'sweetalert2';
-import { OfertaService } from '../../../services/oferta.service';
+import { Oferta } from '../../interfaces/iempresa-detalle';
+import { OfertaService } from '../../services/oferta.service';
 
 @Component({
   selector: 'app-mis-ofertas-card',

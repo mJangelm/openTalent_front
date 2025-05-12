@@ -1,7 +1,7 @@
 import { Component, Input, input } from '@angular/core';
-import { Empresa } from '../../../interfaces/empresa';
+import { Empresa } from '../../interfaces/empresa';
 import { RouterLink } from '@angular/router';
-import { ImageLoaderComponent } from '../../image-loader/image-loader.component';
+import { ImageLoaderComponent } from '../image-loader/image-loader.component';
 
 @Component({
   selector: 'app-empresas-usuario-card',

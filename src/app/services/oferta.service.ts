@@ -68,9 +68,11 @@ export class OfertaService {
     return this.httpClient.put(url, oferta, { responseType: 'text' });
   }
 
-  getOfertaParaEditar(id: number): Observable<any> {
+  getOfertaParaEditar(id: number): Observable<IanadirOferta> {
     // ← también corregido
-    return this.httpClient.get<any>(`${this.baseUrl}/empresa/ofertas/${id}`);
+    return this.httpClient.get<IanadirOferta>(
+      `${this.baseUrl}/empresa/ofertas/${id}/editar`
+    );
   }
 
   getMisOfertas(): Observable<Oferta[]> {

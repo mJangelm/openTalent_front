@@ -2,8 +2,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { MenuUsuarioComponent } from './components/usuario/menu-usuario/menu-usuario.component';
-import { NavbarUsuarioComponent } from './components/usuario/navbar-usuario/navbar-usuario.component';
+import { MenuUsuarioComponent } from './components/menu-usuario/menu-usuario.component';
+import { NavbarUsuarioComponent } from './components/navbar-usuario/navbar-usuario.component';
 
 @Component({
   selector: 'app-root',

@@ -17,7 +17,7 @@ import { EmpresaService } from '../../services/empresa.service';
   templateUrl: './add-resenna.component.html',
   styleUrl: './add-resenna.component.css',
 })
-export class AddResennaComponent implements OnInit {
+export class AddResennaComponent {
   resennaForm!: FormGroup;
   empresaCif: string = '';
   empresaNombre: string = '';

@@ -17,7 +17,6 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-edit-oferta',
   imports: [ReactiveFormsModule, CommonModule],
-  standalone: true,
   templateUrl: './edit-oferta.component.html',
   styleUrl: './edit-oferta.component.css',
 })
@@ -71,12 +70,11 @@ export class EditOfertaComponent {
         this.idOferta = +idParam;
 
         this.servicioOfertas.getOfertaParaEditar(this.idOferta).subscribe({
-          next: (oferta) => {
+          next: (oferta: IanadirOferta) => {
             // Formateamos la fecha a YYYY-MM-DD
             const fechaIso = oferta.fechaFin
               ? new Date(oferta.fechaFin).toISOString().split('T')[0]
               : '';
-            console.log(oferta);
             // Actualizamos todos los campos del formulario
             this.modelForm.patchValue({
               titulo: oferta.titulo,
@@ -84,8 +82,8 @@ export class EditOfertaComponent {
               nombreSector: oferta.nombreSector,
               tipoOferta: oferta.tipoOferta,
               modalidad: oferta.modalidad,
-              numeroPlazas: oferta.vacantesDisponibles,
-              fotoContenido: oferta.foto,
+              numeroPlazas: oferta.numeroPlazas,
+              fotoContenido: oferta.fotoContenido,
               fechaFin: fechaIso,
             });
 
@@ -126,16 +124,6 @@ export class EditOfertaComponent {
       fotoContenido: this.modelForm.value.fotoContenido,
       fechaFin: new Date(this.modelForm.value.fechaFin),
     };
-    console.log('Payload a enviar:', {
-      titulo: this.modelForm.value.titulo,
-      descripcion: this.modelForm.value.descripcion,
-      nombreSector: this.modelForm.value.nombreSector,
-      fotoContenido: this.modelForm.value.fotoContenido,
-      numeroPlazas: this.modelForm.value.numeroPlazas,
-      tipoOferta: this.modelForm.value.tipoOferta,
-      modalidad: this.modelForm.value.modalidad,
-      fechaFin: this.modelForm.value.fechaFin,
-    });
 
     this.servicioOfertas.editarOferta(this.idOferta, ofertaEditada).subscribe({
       next: () => {
