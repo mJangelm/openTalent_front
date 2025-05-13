@@ -13,7 +13,7 @@ import { PostulanteI } from '../interfaces/postulante';
 export class OfertaService {
   httpClient = inject(HttpClient);
 
-  private baseUrl: string = 'http://localhost:9009';
+  private baseUrl: string = 'https://opentalentapi.matabuena.com';
 
   constructor() {}
 

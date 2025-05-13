@@ -12,7 +12,7 @@ import { IReview } from '../interfaces/ireview';
 export class EmpresaService {
   httpClient = inject(HttpClient);
 
-  private baseUrl: string = 'http://localhost:9009';
+  private baseUrl: string = 'https://opentalentapi.matabuena.com';
 
   constructor() {}
 

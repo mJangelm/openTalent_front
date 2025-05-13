@@ -14,7 +14,7 @@ import { IEstadoSolicitud } from '../interfaces/iestado-solicitud';
 export class ProyectosService {
   httpClient = inject(HttpClient);
 
-  private baseUrl: string = 'http://localhost:9009/';
+  private baseUrl: string = 'https://opentalentapi.matabuena.com/';
 
   constructor() {}
 
@@ -27,13 +27,12 @@ export class ProyectosService {
     );
   }
 
-
-cancelarProyecto(idProyecto: number): Observable<any> {
-  return this.httpClient.post<any>(
-    `${this.baseUrl}usuario/proyectos/${idProyecto}/cancelar`,
-    {}     // body vacío
-  );
-}
+  cancelarProyecto(idProyecto: number): Observable<any> {
+    return this.httpClient.post<any>(
+      `${this.baseUrl}usuario/proyectos/${idProyecto}/cancelar`,
+      {} // body vacío
+    );
+  }
 
   editarProyecto(proyectoEdit: ProyectoRequestI): Observable<ProyectoRequestI> {
     return this.httpClient.put<ProyectoRequestI>(

@@ -10,7 +10,7 @@ import { EmpresaRegistroDto } from '../interfaces/empresa-registro-dto';
 export class LoginServiceService {
   httpClient = inject(HttpClient);
 
-  private baseUrl: string = 'http://localhost:9009/auth/';
+  private baseUrl: string = 'https://opentalentapi.matabuena.com/auth/';
 
   constructor() {}
 

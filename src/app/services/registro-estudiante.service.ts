@@ -11,7 +11,7 @@ import { RegistroEstudianteDto } from '../interfaces/registro-estudiante-dto';
 export class RegistroEstudianteService {
   httpClient = inject(HttpClient);
 
-  private baseUrl: string = 'http://localhost:9009/auth/signup';
+  private baseUrl: string = 'https://opentalentapi.matabuena.com/auth/signup';
 
   constructor() {}
 
