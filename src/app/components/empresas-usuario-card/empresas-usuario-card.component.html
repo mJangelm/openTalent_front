@@ -8,7 +8,7 @@
         style="width: 50px; height: 48px; box-shadow: inset 0 4px 4px rgba(0, 0, 0, 0.25);">
       <div class="fw-semibold fs-5 text-dark">{{empresaUnica.nombreEmpresa}}</div>
     </div>
-    <a [routerLink]="[empresaUnica.cif]" class="text-decoration-none text-dark card-trigger">
+    <a [routerLink]="['/usuario/empresas/'+ empresaUnica.cif]"  class="text-decoration-none text-dark card-trigger">
     <div class="text-justify text-dark fs-6" style="font-size: 12px;">
       {{empresaUnica.descripcion}}
     </div></a>
